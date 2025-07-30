@@ -45,7 +45,7 @@
 
 <section class="py-16 px-6 bg-[#1A1A1A]">
   <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl text-center font-bold text-[#FFD700] uppercase mb-10">Top Registered Bullies</h2>
+    <h2 class="text-3xl text-center font-bold text-[#FFD700] uppercase mb-10">XCLUSIVE REGISTERED STUDS</h2>
 
     <!-- Swiper -->
     <div class="swiper mySwiper">
