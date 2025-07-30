@@ -35,7 +35,7 @@
       <a href="registration" class="text-[#CCCCCC] hover:text-white">Registration</a>
       <a href="standard" class="text-[#CCCCCC] hover:text-white">Standard</a>
       <a href="events" class="text-[#CCCCCC] hover:text-white">Events</a>
-      <a href="marketplace" class="text-[#CCCCCC] hover:text-white">Market Place</a>
+      <a href="gettable" class="text-[#CCCCCC] hover:text-white">Gettable</a>
       <a href="pointchart" class="text-[#CCCCCC] hover:text-white">Points Chart</a>
     </nav>
   </div>

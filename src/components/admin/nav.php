@@ -37,7 +37,7 @@
 
       <a href="marketplace" class="nav-link flex items-center space-x-3 text-[#CCCCCC] hover:text-[#FFD700] hover:bg-white/10 px-4 py-2 rounded-md transition-all duration-300">
         <span class="material-icons">storefront</span>
-        <span>Marketplace</span>
+        <span>Gettable</span>
       </a>
 
       <a href="events" class="nav-link flex items-center space-x-3 text-[#CCCCCC] hover:text-[#FFD700] hover:bg-white/10 px-4 py-2 rounded-md transition-all duration-300">
