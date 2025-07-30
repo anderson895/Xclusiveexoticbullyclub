@@ -98,10 +98,11 @@
         <!-- Rank -->
    
 
-        <!-- Verified Badge -->
-        <div class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 z-10 shadow">
-          <span class="material-icons text-sm text-white">verified</span> Verified
-        </div>
+     <div class="absolute top-3 right-3 bg-[#FFD700] text-black text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 z-10 shadow">
+  <span class="material-icons text-sm text-black">emoji_events</span> Xclusive
+</div>
+
+
 
         <!-- Dog Image -->
         <img src="${dog.image}" alt="${dog.name}" class="w-full h-40 object-cover rounded-lg mb-4" />
@@ -110,7 +111,7 @@
         <h3 class="text-xl font-bold text-[#FFD700] mb-1">${dog.name}</h3>
         <p class="text-[#CCCCCC] text-sm mb-1">Breed: ${dog.breed}</p>
         <p class="text-[#CCCCCC] text-sm mb-1">Owner: ${dog.owner}</p>
-        <p class="text-[#CCCCCC] text-sm">Chip: ${dog.chip}</p>
+        <p class="text-[#CCCCCC] text-sm">XEBC No: ${dog.chip}</p>
       </div>
     `;
     slider.innerHTML += card;
