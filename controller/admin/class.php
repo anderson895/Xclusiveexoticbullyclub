@@ -40,6 +40,7 @@ class global_class extends db_connect
                         session_start();
                     }
                     $_SESSION['id'] = $user['admin_id'];
+                    $_SESSION['admin_fullname'] = $user['admin_fullname'];
                     $query->close();
                     return ['success' => true, 'data' => $user];
                 } else {

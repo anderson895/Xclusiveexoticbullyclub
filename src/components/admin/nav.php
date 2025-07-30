@@ -63,7 +63,7 @@
   <div id="overlay" class="fixed inset-0 bg-black opacity-50 hidden lg:hidden z-40"></div>
 
   <!-- Main Content -->
-  <main class="flex-1 bg-gray-50 p-8 lg:p-12">
+  <main class="flex-1 bg-[#1A1A1A] p-8 lg:p-12">
     <!-- Mobile menu button -->
     <button id="menuButton" class="lg:hidden text-[#FFD700] bg-white/10 hover:bg-white/20 p-2 rounded-md transition duration-300 mb-4">
       <span class="material-icons">menu</span> 
@@ -71,6 +71,10 @@
 
   
 
+   
+
+
+   
 <!-- JavaScript -->
 <script>
   // Dropdown toggle logic
