@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login</title>
-  <link href="../src/output.css" rel="stylesheet" />
+<?php
 
-  <!-- Google Fonts: Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-</head>
+
+include "../src/components/admin/header.php";
+
+
+?>
+
 <body class="min-h-screen bg-[#0D0D0D] flex items-center justify-center px-4 font-[Poppins]">
 
   <div class="w-full max-w-sm p-8 bg-[#1A1A1A] rounded-2xl shadow-lg">
@@ -17,9 +14,14 @@
       <img src="../static/logo.jpg" alt="Logo" class="w-20 h-20 rounded-full border-2 border-gray-700" />
     </div>
 
+     <!-- Spinner Overlay -->
+   <div id="spinner" class="absolute inset-0 flex items-center justify-center z-50" style="display:none; background-color: rgba(255, 255, 255, 0.7);">
+  <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+</div>
+
     <h2 class="text-2xl font-semibold text-[#FFD700] text-center mb-6">Administrator</h2>
 
-    <form action="#" method="POST" class="space-y-5">
+    <form id="frmLogin" method="POST" class="space-y-5">
       <div>
         <label for="email" class="block text-sm text-[#CCCCCC] mb-1">Email</label>
         <input
@@ -56,12 +58,12 @@
         Sign In
       </button>
     </form>
-
-    <p class="text-sm text-center text-[#999999] mt-6">
-      Don't have an account?
-      <a href="#" class="text-[#CCCCCC] hover:underline font-medium">Sign Up</a>
-    </p>
   </div>
-</body>
 
-</html>
+
+
+<?php 
+
+include "../src/components/admin/footer.php"; 
+
+?>
