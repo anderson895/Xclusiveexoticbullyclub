@@ -45,12 +45,7 @@ include "../src/components/admin/nav.php";
                 class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
         </div>
 
-        <!-- Date of Registration -->
-        <div>
-            <label class="block text-sm font-semibold mb-2">DATE OF REGISTRATION:</label>
-            <input type="date" name="registration_date"
-                class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
-        </div>
+ 
 
         <!-- Country -->
         <div>
