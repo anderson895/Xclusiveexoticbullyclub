@@ -279,7 +279,7 @@ class global_class extends db_connect
 
 
  public function fetch_all_registered_dogs() {
-    $query = $this->conn->prepare("SELECT * FROM dogs WHERE dog_registered_status = '1'");
+    $query = $this->conn->prepare("SELECT * FROM dogs WHERE dog_registered_status = '1' ORDER BY dog_id DESC");
 
     if ($query->execute()) {
         $result = $query->get_result();
@@ -293,6 +293,7 @@ class global_class extends db_connect
     }
     return []; 
 }
+
 
 
 
