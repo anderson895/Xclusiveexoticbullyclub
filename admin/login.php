@@ -10,14 +10,14 @@ include "../src/components/admin/header.php";
 
   <div class="w-full max-w-sm p-8 bg-[#1A1A1A] rounded-2xl shadow-lg">
 
-    <div class="flex justify-center mb-6">
+  <div class="flex justify-center mb-6">
       <img src="../static/logo.jpg" alt="Logo" class="w-20 h-20 rounded-full border-2 border-gray-700" />
-    </div>
+  </div>
 
-     <!-- Spinner Overlay -->
-   <div id="spinner" class="absolute inset-0 flex items-center justify-center z-50" style="display:none; background-color: rgba(255, 255, 255, 0.7);">
-  <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-</div>
+  <!-- Spinner Overlay -->
+  <div id="spinner" class="absolute inset-0 flex items-center justify-center z-50" style="display:none; background-color: rgba(255, 255, 255, 0.7);">
+    <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+  </div>
 
     <h2 class="text-2xl font-semibold text-[#FFD700] text-center mb-6">Administrator</h2>
 
@@ -62,8 +62,11 @@ include "../src/components/admin/header.php";
 
 
 
+
+
 <?php 
-
 include "../src/components/admin/footer.php"; 
-
 ?>
+
+
+<script src="../static/js/login.js"></script>

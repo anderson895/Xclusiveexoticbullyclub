@@ -11,16 +11,25 @@ include "../src/components/admin/nav.php";
     </div>
 </div>
 
+
+
 <!-- Registration Form Section -->
 <div class="bg-[#1A1A1A] text-white p-6 rounded-lg shadow-lg">
 
+
+    <!-- Spinner Overlay -->
+    <div id="spinner" class="absolute inset-0 flex items-center justify-center z-50" style="display:none; background-color: rgba(255, 255, 255, 0.7);">
+        <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+
+
     <!-- Form Start -->
-    <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <form id="frmDogRegister" class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
         <!-- Dog Image Upload -->
         <div class="col-span-1 md:col-span-2">
             <label class="block text-sm font-semibold mb-2">DOG IMAGE</label>
-            <input type="file" name="dog_image" accept="image/*"
+            <input type="file" id="dog_image" name="dog_image" accept="image/*"
                 class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-600 file:bg-[#FFD700] file:text-black file:font-semibold file:border-none file:px-4 file:py-2">
         </div>
 
@@ -99,7 +108,7 @@ include "../src/components/admin/nav.php";
         <!-- Type (Dropdown) -->
         <div class="md:col-span-2">
             <label class="block text-sm font-semibold mb-2">TYPE:</label>
-            <select name="type" class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 text-white">
+            <select name="type" id="type" class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 text-white">
                 <option value="REGULAR">REGULAR</option>
                 <option value="EXCLUSIVE">EXCLUSIVE</option>
             </select>
@@ -116,6 +125,6 @@ include "../src/components/admin/nav.php";
 </div>
 
 
-<?php
-include "../src/components/admin/footer.php";
-?>
+<?php include "../src/components/admin/footer.php";?>
+
+<script src="../static/js/admin/registration.js"></script>
