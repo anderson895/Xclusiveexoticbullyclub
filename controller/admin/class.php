@@ -60,13 +60,14 @@ class global_class extends db_connect
     }
     
 
-      public function DogRegister(
+     public function DogRegister(
             $dog_name, $owner_name, $breeder_name, $country, $color,
             $height, $dob, $contact_number, $facebook_name, $ig_name, $uniqueFileName
         ) {
             // Generate a unique dog code in format "9900000" + random 7-digit number
             $dog_code = $this->generateDogCode();
 
+            // First: Insert into dogs table
             $query = "INSERT INTO dogs (
                 dog_code, dog_name, dog_owner_name, dog_breeder_name, dog_image, dog_country,
                 dog_color, dog_height, dog_date_of_birth, dog_contact_number,
@@ -95,9 +96,28 @@ class global_class extends db_connect
             );
 
             $result = $stmt->execute();
+            
+            if (!$result) {
+                $stmt->close();
+                return false;
+            }
+
+            // Get the inserted dog_id
+            $dog_id = $this->conn->insert_id;
             $stmt->close();
 
-            return $result;
+            // Second: Insert into generation table using the dog_id
+            $gen_query = "INSERT INTO generation (dog_id) VALUES (?)";
+            $gen_stmt = $this->conn->prepare($gen_query);
+            if (!$gen_stmt) {
+                die("Prepare failed (generation): " . $this->conn->error);
+            }
+
+            $gen_stmt->bind_param("i", $dog_id);
+            $gen_result = $gen_stmt->execute();
+            $gen_stmt->close();
+
+            return $gen_result;
         }
 
 
@@ -262,54 +282,88 @@ class global_class extends db_connect
 }
 
 
+
 public function fetch_dogs_generation($dog_id) {
-    $dogs = [];
+    $query = "
+        SELECT 
+            gen.*,
 
-    // 1. Get selected dog details
-    $stmt = $this->conn->prepare("SELECT * FROM dogs WHERE dog_id = ?");
+            main_dog.dog_name AS main_dog_name,
+            main_dog.dog_image AS main_dog_image,
+
+            father.dog_name AS father_name,
+            father.dog_image AS father_image,
+
+            mother.dog_name AS mother_name,
+            mother.dog_image AS mother_image,
+
+            gf1.dog_name AS grandfather1_name,
+            gf1.dog_image AS grandfather1_image,
+
+            gm1.dog_name AS grandmother1_name,
+            gm1.dog_image AS grandmother1_image,
+
+            gf2.dog_name AS grandfather2_name,
+            gf2.dog_image AS grandfather2_image,
+
+            gm2.dog_name AS grandmother2_name,
+            gm2.dog_image AS grandmother2_image,
+
+            ggf1.dog_name AS ggfather1_name,
+            ggf1.dog_image AS ggfather1_image,
+
+            ggm1.dog_name AS ggmother1_name,
+            ggm1.dog_image AS ggmother1_image,
+
+            ggf2.dog_name AS ggfather2_name,
+            ggf2.dog_image AS ggfather2_image,
+
+            ggm2.dog_name AS ggmother2_name,
+            ggm2.dog_image AS ggmother2_image,
+
+            ggf3.dog_name AS ggfather3_name,
+            ggf3.dog_image AS ggfather3_image,
+
+            ggm3.dog_name AS ggmother3_name,
+            ggm3.dog_image AS ggmother3_image,
+
+            ggf4.dog_name AS ggfather4_name,
+            ggf4.dog_image AS ggfather4_image,
+
+            ggm4.dog_name AS ggmother4_name,
+            ggm4.dog_image AS ggmother4_image
+
+        FROM generation gen
+        LEFT JOIN dogs main_dog ON gen.gen_dog_id = main_dog.dog_id
+        LEFT JOIN dogs father ON gen.father_dog_id = father.dog_id
+        LEFT JOIN dogs mother ON gen.mother_dog_id = mother.dog_id
+        LEFT JOIN dogs gf1 ON gen.grandfather1_dog_id = gf1.dog_id
+        LEFT JOIN dogs gm1 ON gen.grandmother1_dog_id = gm1.dog_id
+        LEFT JOIN dogs gf2 ON gen.grandfather2_dog_id = gf2.dog_id
+        LEFT JOIN dogs gm2 ON gen.grandmother2_dog_id = gm2.dog_id
+        LEFT JOIN dogs ggf1 ON gen.ggfather1_dog_id = ggf1.dog_id
+        LEFT JOIN dogs ggm1 ON gen.ggmother1_dog_id = ggm1.dog_id
+        LEFT JOIN dogs ggf2 ON gen.ggfather2_dog_id = ggf2.dog_id
+        LEFT JOIN dogs ggm2 ON gen.ggmother2_dog_id = ggm2.dog_id
+        LEFT JOIN dogs ggf3 ON gen.ggfather3_dog_id = ggf3.dog_id
+        LEFT JOIN dogs ggm3 ON gen.ggmother3_dog_id = ggm3.dog_id
+        LEFT JOIN dogs ggf4 ON gen.ggfather4_dog_id = ggf4.dog_id
+        LEFT JOIN dogs ggm4 ON gen.ggmother4_dog_id = ggm4.dog_id
+        WHERE gen.gen_dog_id = ?
+    ";
+
+    $stmt = $this->conn->prepare($query);
     $stmt->bind_param("i", $dog_id);
     $stmt->execute();
-    $dog_result = $stmt->get_result();
-    if ($dog_result->num_rows > 0) {
-        $dogs['dog'] = $dog_result->fetch_assoc();
-    }
+    $result = $stmt->get_result();
+    $data = $result->fetch_assoc();
+    $stmt->close();
 
-    // 2. Get parents (from offspring > couples)
-    $stmt = $this->conn->prepare("
-        SELECT d.dog_id, d.dog_name, d.dog_image
-        FROM offspring o
-        JOIN couples c ON o.parent_couple_id = c.couple_id
-        JOIN dogs d ON d.dog_id = c.male_dog_id OR d.dog_id = c.female_dog_id
-        WHERE o.child_dog_id = ?
-    ");
-    $stmt->bind_param("i", $dog_id);
-    $stmt->execute();
-    $parent_result = $stmt->get_result();
-    $parents = [];
-    while ($row = $parent_result->fetch_assoc()) {
-        $parents[] = $row;
-    }
-    $dogs['parents'] = $parents;
-
-    // 3. Get children (from couples > offspring)
-    $stmt = $this->conn->prepare("
-        SELECT d.dog_id, d.dog_name, d.dog_image
-        FROM couples c
-        JOIN offspring o ON c.couple_id = o.parent_couple_id
-        JOIN dogs d ON d.dog_id = o.child_dog_id
-        WHERE c.male_dog_id = ? OR c.female_dog_id = ?
-    ");
-    $stmt->bind_param("ii", $dog_id, $dog_id);
-    $stmt->execute();
-    $child_result = $stmt->get_result();
-    $children = [];
-    while ($row = $child_result->fetch_assoc()) {
-        $children[] = $row;
-    }
-    $dogs['children'] = $children;
-
-    return $dogs;
+    return $data;
 }
+
+
+
 
 
 
