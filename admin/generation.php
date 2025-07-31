@@ -44,7 +44,6 @@ include "../src/components/admin/nav.php";
           <span class="text-xs mt-1 text-gray-700 font-semibold">Mother</span>
         </div>
       </div>
-      <p class="text-center mt-2 text-sm"><br>X<br></p>
     </div>
   </div>
 
@@ -62,7 +61,7 @@ include "../src/components/admin/nav.php";
           <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Mother</span>
         </div>
       </div>
-      <p class="text-center mt-2 text-sm"><br>X<br></p>
+     
     </div>
 
     <!-- Couple 2 -->
@@ -77,7 +76,7 @@ include "../src/components/admin/nav.php";
           <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Mother</span>
         </div>
       </div>
-      <p class="text-center mt-2 text-sm"><br>X<br></p>
+   
     </div>
   </div>
 
@@ -95,7 +94,7 @@ include "../src/components/admin/nav.php";
           <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
         </div>
       </div>
-      <p class="text-center mt-2 text-xs"><br>X<br></p>
+      
     </div>
 
     <!-- Couple 2 -->
@@ -110,7 +109,7 @@ include "../src/components/admin/nav.php";
           <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
         </div>
       </div>
-      <p class="text-center mt-2 text-xs"><br>X<br></p>
+      
     </div>
 
     <!-- Couple 3 -->
@@ -125,7 +124,7 @@ include "../src/components/admin/nav.php";
           <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
         </div>
       </div>
-      <p class="text-center mt-2 text-xs"><br>X<br></p>
+    
     </div>
 
     <!-- Couple 4 -->
@@ -140,7 +139,7 @@ include "../src/components/admin/nav.php";
           <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
         </div>
       </div>
-      <p class="text-center mt-2 text-xs"><br>X<br></p>
+     
     </div>
   </div>
 </div>
