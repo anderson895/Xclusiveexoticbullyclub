@@ -16,14 +16,17 @@ include "../src/components/admin/nav.php";
 
 <!-- Result Dog Display -->
 <div class="max-w-screen-md mx-auto my-10" id="result-dog-section">
-  <h2 class="text-center text-2xl font-bold text-yellow-600 mb-4">Result Dog</h2>
+  <h2 id="result_dog_name" class="text-center text-2xl font-bold text-yellow-600 mb-4 uppercase">Result Dog</h2>
+
   <div class="flex justify-center">
     <div class="flex flex-col items-center">
       <img src="" alt="Result Dog" id="result_dog_image" class="w-24 h-24 rounded-full border-4 border-yellow-500 object-cover" />
-      <span id="result_dog_name" class="mt-2 text-lg font-semibold text-gray-800">Dog Name</span>
+    
     </div>
   </div>
 </div>
+
+
 
 
 <div class="max-w-screen-xl mx-auto space-y-16">
@@ -143,73 +146,60 @@ include "../src/components/admin/nav.php";
 </div>
 
 
-<script>
-$(document).ready(function () {
-    const dogId = getUrlParameter('dog_id');
 
-    if (dogId) {
-        $.ajax({
-            url: "../controller/admin/end-points/controller.php",
-            type: 'GET',
-            data: { dog_id: dogId, requestType: "fetch_dogs_generation" },
-            dataType: 'json',
-            success: function (response) {
-                if (response.status === 200) {
-                    const data = response.data;
 
-                    // Main Dog
-                    $('#result_dog_name').text(data.main_dog_name ?? 'Unknown');
-                    updateImageOrIcon('#result_dog_image', data.main_dog_image);
+<!-- Modal -->
+<div id="dogModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/30 backdrop-blur-sm transition duration-300 ease-in-out">
 
-                    // Generation members
-                    updateDog('father', data.father_name, data.father_image);
-                    updateDog('mother', data.mother_name, data.mother_image);
-                    updateDog('grandfather1', data.grandfather1_name, data.grandfather1_image);
-                    updateDog('grandmother1', data.grandmother1_name, data.grandmother1_image);
-                    updateDog('grandfather2', data.grandfather2_name, data.grandfather2_image);
-                    updateDog('grandmother2', data.grandmother2_name, data.grandmother2_image);
-                    updateDog('ggfather1', data.ggfather1_name, data.ggfather1_image);
-                    updateDog('ggmother1', data.ggmother1_name, data.ggmother1_image);
-                    updateDog('ggfather2', data.ggfather2_name, data.ggfather2_image);
-                    updateDog('ggmother2', data.ggmother2_name, data.ggmother2_image);
-                    updateDog('ggfather3', data.ggfather3_name, data.ggfather3_image);
-                    updateDog('ggmother3', data.ggmother3_name, data.ggmother3_image);
-                    updateDog('ggfather4', data.ggfather4_name, data.ggfather4_image);
-                    updateDog('ggmother4', data.ggmother4_name, data.ggmother4_image);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.error("AJAX error:", error);
-            }
-        });
-    }
+  <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md space-y-6">
+   <h2 class="text-2xl font-extrabold text-gray-800 text-center" id="modalTitle">Update Details</h2>
+    <p class="text-center text-sm text-gray-600 font-medium" id="generation">: </p>
 
-    function getUrlParameter(name) {
-        const url = new URL(window.location.href);
-        return url.searchParams.get(name);
-    }
+    <form id="updateGenForm" class="space-y-5">
+      <input type="hidden" id="dogRole" name="dogRole">
 
-    // Replace image with pets icon if missing
-    function updateImageOrIcon(selector, imagePath) {
-        if (imagePath && imagePath.trim() !== '') {
-            $(selector).attr('src', '../static/upload/' + imagePath).show();
-            $(selector).next('.material-icons').remove(); // remove icon if image exists
-        } else {
-            const icon = $('<span class="material-icons text-yellow-500 text-5xl">pets</span>');
-            $(selector).hide().after(icon);
-        }
-    }
+      <input type="hidden" id="dog_id" name="dog_id" value="<?php $_GET['dog_id'];?>">
 
-    // Update generation name and image/icon
-    function updateDog(id, name, image) {
-        const imgSelector = '#' + id;
-        const labelSelector = $(imgSelector).next('span');
-        labelSelector.text(name ?? 'UNKNOWN');
-        updateImageOrIcon(imgSelector, image);
-    }
-});
-</script>
 
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Dog Type</label>
+        <select id="dogType" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
+          <option value="registered">Registered</option>
+          <option value="not_registered">Not Registered</option>
+        </select>
+      </div>
+
+      <!-- Registered Section -->
+      <div id="registeredSection">
+        <label for="registeredDog" class="block text-sm font-medium text-gray-700 mb-1">Select Registered Dog</label>
+        <select id="registeredDog" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
+          <option value="">-- Select Dog --</option>
+          <option value="dog1">Buddy</option>
+          <option value="dog2">Max</option>
+          <option value="dog3">Charlie</option>
+        </select>
+      </div>
+
+      <!-- Not Registered Section -->
+      <div id="notRegisteredSection" class="hidden space-y-4">
+        <div>
+          <label for="dogName" class="block text-sm font-medium text-gray-700 mb-1">Dog Name</label>
+          <input type="text" id="dogName" name="dogName" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
+        </div>
+        <div>
+          <label for="dogImage" class="block text-sm font-medium text-gray-700 mb-1">Dog Image</label>
+          <input type="file" id="dogImage" name="dogImage" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-lg file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100">
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-end space-x-3 pt-2">
+        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
+        <button type="submit" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 
 

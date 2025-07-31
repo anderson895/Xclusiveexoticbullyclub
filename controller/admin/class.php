@@ -60,14 +60,14 @@ class global_class extends db_connect
     }
     
 
-     public function DogRegister(
-            $dog_name, $owner_name, $breeder_name, $country, $color,
-            $height, $dob, $contact_number, $facebook_name, $ig_name, $uniqueFileName
-        ) {
-            // Generate a unique dog code in format "9900000" + random 7-digit number
-            $dog_code = $this->generateDogCode();
+    public function DogRegister(
+        $dog_name, $owner_name, $breeder_name, $country, $color,
+        $height, $dob, $contact_number, $facebook_name, $ig_name, $uniqueFileName
+    ) {
+        // Generate a unique dog code in format "9900000" + random 7-digit number
+        $dog_code = $this->generateDogCode();
 
-            // First: Insert into dogs table
+        // First: Insert into dogs table
             $query = "INSERT INTO dogs (
                 dog_code, dog_name, dog_owner_name, dog_breeder_name, dog_image, dog_country,
                 dog_color, dog_height, dog_date_of_birth, dog_contact_number,
@@ -107,7 +107,7 @@ class global_class extends db_connect
             $stmt->close();
 
             // Second: Insert into generation table using the dog_id
-            $gen_query = "INSERT INTO generation (dog_id) VALUES (?)";
+            $gen_query = "INSERT INTO generation (gen_dog_id) VALUES (?)";
             $gen_stmt = $this->conn->prepare($gen_query);
             if (!$gen_stmt) {
                 die("Prepare failed (generation): " . $this->conn->error);
@@ -119,6 +119,7 @@ class global_class extends db_connect
 
             return $gen_result;
         }
+
 
 
         private function generateDogCode() {
@@ -282,14 +283,13 @@ class global_class extends db_connect
 }
 
 
-
 public function fetch_dogs_generation($dog_id) {
     $query = "
         SELECT 
-            gen.*,
+            d.dog_name AS main_dog_name,
+            d.dog_image AS main_dog_image,
 
-            main_dog.dog_name AS main_dog_name,
-            main_dog.dog_image AS main_dog_image,
+            gen.*,
 
             father.dog_name AS father_name,
             father.dog_image AS father_image,
@@ -333,23 +333,31 @@ public function fetch_dogs_generation($dog_id) {
             ggm4.dog_name AS ggmother4_name,
             ggm4.dog_image AS ggmother4_image
 
-        FROM generation gen
-        LEFT JOIN dogs main_dog ON gen.gen_dog_id = main_dog.dog_id
+        FROM dogs d
+        LEFT JOIN generation gen ON d.dog_id = gen.gen_dog_id
+
         LEFT JOIN dogs father ON gen.father_dog_id = father.dog_id
         LEFT JOIN dogs mother ON gen.mother_dog_id = mother.dog_id
+
         LEFT JOIN dogs gf1 ON gen.grandfather1_dog_id = gf1.dog_id
         LEFT JOIN dogs gm1 ON gen.grandmother1_dog_id = gm1.dog_id
+
         LEFT JOIN dogs gf2 ON gen.grandfather2_dog_id = gf2.dog_id
         LEFT JOIN dogs gm2 ON gen.grandmother2_dog_id = gm2.dog_id
+
         LEFT JOIN dogs ggf1 ON gen.ggfather1_dog_id = ggf1.dog_id
         LEFT JOIN dogs ggm1 ON gen.ggmother1_dog_id = ggm1.dog_id
+
         LEFT JOIN dogs ggf2 ON gen.ggfather2_dog_id = ggf2.dog_id
         LEFT JOIN dogs ggm2 ON gen.ggmother2_dog_id = ggm2.dog_id
+
         LEFT JOIN dogs ggf3 ON gen.ggfather3_dog_id = ggf3.dog_id
         LEFT JOIN dogs ggm3 ON gen.ggmother3_dog_id = ggm3.dog_id
+
         LEFT JOIN dogs ggf4 ON gen.ggfather4_dog_id = ggf4.dog_id
         LEFT JOIN dogs ggm4 ON gen.ggmother4_dog_id = ggm4.dog_id
-        WHERE gen.gen_dog_id = ?
+
+        WHERE d.dog_id = ?
     ";
 
     $stmt = $this->conn->prepare($query);
@@ -362,6 +370,14 @@ public function fetch_dogs_generation($dog_id) {
     return $data;
 }
 
+
+
+
+
+  public function updateGenForm_registered($dogRole,$dog_id) {
+        $stmt = $this->conn->prepare("UPDATE `orders` SET `order_status` = '$newStatus',`order_pickup_date` = '$scheduleDate',`order_pickup_time` = '$scheduleTime' WHERE `orders`.`order_id` = '$orderId'");
+        return $stmt->execute();
+    }
 
 
 

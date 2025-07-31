@@ -148,6 +148,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             exit;
 
+        }else if ($_GET['requestType'] == 'updateGenForm') {
+
+            
+            $dogRole=$_GET['dogRole'];
+            $dog_id=$_GET['dog_id'];
+
+
+            $dogType=$_GET['dogType'];
+
+            if($dogType=="registered"){
+
+                $result = $db->updateGenForm_registered($dogRole,$dog_id);
+
+            }else if($dogType=="not_registered"){
+                $result = $db->updateGenForm_not_registered($dogRole,$dog_id);
+            }
+
+            echo json_encode([
+                'status' => 200,
+                'data' => $result
+            ]);
         }else {
             echo 'Else';
         }

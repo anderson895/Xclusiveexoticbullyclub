@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2025 at 05:36 AM
+-- Generation Time: Jul 31, 2025 at 09:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -66,12 +66,30 @@ CREATE TABLE `dogs` (
   `dog_registered_status` int(11) NOT NULL COMMENT '0=not registered,1=registered'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `dogs`
+-- Table structure for table `generation`
 --
 
-INSERT INTO `dogs` (`dog_id`, `dog_code`, `dog_name`, `dog_owner_name`, `dog_breeder_name`, `dog_date_registration`, `dog_image`, `dog_country`, `dog_color`, `dog_height`, `dog_date_of_birth`, `dog_contact_number`, `dog_facebook_name`, `dog_ig_name`, `dog_type_status`, `dog_registered_status`) VALUES
-(8, '99000003962454', 'bobbiess', 'joshua padilla', 'juan dela cruz', '2025-07-31 03:36:15', 'dog_688ae35f4f1fe0.89360323.jpg', 'philippines', 'white', '3ft', '2025-03-25', '09454454744', 'bobby cutie', 'bobby cuties', 'regular', 1);
+CREATE TABLE `generation` (
+  `gen_id` int(11) NOT NULL,
+  `gen_dog_id` int(11) NOT NULL,
+  `father_dog_id` int(11) DEFAULT NULL,
+  `mother_dog_id` int(11) DEFAULT NULL,
+  `grandfather1_dog_id` int(11) DEFAULT NULL,
+  `grandmother1_dog_id` int(11) DEFAULT NULL,
+  `grandfather2_dog_id` int(11) DEFAULT NULL,
+  `grandmother2_dog_id` int(11) DEFAULT NULL,
+  `ggfather1_dog_id` int(11) DEFAULT NULL,
+  `ggmother1_dog_id` int(11) DEFAULT NULL,
+  `ggfather2_dog_id` int(11) DEFAULT NULL,
+  `ggmother2_dog_id` int(11) DEFAULT NULL,
+  `ggfather3_dog_id` int(11) DEFAULT NULL,
+  `ggmother3_dog_id` int(11) DEFAULT NULL,
+  `ggfather4_dog_id` int(11) DEFAULT NULL,
+  `ggmother4_dog_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -90,6 +108,13 @@ ALTER TABLE `dogs`
   ADD PRIMARY KEY (`dog_id`);
 
 --
+-- Indexes for table `generation`
+--
+ALTER TABLE `generation`
+  ADD PRIMARY KEY (`gen_id`),
+  ADD KEY `gen_dog_id` (`gen_dog_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -103,7 +128,23 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `dogs`
 --
 ALTER TABLE `dogs`
-  MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `generation`
+--
+ALTER TABLE `generation`
+  MODIFY `gen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `generation`
+--
+ALTER TABLE `generation`
+  ADD CONSTRAINT `generation_ibfk_1` FOREIGN KEY (`gen_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
