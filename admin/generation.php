@@ -18,27 +18,21 @@ include "../src/components/admin/nav.php";
 <input type="text" id="dog_id" value="<?=$_GET['dog_id']?>">
 <div class="max-w-screen-xl mx-auto space-y-16">
 
-  <!-- Generation 1 Label -->
-  <div class="text-center">
-    <h2 class="text-2xl font-bold text-gray-800 uppercase">Generation 1</h2>
-    <p class="text-sm text-gray-500">Great-Great Grandparents</p>
-  </div>
-
   <!-- Generation 1: 1 Couple -->
   <div class="flex justify-center">
     <div class="flex flex-col items-center">
       <div class="flex space-x-2">
-        <img src="dog1.jpg" alt="Dog A" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-        <img src="dog2.jpg" alt="Dog B" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
+        <div class="flex flex-col items-center">
+          <img src="dog1.jpg" alt="Dog A" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
+          <span class="text-xs mt-1 text-gray-700 font-semibold">Father</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="dog2.jpg" alt="Dog B" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
+          <span class="text-xs mt-1 text-gray-700 font-semibold">Mother</span>
+        </div>
       </div>
       <p class="text-center mt-2 text-sm">黑社会<br>X<br>红色风暴</p>
     </div>
-  </div>
-
-  <!-- Generation 2 Label -->
-  <div class="text-center mt-10">
-    <h2 class="text-2xl font-bold text-gray-800 uppercase">Generation 2</h2>
-    <p class="text-sm text-gray-500">Great Grandparents</p>
   </div>
 
   <!-- Generation 2: 2 Couples -->
@@ -46,8 +40,14 @@ include "../src/components/admin/nav.php";
     <!-- Couple 1 -->
     <div class="flex flex-col items-center">
       <div class="flex space-x-2">
-        <img src="dog3.jpg" alt="Terror" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-        <img src="dog4.jpg" alt="Dwarf" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
+        <div class="flex flex-col items-center">
+          <img src="dog3.jpg" alt="Terror" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
+          <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Father</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="dog4.jpg" alt="Dwarf" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
+          <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Mother</span>
+        </div>
       </div>
       <p class="text-center mt-2 text-sm">恐怖<br>X<br>DWARF</p>
     </div>
@@ -55,17 +55,17 @@ include "../src/components/admin/nav.php";
     <!-- Couple 2 -->
     <div class="flex flex-col items-center">
       <div class="flex space-x-2">
-        <img src="dog5.jpg" alt="Focus" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-        <img src="dog6.jpg" alt="NANA1" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
+        <div class="flex flex-col items-center">
+          <img src="dog5.jpg" alt="Focus" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
+          <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Father</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="dog6.jpg" alt="NANA1" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
+          <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Mother</span>
+        </div>
       </div>
       <p class="text-center mt-2 text-sm">FOCUS<br>X<br>NANA1</p>
     </div>
-  </div>
-
-  <!-- Generation 3 Label -->
-  <div class="text-center mt-10">
-    <h2 class="text-2xl font-bold text-gray-800 uppercase">Generation 3</h2>
-    <p class="text-sm text-gray-500">Grandparents</p>
   </div>
 
   <!-- Generation 3: 4 Couples -->
@@ -73,8 +73,14 @@ include "../src/components/admin/nav.php";
     <!-- Couple 1 -->
     <div class="flex flex-col items-center">
       <div class="flex space-x-2">
-        <img src="dog7.jpg" alt="Problem" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-        <img src="dog8.jpg" alt="Boogie" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
+        <div class="flex flex-col items-center">
+          <img src="dog7.jpg" alt="Problem" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
+          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Father</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="dog8.jpg" alt="Boogie" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
+          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
+        </div>
       </div>
       <p class="text-center mt-2 text-xs">PROBLEM<br>X<br>BOOGIE</p>
     </div>
@@ -82,8 +88,14 @@ include "../src/components/admin/nav.php";
     <!-- Couple 2 -->
     <div class="flex flex-col items-center">
       <div class="flex space-x-2">
-        <img src="dog9.jpg" alt="Hazard" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-        <img src="dog10.jpg" alt="ADEA" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
+        <div class="flex flex-col items-center">
+          <img src="dog9.jpg" alt="Hazard" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
+          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Father</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="dog10.jpg" alt="ADEA" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
+          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
+        </div>
       </div>
       <p class="text-center mt-2 text-xs">HAZARD<br>X<br>ADEA</p>
     </div>
@@ -91,8 +103,14 @@ include "../src/components/admin/nav.php";
     <!-- Couple 3 -->
     <div class="flex flex-col items-center">
       <div class="flex space-x-2">
-        <img src="dog11.jpg" alt="China Line" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-        <img src="dog12.jpg" alt="Masha" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
+        <div class="flex flex-col items-center">
+          <img src="dog11.jpg" alt="China Line" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
+          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Father</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="dog12.jpg" alt="Masha" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
+          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
+        </div>
       </div>
       <p class="text-center mt-2 text-xs">中国线...<br>X<br>玛莎...</p>
     </div>
@@ -100,13 +118,18 @@ include "../src/components/admin/nav.php";
     <!-- Couple 4 -->
     <div class="flex flex-col items-center">
       <div class="flex space-x-2">
-        <img src="dog13.jpg" alt="MACCHI" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-        <img src="dog14.jpg" alt="DEACON" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
+        <div class="flex flex-col items-center">
+          <img src="dog13.jpg" alt="MACCHI" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
+          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Father</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="dog14.jpg" alt="DEACON" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
+          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
+        </div>
       </div>
       <p class="text-center mt-2 text-xs">MACCHI...<br>X<br>DEACON</p>
     </div>
   </div>
-
 </div>
 
 
