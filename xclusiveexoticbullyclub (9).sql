@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2025 at 06:05 PM
+-- Generation Time: Jul 31, 2025 at 07:40 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -62,7 +62,7 @@ CREATE TABLE `dogs` (
   `dog_contact_number` varchar(25) DEFAULT NULL,
   `dog_facebook_name` varchar(60) DEFAULT NULL,
   `dog_ig_name` varchar(60) DEFAULT NULL,
-  `dog_type_status` enum('regular','exclusive') DEFAULT NULL,
+  `dog_type_status` varchar(60) DEFAULT NULL,
   `dog_registered_status` int(11) NOT NULL COMMENT '0=not registered,1=registered'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -72,10 +72,23 @@ CREATE TABLE `dogs` (
 
 INSERT INTO `dogs` (`dog_id`, `dog_code`, `dog_name`, `dog_owner_name`, `dog_breeder_name`, `dog_date_registration`, `dog_image`, `dog_country`, `dog_color`, `dog_height`, `dog_date_of_birth`, `dog_contact_number`, `dog_facebook_name`, `dog_ig_name`, `dog_type_status`, `dog_registered_status`) VALUES
 (13, '99000004791297', 'husky', 'april jane', 'juan dela cruz', '2025-07-31 07:20:54', 'dog_688b19568fceb0.96194899.png', 'philippines', 'white', '3ft', '2025-03-25', '09454454744', 'HUBBY', 'HUBBY', 'regular', 1),
-(14, '99000007215398', 'bobbies', 'joshua padilla', 'juan dela cruz', '2025-07-31 15:47:15', 'dog_688b9003634a94.68791231.jpg', 'philippines', 'white', '5ft', '2025-03-25', '09454454744', 'booby', 'booby', 'regular', 1),
+(14, '99000007215398', 'alpha', 'joshua padilla', 'juan dela cruz', '2025-07-31 17:02:29', 'dog_688b9003634a94.68791231.jpg', 'philippines', 'white', '5ft', '2025-03-25', '09454454744', 'booby', 'booby', 'regular', 1),
 (17, '99000003939935', 'mark', NULL, NULL, '2025-07-31 15:16:06', 'dog_688b88b6d6ac99.27833191.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (18, '99000001784755', 'fdefsefse', NULL, NULL, '2025-07-31 15:35:47', 'dog_688b8d535bb9f9.03702900.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(19, '99000007402568', 'patty', NULL, NULL, '2025-07-31 16:04:33', 'dog_688b9411105315.87173173.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+(19, '99000007402568', 'patty', NULL, NULL, '2025-07-31 16:04:33', 'dog_688b9411105315.87173173.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(20, '99000002157671', 'master', NULL, NULL, '2025-07-31 16:15:27', 'dog_688b969f650a01.66399990.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(21, '99000001510201', 'Bella', 'bella padilla', 'justin bieber', '2025-07-31 16:16:27', 'dog_688b96db600411.97613913.avif', 'USA', 'gray', '15 cm', '2025-08-01', '09454454744', 'bella', 'bella', 'regular', 1),
+(22, '99000003820257', 'batman', 'robin padilla', 'justin bieber', '2025-07-31 16:23:38', 'dog_688b988a0fafa4.22209273.avif', 'philippines', 'black and white', '4 fit', '2025-08-01', '09454454744', 'BATMAN', 'BATMAN', 'regular', 1),
+(23, '99000000110469', 'koko', NULL, NULL, '2025-07-31 16:24:09', 'dog_688b98a9897801.96242836.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(24, '99000006610296', 'mac mac', NULL, NULL, '2025-07-31 16:24:29', 'dog_688b98bdc0d2d5.07642578.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(25, '99000004426855', 'tan tan', NULL, NULL, '2025-07-31 16:24:44', 'dog_688b98ccaf70a2.97428477.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(26, '99000005246561', 'kiko', NULL, NULL, '2025-07-31 16:25:02', 'dog_688b98de6bcbc5.58173858.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(27, '99000008218255', 'chubby', 'juan dela cruz', 'joshua padilla', '2025-07-31 17:29:03', 'dog_688ba14702f6b2.11945236.avif', 'philippines', 'brown', '4ft', '2025-08-01', '09454454744', 'chubby', 'chubby', 'exclusive', 1),
+(28, '99000009133247', 'alucard', NULL, NULL, '2025-07-31 17:01:18', 'dog_688ba15e961a01.25065870.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(29, '99000007531350', 'lebron', NULL, NULL, '2025-07-31 17:02:02', 'dog_688ba18a830450.52300802.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(30, '99000003461104', 'chuchay', 'april jane', 'joshua padilla', '2025-07-31 17:32:58', 'dog_688ba8ca1123b8.27562269.jpg', 'philippines', 'brown', '15cm', '2025-08-01', '09454454744', 'chuchay', 'chuchay', 'regular', 1),
+(31, '99000001989421', 'awdaw', 'DWAD', 'GREG', '2025-07-31 17:34:05', 'dog_688ba90d6fdb41.19073794.jpg', 'TRH', 'R5H', 'TJ7', '2025-08-20', 'AWAW', '2AD', 'AWAWDWAD', 'regular', 1),
+(33, '99000003223376', 'bobby', 'bobby', 'bobby', '2025-07-31 17:39:12', 'dog_688baa409f2a58.66027668.webp', 'bobby', 'bobby', 'bobby', '2025-08-01', '09454454744', 'awdawd', 'awdwa', 'exclusive', 1);
 
 -- --------------------------------------------------------
 
@@ -107,8 +120,14 @@ CREATE TABLE `generation` (
 --
 
 INSERT INTO `generation` (`gen_id`, `gen_dog_id`, `father_dog_id`, `mother_dog_id`, `grandfather1_dog_id`, `grandmother1_dog_id`, `grandfather2_dog_id`, `grandmother2_dog_id`, `ggfather1_dog_id`, `ggmother1_dog_id`, `ggfather2_dog_id`, `ggmother2_dog_id`, `ggfather3_dog_id`, `ggmother3_dog_id`, `ggfather4_dog_id`, `ggmother4_dog_id`) VALUES
-(3, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, NULL),
-(4, 14, NULL, NULL, NULL, NULL, NULL, NULL, 19, NULL, NULL, NULL, NULL, NULL, 13, 18);
+(3, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, 20),
+(4, 14, NULL, NULL, NULL, NULL, NULL, NULL, 19, NULL, NULL, NULL, NULL, NULL, 13, 18),
+(8, 21, 22, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(9, 22, 21, 23, 24, 25, 26, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 27, 28, 13, 21, 22, 29, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(11, 30, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, 31, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(14, 33, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -144,7 +163,8 @@ ALTER TABLE `generation`
   ADD KEY `grandfather2_dog_id` (`grandfather2_dog_id`),
   ADD KEY `grandmother1_dog_id` (`grandmother1_dog_id`),
   ADD KEY `grandmother2_dog_id` (`grandmother2_dog_id`),
-  ADD KEY `mother_dog_id` (`mother_dog_id`);
+  ADD KEY `mother_dog_id` (`mother_dog_id`),
+  ADD KEY `father_dog_id` (`father_dog_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -160,13 +180,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `dogs`
 --
 ALTER TABLE `dogs`
-  MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `generation`
 --
 ALTER TABLE `generation`
-  MODIFY `gen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `gen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -182,6 +202,7 @@ ALTER TABLE `generation`
   ADD CONSTRAINT `generation_ibfk_12` FOREIGN KEY (`grandmother1_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `generation_ibfk_13` FOREIGN KEY (`grandmother2_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `generation_ibfk_14` FOREIGN KEY (`mother_dog_id`) REFERENCES `dogs` (`dog_id`),
+  ADD CONSTRAINT `generation_ibfk_15` FOREIGN KEY (`father_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `generation_ibfk_2` FOREIGN KEY (`ggfather1_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `generation_ibfk_3` FOREIGN KEY (`ggfather2_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `generation_ibfk_4` FOREIGN KEY (`ggfather3_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
