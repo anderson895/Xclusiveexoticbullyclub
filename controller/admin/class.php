@@ -258,7 +258,57 @@ class global_class extends db_connect
 
         return $dogs;
     }
-    return []; // Return empty array if failed
+    return []; 
+}
+
+
+public function fetch_dogs_generation($dog_id) {
+    $dogs = [];
+
+    // 1. Get selected dog details
+    $stmt = $this->conn->prepare("SELECT * FROM dogs WHERE dog_id = ?");
+    $stmt->bind_param("i", $dog_id);
+    $stmt->execute();
+    $dog_result = $stmt->get_result();
+    if ($dog_result->num_rows > 0) {
+        $dogs['dog'] = $dog_result->fetch_assoc();
+    }
+
+    // 2. Get parents (from offspring > couples)
+    $stmt = $this->conn->prepare("
+        SELECT d.dog_id, d.dog_name, d.dog_image
+        FROM offspring o
+        JOIN couples c ON o.parent_couple_id = c.couple_id
+        JOIN dogs d ON d.dog_id = c.male_dog_id OR d.dog_id = c.female_dog_id
+        WHERE o.child_dog_id = ?
+    ");
+    $stmt->bind_param("i", $dog_id);
+    $stmt->execute();
+    $parent_result = $stmt->get_result();
+    $parents = [];
+    while ($row = $parent_result->fetch_assoc()) {
+        $parents[] = $row;
+    }
+    $dogs['parents'] = $parents;
+
+    // 3. Get children (from couples > offspring)
+    $stmt = $this->conn->prepare("
+        SELECT d.dog_id, d.dog_name, d.dog_image
+        FROM couples c
+        JOIN offspring o ON c.couple_id = o.parent_couple_id
+        JOIN dogs d ON d.dog_id = o.child_dog_id
+        WHERE c.male_dog_id = ? OR c.female_dog_id = ?
+    ");
+    $stmt->bind_param("ii", $dog_id, $dog_id);
+    $stmt->execute();
+    $child_result = $stmt->get_result();
+    $children = [];
+    while ($row = $child_result->fetch_assoc()) {
+        $children[] = $row;
+    }
+    $dogs['children'] = $children;
+
+    return $dogs;
 }
 
 
