@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 31, 2025 at 10:35 AM
+-- Generation Time: Jul 31, 2025 at 06:05 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -72,7 +72,10 @@ CREATE TABLE `dogs` (
 
 INSERT INTO `dogs` (`dog_id`, `dog_code`, `dog_name`, `dog_owner_name`, `dog_breeder_name`, `dog_date_registration`, `dog_image`, `dog_country`, `dog_color`, `dog_height`, `dog_date_of_birth`, `dog_contact_number`, `dog_facebook_name`, `dog_ig_name`, `dog_type_status`, `dog_registered_status`) VALUES
 (13, '99000004791297', 'husky', 'april jane', 'juan dela cruz', '2025-07-31 07:20:54', 'dog_688b19568fceb0.96194899.png', 'philippines', 'white', '3ft', '2025-03-25', '09454454744', 'HUBBY', 'HUBBY', 'regular', 1),
-(14, '99000007215398', 'bobbies', 'joshua padilla', 'juan dela cruz', '2025-07-31 07:21:23', 'dog_688b19734ba0b7.29156457.webp', 'philippines', 'white', '5ft', '2025-03-25', '09454454744', 'booby', 'booby', 'regular', 1);
+(14, '99000007215398', 'bobbies', 'joshua padilla', 'juan dela cruz', '2025-07-31 15:47:15', 'dog_688b9003634a94.68791231.jpg', 'philippines', 'white', '5ft', '2025-03-25', '09454454744', 'booby', 'booby', 'regular', 1),
+(17, '99000003939935', 'mark', NULL, NULL, '2025-07-31 15:16:06', 'dog_688b88b6d6ac99.27833191.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(18, '99000001784755', 'fdefsefse', NULL, NULL, '2025-07-31 15:35:47', 'dog_688b8d535bb9f9.03702900.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(19, '99000007402568', 'patty', NULL, NULL, '2025-07-31 16:04:33', 'dog_688b9411105315.87173173.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -104,8 +107,8 @@ CREATE TABLE `generation` (
 --
 
 INSERT INTO `generation` (`gen_id`, `gen_dog_id`, `father_dog_id`, `mother_dog_id`, `grandfather1_dog_id`, `grandmother1_dog_id`, `grandfather2_dog_id`, `grandmother2_dog_id`, `ggfather1_dog_id`, `ggmother1_dog_id`, `ggfather2_dog_id`, `ggmother2_dog_id`, `ggfather3_dog_id`, `ggmother3_dog_id`, `ggfather4_dog_id`, `ggmother4_dog_id`) VALUES
-(3, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(4, 14, NULL, NULL, NULL, NULL, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(3, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, NULL),
+(4, 14, NULL, NULL, NULL, NULL, NULL, NULL, 19, NULL, NULL, NULL, NULL, NULL, 13, 18);
 
 --
 -- Indexes for dumped tables
@@ -128,7 +131,20 @@ ALTER TABLE `dogs`
 --
 ALTER TABLE `generation`
   ADD PRIMARY KEY (`gen_id`),
-  ADD KEY `gen_dog_id` (`gen_dog_id`);
+  ADD KEY `gen_dog_id` (`gen_dog_id`),
+  ADD KEY `ggfather1_dog_id` (`ggfather1_dog_id`),
+  ADD KEY `ggfather2_dog_id` (`ggfather2_dog_id`),
+  ADD KEY `ggfather3_dog_id` (`ggfather3_dog_id`),
+  ADD KEY `ggfather4_dog_id` (`ggfather4_dog_id`),
+  ADD KEY `ggmother1_dog_id` (`ggmother1_dog_id`),
+  ADD KEY `ggmother2_dog_id` (`ggmother2_dog_id`),
+  ADD KEY `ggmother3_dog_id` (`ggmother3_dog_id`),
+  ADD KEY `ggmother4_dog_id` (`ggmother4_dog_id`),
+  ADD KEY `grandfather1_dog_id` (`grandfather1_dog_id`),
+  ADD KEY `grandfather2_dog_id` (`grandfather2_dog_id`),
+  ADD KEY `grandmother1_dog_id` (`grandmother1_dog_id`),
+  ADD KEY `grandmother2_dog_id` (`grandmother2_dog_id`),
+  ADD KEY `mother_dog_id` (`mother_dog_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -144,13 +160,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `dogs`
 --
 ALTER TABLE `dogs`
-  MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `generation`
 --
 ALTER TABLE `generation`
-  MODIFY `gen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `gen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
@@ -160,7 +176,20 @@ ALTER TABLE `generation`
 -- Constraints for table `generation`
 --
 ALTER TABLE `generation`
-  ADD CONSTRAINT `generation_ibfk_1` FOREIGN KEY (`gen_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `generation_ibfk_1` FOREIGN KEY (`gen_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `generation_ibfk_10` FOREIGN KEY (`grandfather1_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `generation_ibfk_11` FOREIGN KEY (`grandfather2_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `generation_ibfk_12` FOREIGN KEY (`grandmother1_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `generation_ibfk_13` FOREIGN KEY (`grandmother2_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `generation_ibfk_14` FOREIGN KEY (`mother_dog_id`) REFERENCES `dogs` (`dog_id`),
+  ADD CONSTRAINT `generation_ibfk_2` FOREIGN KEY (`ggfather1_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `generation_ibfk_3` FOREIGN KEY (`ggfather2_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `generation_ibfk_4` FOREIGN KEY (`ggfather3_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `generation_ibfk_5` FOREIGN KEY (`ggfather4_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `generation_ibfk_6` FOREIGN KEY (`ggmother1_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `generation_ibfk_7` FOREIGN KEY (`ggmother2_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `generation_ibfk_8` FOREIGN KEY (`ggmother3_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `generation_ibfk_9` FOREIGN KEY (`ggmother4_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -45,7 +45,7 @@ $(document).ready(function () {
 
                    
 
-                    $('#result_dog_name').text(data.main_dog_name ?? 'Unknown');
+                    $('#result_dog_name').text(data.main_dog_name ?? '');
                     updateImageOrIcon('#result_dog_image', data.main_dog_image);
                     updateDog('father', data.father_name, data.father_image,data.gen_dog_id);
                     updateDog('mother', data.mother_name, data.mother_image,data.gen_dog_id);
@@ -99,7 +99,7 @@ $(document).ready(function () {
     function updateDog(id, name, image,genid) {
         const imgSelector = '#' + id;
         const labelSelector = $(imgSelector).next('span');
-        labelSelector.text(name ?? 'UNKNOWN');
+        labelSelector.text(name ?? '');
         updateImageOrIcon(imgSelector, image);
     
             $(imgSelector).parent().off('click').on('click', function () {

@@ -37,11 +37,11 @@ include "../src/components/admin/nav.php";
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Father" name="father" id="father" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-          <span class="text-xs mt-1 text-gray-700 font-semibold">Father</span>
+          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Mother" name="mother" id="mother" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-          <span class="text-xs mt-1 text-gray-700 font-semibold">Mother</span>
+          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Mother</span>
         </div>
       </div>
     </div>
@@ -54,14 +54,13 @@ include "../src/components/admin/nav.php";
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Grand Father" name="grandfather1" id="grandfather1" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-          <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Father</span>
+          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Grand Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Grand Mother" name="grandmother1" id="grandmother1" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-          <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Mother</span>
+          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Grand Mother</span>
         </div>
       </div>
-     
     </div>
 
     <!-- Couple 2 -->
@@ -69,14 +68,13 @@ include "../src/components/admin/nav.php";
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Grand Father" name="grandfather2" id="grandfather2" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-          <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Father</span>
+          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Grand Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Grand Mother" name="grandmother2" id="grandmother2" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-          <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Mother</span>
+          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Grand Mother</span>
         </div>
       </div>
-   
     </div>
   </div>
 
@@ -87,14 +85,13 @@ include "../src/components/admin/nav.php";
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Father" name="ggfather1" id="ggfather1" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Father</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Mother" name="ggmother1" id="ggmother1" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Mother</span>
         </div>
       </div>
-      
     </div>
 
     <!-- Couple 2 -->
@@ -102,14 +99,13 @@ include "../src/components/admin/nav.php";
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Father" name="ggfather2" id="ggfather2" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Father</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Mother" name="ggmother2" id="ggmother2" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Mother</span>
         </div>
       </div>
-      
     </div>
 
     <!-- Couple 3 -->
@@ -117,14 +113,13 @@ include "../src/components/admin/nav.php";
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Father" name="ggfather3" id="ggfather3" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Father</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Mother" name="ggmother3" id="ggmother3" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Mother</span>
         </div>
       </div>
-    
     </div>
 
     <!-- Couple 4 -->
@@ -132,14 +127,13 @@ include "../src/components/admin/nav.php";
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Father" name="ggfather4" id="ggfather4" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Father</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Mother" name="ggmother4" id="ggmother4" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Mother</span>
         </div>
       </div>
-     
     </div>
   </div>
 </div>
@@ -188,7 +182,7 @@ include "../src/components/admin/nav.php";
         </div>
         <div>
           <label for="dogImage" class="block text-sm font-medium text-gray-700 mb-1">Dog Image</label>
-          <input type="file" id="dogImage" name="dogImage" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-lg file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100">
+          <input type="file" id="dogImage" name="dog_image" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-lg file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100">
         </div>
       </div>
 

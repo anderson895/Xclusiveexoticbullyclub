@@ -17,9 +17,7 @@
 
 
 
-
-<div class="max-w-screen-xl mx-auto space-y-16 pb-40">
-
+<div class="max-w-screen-xl mx-auto space-y-16 pb-40" id="generationtree">
 
   <!-- Generation 1: 1 Couple -->
   <div class="flex justify-center">
@@ -27,11 +25,11 @@
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Father" name="father" id="father" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-          <span class="text-xs mt-1 text-gray-700 font-semibold">Father</span>
+          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Mother" name="mother" id="mother" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-          <span class="text-xs mt-1 text-gray-700 font-semibold">Mother</span>
+          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Mother</span>
         </div>
       </div>
     </div>
@@ -44,14 +42,13 @@
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Grand Father" name="grandfather1" id="grandfather1" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-          <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Father</span>
+          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Grand Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Grand Mother" name="grandmother1" id="grandmother1" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-          <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Mother</span>
+          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Grand Mother</span>
         </div>
       </div>
-     
     </div>
 
     <!-- Couple 2 -->
@@ -59,14 +56,13 @@
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Grand Father" name="grandfather2" id="grandfather2" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-          <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Father</span>
+          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Grand Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Grand Mother" name="grandmother2" id="grandmother2" class="w-20 h-20 rounded-full border-4 border-yellow-400" />
-          <span class="text-xs mt-1 text-gray-700 font-semibold">Grand Mother</span>
+          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Grand Mother</span>
         </div>
       </div>
-   
     </div>
   </div>
 
@@ -77,14 +73,13 @@
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Father" name="ggfather1" id="ggfather1" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Father</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Mother" name="ggmother1" id="ggmother1" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Mother</span>
         </div>
       </div>
-      
     </div>
 
     <!-- Couple 2 -->
@@ -92,14 +87,13 @@
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Father" name="ggfather2" id="ggfather2" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Father</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Mother" name="ggmother2" id="ggmother2" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Mother</span>
         </div>
       </div>
-      
     </div>
 
     <!-- Couple 3 -->
@@ -107,14 +101,13 @@
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Father" name="ggfather3" id="ggfather3" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Father</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Mother" name="ggmother3" id="ggmother3" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Mother</span>
         </div>
       </div>
-    
     </div>
 
     <!-- Couple 4 -->
@@ -122,16 +115,22 @@
       <div class="flex space-x-2">
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Father" name="ggfather4" id="ggfather4" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Father</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Father</span>
         </div>
         <div class="flex flex-col items-center">
           <img src="#" alt="Great Grand Mother" name="ggmother4" id="ggmother4" class="w-16 h-16 rounded-full border-4 border-yellow-400" />
-          <span class="text-[10px] mt-1 text-gray-700 font-semibold">Great Grand Mother</span>
+          <span class="text-[10px] mt-1 text-yellow-600 font-semibold uppercase">Great Grand Mother</span>
         </div>
       </div>
-     
     </div>
   </div>
+</div>
+
+
+
+
+<div id="noGenerationNotice" class="hidden text-center text-gray-600 italic bg-yellow-50 border border-yellow-300 p-4 rounded-md shadow-sm mb-10">
+    Lineage data is unavailable for unregistered dogs.
 </div>
 
 

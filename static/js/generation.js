@@ -11,7 +11,17 @@ $(document).ready(function () {
                 if (response.status === 200) {
                     const data = response.data;
 
-                   
+                    console.log(data.dog_registered_status);
+
+                if (data.dog_registered_status === 0) {
+                    $('#generationtree').hide();
+                    $('#noGenerationNotice').removeClass('hidden'); // Show notice
+                } else {
+                    $('#generationtree').show();
+                    $('#noGenerationNotice').addClass('hidden'); // Hide notice
+                }
+
+
 
                     $('#result_dog_name').text(data.main_dog_name ?? 'Unknown');
                     updateImageOrIcon('#result_dog_image', data.main_dog_image);

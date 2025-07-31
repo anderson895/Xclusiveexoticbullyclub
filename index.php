@@ -7,7 +7,8 @@
 <section class="bg-[#0D0D0D] text-center py-20 px-4">
   <div class="max-w-4xl mx-auto">
     <h1 class="text-4xl md:text-6xl font-bold text-[#FFD700] mb-6">
-      Real. Fair. And Professional.
+      Xclusive Exotic Bully Club
+
     </h1>
 
     <p class="text-lg text-[#CCCCCC] mb-12 px-4">

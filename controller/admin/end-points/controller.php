@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
                 // FILES
-                 $dog_image = $_FILES['dog_image'];
+                $dog_image = $_FILES['dog_image'];
                 
 
                 if ($dog_image['error'] === UPLOAD_ERR_OK) {
@@ -150,24 +150,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }else if ($_POST['requestType'] == 'updateGenForm') {
 
-
-            //   echo "<pre>";
-            //     print_r($_POST);
-            //     echo "</pre>";
-            
             $dogRole=$_POST['dogRole'];
-            $parent_dog_id=$_POST['dog_id'];
+           
             $main_dog_id=$_POST['main_dog_id'];
 
 
             $dogType=$_POST['dogType'];
 
             if($dogType=="registered"){
-
+                $parent_dog_id=$_POST['dog_id'];
                 $result = $db->updateGenForm_registered($dogRole,$parent_dog_id,$main_dog_id);
 
             }else if($dogType=="not_registered"){
-                $result = $db->updateGenForm_not_registered($dogRole,$dog_id);
+
+               $dogName=$_POST['dogName'];
+               
+
+                $dog_image = $_FILES['dog_image'];
+                
+
+                if ($dog_image['error'] === UPLOAD_ERR_OK) {
+                    $uploadDir = '../../../static/upload/';
+                    $fileExtension = pathinfo($dog_image['name'], PATHINFO_EXTENSION);
+                    $uniqueFileName = uniqid('dog_', true) . '.' . $fileExtension;
+                    $uploadFilePath = $uploadDir . $uniqueFileName;
+
+                    if (move_uploaded_file($dog_image['tmp_name'], $uploadFilePath)) {
+                        $result = $db->updateGenForm_not_registered($main_dog_id,$dogRole,$dogName,$uniqueFileName);
+                    }
+                }
             }
 
             echo json_encode([

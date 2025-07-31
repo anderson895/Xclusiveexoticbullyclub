@@ -58,6 +58,12 @@ class global_class extends db_connect
             return ['success' => false, 'message' => 'Database error during execution.'];
         }
     }
+
+
+
+
+
+    
     
 
     public function DogRegister(
@@ -345,6 +351,7 @@ public function fetch_dogs_generation($dog_id) {
         SELECT 
             d.dog_name AS main_dog_name,
             d.dog_image AS main_dog_image,
+            d.dog_registered_status, 
 
             gen.*,
 
@@ -461,6 +468,84 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
     return $stmt->execute();
 }
 
+
+
+
+   public function updateGenForm_not_registered($main_dog_id, $dogRole, $dogName, $uniqueFileName) {
+    // Generate a unique dog code
+    $dog_code = $this->generateDogCode();
+
+    // Step 1: Insert into dogs table
+    $query = "INSERT INTO dogs (
+        dog_code, dog_name, dog_image, dog_registered_status
+    ) VALUES (?, ?, ?, 0)";
+    
+    $stmt = $this->conn->prepare($query);
+    if (!$stmt) {
+        die("Prepare failed: " . $this->conn->error);
+    }
+
+    $stmt->bind_param("sss", $dog_code, $dogName, $uniqueFileName);
+    $result = $stmt->execute();
+    if (!$result) {
+        $stmt->close();
+        return false;
+    }
+
+    // Get the inserted dog_id
+    $newDogId = $this->conn->insert_id;
+    $stmt->close();
+
+    // Validate dogRole
+    $allowedRoles = [
+        'father', 'mother',
+        'grandfather1', 'grandmother1',
+        'grandfather2', 'grandmother2',
+        'ggfather1', 'ggmother1',
+        'ggfather2', 'ggmother2',
+        'ggfather3', 'ggmother3',
+        'ggfather4', 'ggmother4'
+    ];
+
+    if (!in_array($dogRole, $allowedRoles)) {
+        return false; // Invalid role
+    }
+
+    // Step 2: Check if gen_dog_id already exists
+    $check_query = "SELECT COUNT(*) FROM generation WHERE gen_dog_id = ?";
+    $check_stmt = $this->conn->prepare($check_query);
+    $check_stmt->bind_param("i", $main_dog_id);
+    $check_stmt->execute();
+    $check_stmt->bind_result($count);
+    $check_stmt->fetch();
+    $check_stmt->close();
+
+    if ($count > 0) {
+        // Exists: do UPDATE
+        $update_query = "UPDATE generation SET `{$dogRole}_dog_id` = ? WHERE gen_dog_id = ?";
+        $update_stmt = $this->conn->prepare($update_query);
+        if (!$update_stmt) {
+            die("Prepare failed (update): " . $this->conn->error);
+        }
+        $update_stmt->bind_param("ii", $newDogId, $main_dog_id);
+        $update_result = $update_stmt->execute();
+        $update_stmt->close();
+
+        return $update_result;
+    } else {
+        // Does not exist: do INSERT
+        $insert_query = "INSERT INTO generation (gen_dog_id, `{$dogRole}_dog_id`) VALUES (?, ?)";
+        $insert_stmt = $this->conn->prepare($insert_query);
+        if (!$insert_stmt) {
+            die("Prepare failed (insert): " . $this->conn->error);
+        }
+        $insert_stmt->bind_param("ii", $main_dog_id, $newDogId);
+        $insert_result = $insert_stmt->execute();
+        $insert_stmt->close();
+
+        return $insert_result;
+    }
+}
 
 
 
