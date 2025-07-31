@@ -59,82 +59,6 @@
 
 
 
-<script>
-  const Top10verifiedListData = [
-    {
-      name: "Thor",
-      chip: "123456",
-      breed: "American Bully",
-      owner: "Mark Reyes",
-      image: "static/assets/bullies/exotic_bullies.webp"
-    },
-    {
-      name: "Luna",
-      chip: "654321",
-      breed: "Pocket Bully",
-      owner: "Anna Santos",
-      image: "static/assets/bullies/x_bullies.webp"
-    },
-    {
-      name: "Coco",
-      chip: "789012",
-      breed: "Exotic Bully",
-      owner: "Carlos Dela Cruz",
-      image: "static/assets/bullies/french.webp"
-    },
-    {
-      name: "Max",
-      chip: "987654",
-      breed: "Classic Bully",
-      owner: "John Cruz",
-      image: "static/assets/bullies/shorty.webp"
-    }
-  ];
-
-  const slider = document.getElementById("bullySlider");
-
-  Top10verifiedListData.forEach((dog, index) => {
-    const card = `
-      <div class="swiper-slide bg-[#2B2B2B] p-6 rounded-xl border border-[#333] w-72 shadow-lg relative text-center">
-        <!-- Rank -->
-   
-
-     <div class="absolute top-3 right-3 bg-[#FFD700] text-black text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 z-10 shadow">
-      <span class="material-icons text-sm text-black">emoji_events</span> Xclusive
-    </div>
-
-
-
-        <!-- Dog Image -->
-        <img src="${dog.image}" alt="${dog.name}" class="w-full h-40 object-cover rounded-lg mb-4" />
-
-        <!-- Dog Details -->
-        <h3 class="text-xl font-bold text-[#FFD700] mb-1">${dog.name}</h3>
-        <p class="text-[#CCCCCC] text-sm mb-1">Breeder: ${dog.breed}</p>
-        <p class="text-[#CCCCCC] text-sm mb-1">Owner: ${dog.owner}</p>
-        <p class="text-[#CCCCCC] text-sm">XEBC No: ${dog.chip}</p>
-      </div>
-    `;
-    slider.innerHTML += card;
-  });
-
-  // Swiper Init
-  new Swiper(".mySwiper", {
-    loop: true,
-    slidesPerView: 1.2,
-    spaceBetween: 20,
-    breakpoints: {
-      640: { slidesPerView: 1.5 },
-      768: { slidesPerView: 2.5 },
-      1024: { slidesPerView: 3 },
-    },
-    autoplay: {
-      delay: 2500,
-      disableOnInteraction: false,
-    },
-  });
-</script>
-
 
 
   
@@ -282,3 +206,6 @@
 <?php
     include "src/components/footer.php";
 ?>
+<script src="static/js/swipper.js"></script>
+<script src="static/js/search.js"></script>
+

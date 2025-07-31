@@ -214,10 +214,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }else if ($_GET['requestType'] == 'fetch_dogs_generation') {
 
             $dog_id=$_GET['dog_id'];
-
             $result = $db->fetch_dogs_generation($dog_id);
-            
+            echo json_encode([
+                'status' => 200,
+                'data' => $result
+            ]);
+        }else if ($_GET['requestType'] == 'fetch_top_10_exclusive') {
 
+            $result = $db->fetch_top_10_exclusive();
             echo json_encode([
                 'status' => 200,
                 'data' => $result

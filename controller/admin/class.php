@@ -295,6 +295,29 @@ class global_class extends db_connect
 }
 
 
+public function fetch_top_10_exclusive() {
+    $query = $this->conn->prepare("
+        SELECT * FROM dogs 
+        WHERE dog_registered_status = 1 AND dog_type_status = 'exclusive' 
+        ORDER BY dog_id DESC 
+        LIMIT 10
+    ");
+
+    if ($query->execute()) {
+        $result = $query->get_result();
+        $dogs = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $dogs[] = $row;
+        }
+
+        return $dogs;
+    }
+
+    return []; 
+}
+
+
 
 
 public function fetch_all_registered_dogs_once($dogId) {
