@@ -110,7 +110,7 @@
 
         <!-- Dog Details -->
         <h3 class="text-xl font-bold text-[#FFD700] mb-1">${dog.name}</h3>
-        <p class="text-[#CCCCCC] text-sm mb-1">Breed: ${dog.breed}</p>
+        <p class="text-[#CCCCCC] text-sm mb-1">Breeder: ${dog.breed}</p>
         <p class="text-[#CCCCCC] text-sm mb-1">Owner: ${dog.owner}</p>
         <p class="text-[#CCCCCC] text-sm">XEBC No: ${dog.chip}</p>
       </div>

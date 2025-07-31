@@ -115,7 +115,7 @@ $('#searchForm').on('submit', function (e) {
             <h3 class="text-xl font-semibold text-yellow-300 mb-2">${result.dog_name}</h3>
             <p><strong>XEBC No #:</strong> ${result.dog_code}</p>
             <p><strong>Owner:</strong> ${result.dog_owner_name}</p>
-            <p><strong>Breeder Name:</strong> ${result.dog_breeder_name}</p>
+            <p><strong>Breeder:</strong> ${result.dog_breeder_name}</p>
           </div>
         </div>
       `);
