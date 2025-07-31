@@ -114,7 +114,7 @@ $(document).ready(function () {
             $("#gen_dog_id").val(genid);
 
 
-            console.log(id);
+           
             openModal();
         });
     }
@@ -153,6 +153,31 @@ function closeModal() {
 
 $('#updateGenForm').submit(function (e) {
         e.preventDefault();
+
+        let registeredDog = $("#registeredDog").val();
+        let dogName = $("#dogName").val();
+        let dogImage = $("#dogImage").val(); // This is a file input
+        let dogType = $("#dogType").val();
+
+        if (dogType === "registered") {
+            if (!registeredDog) {
+                alertify.error("Please select a registered dog.");
+                return;
+            }
+        } else if (dogType === "not_registered") {
+            if (!dogName || dogName.trim() === "") {
+                alertify.error("Please enter a dog name.");
+                return;
+            }
+
+            if (!dogImage) {
+                alertify.error("Please upload a dog image.");
+                return;
+            }
+        }
+
+
+
         const formData = new FormData(this);
         formData.append("requestType", "updateGenForm");
 

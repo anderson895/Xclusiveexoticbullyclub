@@ -45,6 +45,14 @@
         <span>Events</span>
       </a>
 
+
+    <a href="pointchart" class="nav-link flex items-center space-x-3 text-[#CCCCCC] hover:text-[#FFD700] hover:bg-white/10 px-4 py-2 rounded-md transition-all duration-300">
+      <span class="material-icons">bar_chart</span>
+      <span>Points Chart</span>
+    </a>
+
+
+
       <a href="settings" class="nav-link flex items-center space-x-3 text-[#CCCCCC] hover:text-[#FFD700] hover:bg-white/10 px-4 py-2 rounded-md transition-all duration-300">
         <span class="material-icons">settings</span>
         <span>Settings</span>

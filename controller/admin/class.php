@@ -288,48 +288,51 @@ class global_class extends db_connect
     return []; 
 }
 
-public function fetch_all_registered_dogs_once($dogId) {
-    $query = $this->conn->prepare("
-        SELECT * FROM dogs 
-        WHERE dog_registered_status = '1' 
-        AND dog_id != ?
-        AND dog_id NOT IN (
-            SELECT father_dog_id FROM generation WHERE father_dog_id IS NOT NULL
-            UNION
-            SELECT mother_dog_id FROM generation WHERE mother_dog_id IS NOT NULL
-            UNION
-            SELECT grandfather1_dog_id FROM generation WHERE grandfather1_dog_id IS NOT NULL
-            UNION
-            SELECT grandmother1_dog_id FROM generation WHERE grandmother1_dog_id IS NOT NULL
-            UNION
-            SELECT grandfather2_dog_id FROM generation WHERE grandfather2_dog_id IS NOT NULL
-            UNION
-            SELECT grandmother2_dog_id FROM generation WHERE grandmother2_dog_id IS NOT NULL
-            UNION
-            SELECT ggfather1_dog_id FROM generation WHERE ggfather1_dog_id IS NOT NULL
-            UNION
-            SELECT ggmother1_dog_id FROM generation WHERE ggmother1_dog_id IS NOT NULL
-            UNION
-            SELECT ggfather2_dog_id FROM generation WHERE ggfather2_dog_id IS NOT NULL
-            UNION
-            SELECT ggmother2_dog_id FROM generation WHERE ggmother2_dog_id IS NOT NULL
-            UNION
-            SELECT ggfather3_dog_id FROM generation WHERE ggfather3_dog_id IS NOT NULL
-            UNION
-            SELECT ggmother3_dog_id FROM generation WHERE ggmother3_dog_id IS NOT NULL
-            UNION
-            SELECT ggfather4_dog_id FROM generation WHERE ggfather4_dog_id IS NOT NULL
-            UNION
-            SELECT ggmother4_dog_id FROM generation WHERE ggmother4_dog_id IS NOT NULL
-        )
-    ");
 
-    if ($query === false) {
-        // Optional: log or return an error
-        return [];
+
+public function fetch_all_registered_dogs_once($dogId) {
+    // Step 1: Get dog IDs used in gen_dog_id row (excluding gen_dog_id itself)
+    $subQuery = $this->conn->prepare("
+        SELECT * FROM generation WHERE gen_dog_id = ?
+    ");
+    
+    if ($subQuery === false) return [];
+
+    $subQuery->bind_param("i", $dogId);
+    $subQuery->execute();
+    $result = $subQuery->get_result();
+
+    $excludeIds = [];
+    if ($row = $result->fetch_assoc()) {
+        foreach ($row as $key => $value) {
+            if (
+                $key !== "gen_id" && $key !== "gen_dog_id" && 
+                !is_null($value) && $value != $dogId
+            ) {
+                $excludeIds[] = (int)$value;
+            }
+        }
     }
 
-    $query->bind_param("i", $dogId);
+    // Convert array to comma-separated placeholders
+    $placeholders = implode(',', array_fill(0, count($excludeIds), '?'));
+
+    // Step 2: Build query
+    $sql = "SELECT * FROM dogs WHERE dog_registered_status = '1' AND dog_id != ?";
+
+    if (!empty($excludeIds)) {
+        $sql .= " AND dog_id NOT IN ($placeholders)";
+    }
+
+    $query = $this->conn->prepare($sql);
+    if ($query === false) return [];
+
+    // Merge bind parameters: first $dogId, then the list
+    $types = str_repeat('i', count($excludeIds) + 1); // all integers
+    $params = array_merge([$dogId], $excludeIds);
+
+    // Use argument unpacking to bind params dynamically
+    $query->bind_param($types, ...$params);
 
     if ($query->execute()) {
         $result = $query->get_result();
@@ -344,6 +347,8 @@ public function fetch_all_registered_dogs_once($dogId) {
 
     return [];
 }
+
+
 
 
 public function fetch_dogs_generation($dog_id) {
