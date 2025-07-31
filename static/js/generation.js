@@ -23,7 +23,10 @@ $(document).ready(function () {
 
 
 
-                    $('#result_dog_name').text(data.main_dog_name ?? 'Unknown');
+                    $('#result_dog_name').text(data.main_dog_name);
+                    $('#dog_breeder_name').text(data.dog_breeder_name);
+                    $('#dog_owner_name').text(data.dog_owner_name);
+                    $('#dog_code').text(data.dog_code);
                     updateImageOrIcon('#result_dog_image', data.main_dog_image);
                     updateDog('father', data.father_name, data.father_image, data.father_dog_id);
                     updateDog('mother', data.mother_name, data.mother_image, data.mother_dog_id);

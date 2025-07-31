@@ -387,6 +387,9 @@ public function fetch_dogs_generation($dog_id) {
             d.dog_name AS main_dog_name,
             d.dog_image AS main_dog_image,
             d.dog_registered_status, 
+            d.dog_code, 
+            d.dog_owner_name, 
+            d.dog_breeder_name, 
 
             gen.*,
 
