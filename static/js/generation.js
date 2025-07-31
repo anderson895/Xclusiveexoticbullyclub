@@ -26,7 +26,18 @@ $(document).ready(function () {
                     $('#result_dog_name').text(data.main_dog_name);
                     $('#dog_breeder_name').text(data.dog_breeder_name);
                     $('#dog_owner_name').text(data.dog_owner_name);
+                    $('#dog_country').text(data.dog_country);
+                    $('#dog_facebook_name').text(data.dog_facebook_name);
+                    $('#dog_date_of_birth').text(data.dog_date_of_birth);
+                    $('#dog_contact_number').text(data.dog_contact_number);
                     $('#dog_code').text(data.dog_code);
+                    $('#dog_color').text(data.dog_color);
+                    $('#dog_height').text(data.dog_height);
+                    $('#dog_ig_name').text(data.dog_ig_name);
+
+
+
+
                     updateImageOrIcon('#result_dog_image', data.main_dog_image);
                     updateDog('father', data.father_name, data.father_image, data.father_dog_id);
                     updateDog('mother', data.mother_name, data.mother_image, data.mother_dog_id);
