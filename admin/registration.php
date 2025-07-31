@@ -109,8 +109,8 @@ include "../src/components/admin/nav.php";
         <div class="md:col-span-2">
             <label class="block text-sm font-semibold mb-2">TYPE:</label>
             <select name="type" id="type" class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 text-white">
-                <option value="REGULAR">REGULAR</option>
-                <option value="EXCLUSIVE">EXCLUSIVE</option>
+                <option value="regular">REGULAR</option>
+                <option value="exclusive">EXCLUSIVE</option>
             </select>
         </div>
 

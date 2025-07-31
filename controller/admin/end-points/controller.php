@@ -64,7 +64,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $contact_number,
                             $facebook_name,
                             $ig_name,
-                            $uniqueFileName
+                            $uniqueFileName,
+                            $type
                         );
 
 
@@ -95,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         } else if ($_POST['requestType'] == 'update_dog_details') {
 
+            $dog_type_status = $_POST['dog_type_status'];
             $dog_id = $_POST['dog_id'];
             $dog_name = $_POST['dog_name'];
             $owner_name = $_POST['dog_owner_name'];
@@ -118,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 move_uploaded_file($dog_image['tmp_name'], '../../../static/upload/' . $uniqueFileName);
             }
 
-            $result = $db->UpdateDog(
+           $result = $db->UpdateDog(
                 $dog_id,
                 $dog_name,
                 $owner_name,
@@ -130,7 +132,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $contact_number,
                 $facebook_name,
                 $ig_name,
-                $uniqueFileName 
+                $uniqueFileName,
+                $dog_type_status
             );
 
             if ($result) {
@@ -157,11 +160,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $dogType=$_POST['dogType'];
 
-            if($dogType=="registered"){
+        if($dogType=="registered"){
                 $parent_dog_id=$_POST['dog_id'];
                 $result = $db->updateGenForm_registered($dogRole,$parent_dog_id,$main_dog_id);
 
-            }else if($dogType=="not_registered"){
+        }else if($dogType=="not_registered"){
 
                $dogName=$_POST['dogName'];
                

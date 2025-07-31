@@ -66,65 +66,64 @@ class global_class extends db_connect
     
     
 
-    public function DogRegister(
-        $dog_name, $owner_name, $breeder_name, $country, $color,
-        $height, $dob, $contact_number, $facebook_name, $ig_name, $uniqueFileName
-    ) {
-        // Generate a unique dog code in format "9900000" + random 7-digit number
-        $dog_code = $this->generateDogCode();
+   public function DogRegister(
+    $dog_name, $owner_name, $breeder_name, $country, $color,
+    $height, $dob, $contact_number, $facebook_name, $ig_name, $uniqueFileName, $type
+) {
+    $dog_code = $this->generateDogCode();
 
-        // First: Insert into dogs table
-            $query = "INSERT INTO dogs (
-                dog_code, dog_name, dog_owner_name, dog_breeder_name, dog_image, dog_country,
-                dog_color, dog_height, dog_date_of_birth, dog_contact_number,
-                dog_facebook_name, dog_ig_name, dog_type_status, dog_registered_status
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 1)";
+    $query = "INSERT INTO dogs (
+        dog_code, dog_name, dog_owner_name, dog_breeder_name, dog_image, dog_country,
+        dog_color, dog_height, dog_date_of_birth, dog_contact_number,
+        dog_facebook_name, dog_ig_name, dog_type_status, dog_registered_status
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
 
-            $stmt = $this->conn->prepare($query);
-            if (!$stmt) {
-                die("Prepare failed: " . $this->conn->error);
-            }
+    $stmt = $this->conn->prepare($query);
+    if (!$stmt) {
+        die("Prepare failed: " . $this->conn->error);
+    }
 
-            $stmt->bind_param(
-                "ssssssssssss",
-                $dog_code,
-                $dog_name,
-                $owner_name,
-                $breeder_name,
-                $uniqueFileName,
-                $country,
-                $color,
-                $height,
-                $dob,
-                $contact_number,
-                $facebook_name,
-                $ig_name
-            );
+    $stmt->bind_param(
+        "sssssssssssss",
+        $dog_code,
+        $dog_name,
+        $owner_name,
+        $breeder_name,
+        $uniqueFileName,
+        $country,
+        $color,
+        $height,
+        $dob,
+        $contact_number,
+        $facebook_name,
+        $ig_name,
+        $type
+    );
 
-            $result = $stmt->execute();
-            
-            if (!$result) {
-                $stmt->close();
-                return false;
-            }
+    $result = $stmt->execute();
 
-            // Get the inserted dog_id
-            $dog_id = $this->conn->insert_id;
-            $stmt->close();
+    if (!$result) {
+        $stmt->close();
+        return false;
+    }
 
-            // Second: Insert into generation table using the dog_id
-            $gen_query = "INSERT INTO generation (gen_dog_id) VALUES (?)";
-            $gen_stmt = $this->conn->prepare($gen_query);
-            if (!$gen_stmt) {
-                die("Prepare failed (generation): " . $this->conn->error);
-            }
+    $dog_id = $this->conn->insert_id;
+    $stmt->close();
 
-            $gen_stmt->bind_param("i", $dog_id);
-            $gen_result = $gen_stmt->execute();
-            $gen_stmt->close();
+    // Insert into generation table
+    $gen_query = "INSERT INTO generation (gen_dog_id) VALUES (?)";
+    $gen_stmt = $this->conn->prepare($gen_query);
+    if (!$gen_stmt) {
+        die("Prepare failed (generation): " . $this->conn->error);
+    }
 
-            return $gen_result;
-        }
+    $gen_stmt->bind_param("i", $dog_id);
+    $gen_result = $gen_stmt->execute();
+    $gen_stmt->close();
+
+    return $gen_result;
+}
+
 
 
 
@@ -149,9 +148,10 @@ class global_class extends db_connect
 
 
 
-       public function UpdateDog(
+      public function UpdateDog(
             $dog_id, $dog_name, $owner_name, $breeder_name, $country, $color,
-            $height, $dob, $contact_number, $facebook_name, $ig_name, $uniqueFileName = null
+            $height, $dob, $contact_number, $facebook_name, $ig_name,
+            $uniqueFileName = null, $dog_type_status
         ) {
             // Step 1: Fetch old image if a new one is uploaded
             if ($uniqueFileName) {
@@ -173,7 +173,7 @@ class global_class extends db_connect
             }
 
             // Step 3: Build query
-            if ($uniqueFileName) {
+           if ($uniqueFileName) {
                 $query = "UPDATE dogs SET 
                     dog_name = ?, 
                     dog_owner_name = ?, 
@@ -185,7 +185,8 @@ class global_class extends db_connect
                     dog_date_of_birth = ?, 
                     dog_contact_number = ?, 
                     dog_facebook_name = ?, 
-                    dog_ig_name = ? 
+                    dog_ig_name = ?,
+                    dog_type_status = ?
                 WHERE dog_id = ?";
             } else {
                 $query = "UPDATE dogs SET 
@@ -198,9 +199,11 @@ class global_class extends db_connect
                     dog_date_of_birth = ?, 
                     dog_contact_number = ?, 
                     dog_facebook_name = ?, 
-                    dog_ig_name = ? 
+                    dog_ig_name = ?,
+                    dog_type_status = ?
                 WHERE dog_id = ?";
             }
+
 
             $stmt = $this->conn->prepare($query);
             if (!$stmt) {
@@ -209,7 +212,7 @@ class global_class extends db_connect
 
             if ($uniqueFileName) {
                 $stmt->bind_param(
-                    "ssssssssssss",
+                    "sssssssssssss",
                     $dog_name,
                     $owner_name,
                     $breeder_name,
@@ -221,11 +224,12 @@ class global_class extends db_connect
                     $contact_number,
                     $facebook_name,
                     $ig_name,
+                    $dog_type_status,
                     $dog_id
                 );
             } else {
                 $stmt->bind_param(
-                    "sssssssssss",
+                    "ssssssssssss",
                     $dog_name,
                     $owner_name,
                     $breeder_name,
@@ -236,9 +240,11 @@ class global_class extends db_connect
                     $contact_number,
                     $facebook_name,
                     $ig_name,
+                    $dog_type_status,
                     $dog_id
                 );
             }
+
 
             $stmt->execute();
             $stmt->close();

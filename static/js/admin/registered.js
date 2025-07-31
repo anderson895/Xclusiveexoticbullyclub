@@ -19,6 +19,7 @@ $(document).ready(function () {
               <td class="p-3">${dog.dog_breeder_name}</td>
               <td class="p-3 capitalize">${dog.dog_country}</td>
               <td class="p-3">${dog.dog_color}</td>
+              <td class="p-3">${dog.dog_type_status}</td>
               <td class="p-3">${dog.dog_date_of_birth}</td>
               <td class="p-3 text-center">
                 <button class="viewDetailsBtn bg-[#FFD700] hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
@@ -90,6 +91,14 @@ $(document).ready(function () {
             <label class="block text-sm mb-1">Instagram</label>
             <input name="dog_ig_name" value="${dog.dog_ig_name}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
           </div>
+          <div>
+            <label class="block text-sm mb-1">Dog Type</label>
+            <select name="dog_type_status" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white">
+              <option value="regular" ${dog.dog_type_status === 'regular' ? 'selected' : ''}>Regular</option>
+              <option value="exclusive" ${dog.dog_type_status === 'exclusive' ? 'selected' : ''}>Exclusive</option>
+            </select>
+          </div>
+
         </div>
 
         <div class="mt-4 text-right">
