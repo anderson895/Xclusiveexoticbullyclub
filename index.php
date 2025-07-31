@@ -19,7 +19,7 @@
       <input 
         type="text" 
         id="searchInput"
-        placeholder="Search by Name or Chip Number" 
+        placeholder="Search by Name or XEBC No" 
         class="w-full sm:w-80 px-4 py-3 rounded-md bg-white/10 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
       />
    <button 
@@ -99,8 +99,8 @@
    
 
      <div class="absolute top-3 right-3 bg-[#FFD700] text-black text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 z-10 shadow">
-  <span class="material-icons text-sm text-black">emoji_events</span> Xclusive
-</div>
+      <span class="material-icons text-sm text-black">emoji_events</span> Xclusive
+    </div>
 
 
 

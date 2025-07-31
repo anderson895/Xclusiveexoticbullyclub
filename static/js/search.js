@@ -47,7 +47,7 @@
             <img src="${result.image}" alt="${result.name}" class="w-full sm:w-40 h-60 sm:h-40 object-cover flex-shrink-0">
             <div class="p-4">
                 <h3 class="text-xl font-semibold text-yellow-300 mb-2">${result.name}</h3>
-                <p><strong>Chip #:</strong> ${result.chip}</p>
+                <p><strong>XEBC No #:</strong> ${result.chip}</p>
                 <p><strong>Breed:</strong> ${result.breed}</p>
                 <p><strong>Owner:</strong> ${result.owner}</p>
             </div>
