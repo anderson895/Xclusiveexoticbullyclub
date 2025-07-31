@@ -21,8 +21,13 @@ $(document).ready(function () {
               <td class="p-3">${dog.dog_color}</td>
               <td class="p-3">${dog.dog_date_of_birth}</td>
               <td class="p-3 text-center">
-                <button class="viewBtn bg-[#FFD700] hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
-                  data-dog='${JSON.stringify(dog)}'>View</button>
+                <button class="viewDetailsBtn bg-[#FFD700] hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
+                  data-dog='${JSON.stringify(dog)}'>Details</button>
+                <a href="generation?dog_id=${dog.dog_id}" 
+                    class="inline-block bg-[#FFD700] hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition">
+                    Generation
+                </a>
+
               </td>
             </tr>
           `);
@@ -32,7 +37,7 @@ $(document).ready(function () {
   });
 
   // Show modal with pre-filled dog data
-  $(document).on("click", ".viewBtn", function () {
+  $(document).on("click", ".viewDetailsBtn", function () {
     const dog = $(this).data("dog");
 
     $("#modalContent").html(`
@@ -110,7 +115,7 @@ $(document).ready(function () {
   });
 });
 
-// Handle update submission
+
 $(document).on("submit", "#updateDogForm", function (e) {
   e.preventDefault();
 
@@ -124,12 +129,11 @@ $(document).on("submit", "#updateDogForm", function (e) {
     data: formData,
     processData: false,
     contentType: false,
-    dataType: "json", // ✅ case-sensitive and must be in quotes
+    dataType: "json",
     success: function (response) {
-      // Check if status is 200 and message is available
       if (response.status === 200) {
         Swal.fire('Success!', response.message || 'Dog info updated.', 'success').then(() => {
-            location.reload();// ✅ Make sure 'registered' is a valid route or add `.php` if needed
+            location.reload();
         });
       } else {
         alertify.error(response.message || "Error updating dog info.");
