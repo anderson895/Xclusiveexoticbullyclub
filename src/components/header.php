@@ -40,3 +40,6 @@
     </nav>
   </div>
 </header>
+
+
+<?php include "plugins/PageSpinner.php"; ?>
