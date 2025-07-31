@@ -148,18 +148,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             exit;
 
-        }else if ($_GET['requestType'] == 'updateGenForm') {
+        }else if ($_POST['requestType'] == 'updateGenForm') {
 
+
+            //   echo "<pre>";
+            //     print_r($_POST);
+            //     echo "</pre>";
             
-            $dogRole=$_GET['dogRole'];
-            $dog_id=$_GET['dog_id'];
+            $dogRole=$_POST['dogRole'];
+            $parent_dog_id=$_POST['dog_id'];
+            $main_dog_id=$_POST['main_dog_id'];
 
 
-            $dogType=$_GET['dogType'];
+            $dogType=$_POST['dogType'];
 
             if($dogType=="registered"){
 
-                $result = $db->updateGenForm_registered($dogRole,$dog_id);
+                $result = $db->updateGenForm_registered($dogRole,$parent_dog_id,$main_dog_id);
 
             }else if($dogType=="not_registered"){
                 $result = $db->updateGenForm_not_registered($dogRole,$dog_id);
@@ -180,7 +185,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    if (isset($_GET['requestType'])) {
         if ($_GET['requestType'] == 'fetch_all_registered_dogs') {
             $result = $db->fetch_all_registered_dogs();
+            echo json_encode([
+                'status' => 200,
+                'data' => $result
+            ]);
+        }else if ($_GET['requestType'] == 'fetch_all_registered_dogs_once') {
 
+            $dogId=$_GET['dogId'];            
+            $result = $db->fetch_all_registered_dogs_once($dogId);
             echo json_encode([
                 'status' => 200,
                 'data' => $result

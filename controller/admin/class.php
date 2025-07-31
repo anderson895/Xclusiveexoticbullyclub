@@ -282,6 +282,63 @@ class global_class extends db_connect
     return []; 
 }
 
+public function fetch_all_registered_dogs_once($dogId) {
+    $query = $this->conn->prepare("
+        SELECT * FROM dogs 
+        WHERE dog_registered_status = '1' 
+        AND dog_id != ?
+        AND dog_id NOT IN (
+            SELECT father_dog_id FROM generation WHERE father_dog_id IS NOT NULL
+            UNION
+            SELECT mother_dog_id FROM generation WHERE mother_dog_id IS NOT NULL
+            UNION
+            SELECT grandfather1_dog_id FROM generation WHERE grandfather1_dog_id IS NOT NULL
+            UNION
+            SELECT grandmother1_dog_id FROM generation WHERE grandmother1_dog_id IS NOT NULL
+            UNION
+            SELECT grandfather2_dog_id FROM generation WHERE grandfather2_dog_id IS NOT NULL
+            UNION
+            SELECT grandmother2_dog_id FROM generation WHERE grandmother2_dog_id IS NOT NULL
+            UNION
+            SELECT ggfather1_dog_id FROM generation WHERE ggfather1_dog_id IS NOT NULL
+            UNION
+            SELECT ggmother1_dog_id FROM generation WHERE ggmother1_dog_id IS NOT NULL
+            UNION
+            SELECT ggfather2_dog_id FROM generation WHERE ggfather2_dog_id IS NOT NULL
+            UNION
+            SELECT ggmother2_dog_id FROM generation WHERE ggmother2_dog_id IS NOT NULL
+            UNION
+            SELECT ggfather3_dog_id FROM generation WHERE ggfather3_dog_id IS NOT NULL
+            UNION
+            SELECT ggmother3_dog_id FROM generation WHERE ggmother3_dog_id IS NOT NULL
+            UNION
+            SELECT ggfather4_dog_id FROM generation WHERE ggfather4_dog_id IS NOT NULL
+            UNION
+            SELECT ggmother4_dog_id FROM generation WHERE ggmother4_dog_id IS NOT NULL
+        )
+    ");
+
+    if ($query === false) {
+        // Optional: log or return an error
+        return [];
+    }
+
+    $query->bind_param("i", $dogId);
+
+    if ($query->execute()) {
+        $result = $query->get_result();
+        $dogs = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $dogs[] = $row;
+        }
+
+        return $dogs;
+    }
+
+    return [];
+}
+
 
 public function fetch_dogs_generation($dog_id) {
     $query = "
@@ -374,13 +431,35 @@ public function fetch_dogs_generation($dog_id) {
 
 
 
-  public function updateGenForm_registered($dogRole,$dog_id) {
-        $stmt = $this->conn->prepare("UPDATE `orders` SET `order_status` = '$newStatus',`order_pickup_date` = '$scheduleDate',`order_pickup_time` = '$scheduleTime' WHERE `orders`.`order_id` = '$orderId'");
-        return $stmt->execute();
+public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id) {
+    $allowedRoles = [
+        'father', 'mother',
+        'grandfather1', 'grandmother1',
+        'grandfather2', 'grandmother2',
+        'ggfather1', 'ggmother1',
+        'ggfather2', 'ggmother2',
+        'ggfather3', 'ggmother3',
+        'ggfather4', 'ggmother4'
+    ];
+
+    // Validate that the role is one of the allowed generation columns
+    if (!in_array($dogRole, $allowedRoles)) {
+        return false; // Invalid column name
     }
 
+    // Safely build the SQL query with dynamic column name
+    $query = "UPDATE `generation` SET `{$dogRole}_dog_id` = ? WHERE `gen_dog_id` = ?";
 
+    $stmt = $this->conn->prepare($query);
 
+    if (!$stmt) {
+        return false; // Query failed to prepare
+    }
+
+    $stmt->bind_param("ii", $parent_dog_id, $main_dog_id);
+
+    return $stmt->execute();
+}
 
 
 

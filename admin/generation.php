@@ -157,28 +157,29 @@ include "../src/components/admin/nav.php";
 
     <form id="updateGenForm" class="space-y-5">
       <input type="hidden" id="dogRole" name="dogRole">
+      <input type="hidden" id="gen_dog_id" name="main_dog_id">
 
       <input type="hidden" id="dog_id" name="dog_id" value="<?php $_GET['dog_id'];?>">
 
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Dog Type</label>
-        <select id="dogType" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
+        <select id="dogType" name="dogType" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
           <option value="registered">Registered</option>
           <option value="not_registered">Not Registered</option>
         </select>
       </div>
 
       <!-- Registered Section -->
-      <div id="registeredSection">
-        <label for="registeredDog" class="block text-sm font-medium text-gray-700 mb-1">Select Registered Dog</label>
-        <select id="registeredDog" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
-          <option value="">-- Select Dog --</option>
-          <option value="dog1">Buddy</option>
-          <option value="dog2">Max</option>
-          <option value="dog3">Charlie</option>
-        </select>
-      </div>
+        <div id="registeredSection">
+            <label for="registeredDog" class="block text-sm font-medium text-gray-700 mb-1">
+                Select Registered Dog
+            </label>
+            <select id="registeredDog" name="dog_id" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
+                <option value="">-- Select Dog --</option>
+            </select>
+        </div>
+
 
       <!-- Not Registered Section -->
       <div id="notRegisteredSection" class="hidden space-y-4">

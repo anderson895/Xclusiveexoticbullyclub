@@ -1,6 +1,38 @@
 $(document).ready(function () {
     const dogId = getUrlParameter('dog_id');
 
+
+
+
+
+    // TO FETCH DROPDOWN BULLIES
+    $.ajax({
+        url: "../controller/admin/end-points/controller.php",
+        type: "GET",
+        data: {
+            requestType: "fetch_all_registered_dogs_once",
+            dogId: dogId,
+        },
+        dataType: "json",
+        success: function(response) {
+          
+                const dogSelect = $("#registeredDog");
+                response.data.forEach(function(dog) {
+                        const option = $("<option>")
+                            .val(dog.dog_id)
+                            .text(dog.dog_name);
+                        dogSelect.append(option);
+                });
+        },
+        error: function(xhr, status, error) {
+            console.error("AJAX Error:", error);
+        }
+    });
+
+
+
+
+
     if (dogId) {
         $.ajax({
             url: "../controller/admin/end-points/controller.php",
@@ -11,23 +43,24 @@ $(document).ready(function () {
                 if (response.status === 200) {
                     const data = response.data;
 
+                   
+
                     $('#result_dog_name').text(data.main_dog_name ?? 'Unknown');
                     updateImageOrIcon('#result_dog_image', data.main_dog_image);
-
-                    updateDog('father', data.father_name, data.father_image);
-                    updateDog('mother', data.mother_name, data.mother_image);
-                    updateDog('grandfather1', data.grandfather1_name, data.grandfather1_image);
-                    updateDog('grandmother1', data.grandmother1_name, data.grandmother1_image);
-                    updateDog('grandfather2', data.grandfather2_name, data.grandfather2_image);
-                    updateDog('grandmother2', data.grandmother2_name, data.grandmother2_image);
-                    updateDog('ggfather1', data.ggfather1_name, data.ggfather1_image);
-                    updateDog('ggmother1', data.ggmother1_name, data.ggmother1_image);
-                    updateDog('ggfather2', data.ggfather2_name, data.ggfather2_image);
-                    updateDog('ggmother2', data.ggmother2_name, data.ggmother2_image);
-                    updateDog('ggfather3', data.ggfather3_name, data.ggfather3_image);
-                    updateDog('ggmother3', data.ggmother3_name, data.ggmother3_image);
-                    updateDog('ggfather4', data.ggfather4_name, data.ggfather4_image);
-                    updateDog('ggmother4', data.ggmother4_name, data.ggmother4_image);
+                    updateDog('father', data.father_name, data.father_image,data.gen_dog_id);
+                    updateDog('mother', data.mother_name, data.mother_image,data.gen_dog_id);
+                    updateDog('grandfather1', data.grandfather1_name, data.grandfather1_image,data.gen_dog_id);
+                    updateDog('grandmother1', data.grandmother1_name, data.grandmother1_image,data.gen_dog_id);
+                    updateDog('grandfather2', data.grandfather2_name, data.grandfather2_image,data.gen_dog_id);
+                    updateDog('grandmother2', data.grandmother2_name, data.grandmother2_image,data.gen_dog_id);
+                    updateDog('ggfather1', data.ggfather1_name, data.ggfather1_image,data.gen_dog_id);
+                    updateDog('ggmother1', data.ggmother1_name, data.ggmother1_image,data.gen_dog_id);
+                    updateDog('ggfather2', data.ggfather2_name, data.ggfather2_image,data.gen_dog_id);
+                    updateDog('ggmother2', data.ggmother2_name, data.ggmother2_image,data.gen_dog_id);
+                    updateDog('ggfather3', data.ggfather3_name, data.ggfather3_image,data.gen_dog_id);
+                    updateDog('ggmother3', data.ggmother3_name, data.ggmother3_image,data.gen_dog_id);
+                    updateDog('ggfather4', data.ggfather4_name, data.ggfather4_image,data.gen_dog_id);
+                    updateDog('ggmother4', data.ggmother4_name, data.ggmother4_image,data.gen_dog_id);
                 }
             },
             error: function (xhr, status, error) {
@@ -63,20 +96,25 @@ $(document).ready(function () {
         }
 
 
-    function updateDog(id, name, image) {
+    function updateDog(id, name, image,genid) {
         const imgSelector = '#' + id;
         const labelSelector = $(imgSelector).next('span');
         labelSelector.text(name ?? 'UNKNOWN');
         updateImageOrIcon(imgSelector, image);
+    
+            $(imgSelector).parent().off('click').on('click', function () {
 
-        $(imgSelector).parent().off('click').on('click', function () {
             const altValue = $(imgSelector).attr('alt');
+
             $('#dogRole').val(id);
             $('#dogName').val(labelSelector.text());
             $('#dogImage').val('');
             $('#generation').text(altValue);
 
-            console.log(altValue);
+            $("#gen_dog_id").val(genid);
+
+
+            console.log(id);
             openModal();
         });
     }
@@ -91,6 +129,7 @@ $(document).ready(function () {
   $('#dogType').on('change', function () {
     const value = $(this).val();
     if (value === 'registered') {
+        
       $('#registeredSection').removeClass('hidden');
       $('#notRegisteredSection').addClass('hidden');
     } else {
@@ -114,7 +153,7 @@ function closeModal() {
 
 $('#updateGenForm').submit(function (e) {
         e.preventDefault();
-        const formData = new FormData(form);
+        const formData = new FormData(this);
         formData.append("requestType", "updateGenForm");
 
         $.ajax({
@@ -139,3 +178,11 @@ $('#updateGenForm').submit(function (e) {
             }
         });
     });
+
+
+
+
+
+
+
+    
