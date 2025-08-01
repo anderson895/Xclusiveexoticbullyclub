@@ -25,9 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
         }else if ($_POST['requestType'] == 'DogRegister') {
-            // echo "<pre>";
-            // print_r($_POST);
-            // echo "</pre>";
                 $dog_name = $_POST['dog_name'];
                 $owner_name = $_POST['owner_name'];
                 $breeder_name = $_POST['breeder_name'];
@@ -160,17 +157,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $dogType=$_POST['dogType'];
 
-        if($dogType=="registered"){
-                $parent_dog_id=$_POST['dog_id'];
-                $result = $db->updateGenForm_registered($dogRole,$parent_dog_id,$main_dog_id);
+                if($dogType=="registered"){
+                        $parent_dog_id=$_POST['dog_id'];
+                        $result = $db->updateGenForm_registered($dogRole,$parent_dog_id,$main_dog_id);
 
-        }else if($dogType=="not_registered"){
+                }else if($dogType=="not_registered"){
 
-               $dogName=$_POST['dogName'];
-               
+                    $dogName=$_POST['dogName'];
+                    
 
-                $dog_image = $_FILES['dog_image'];
-                
+                        $dog_image = $_FILES['dog_image'];
+                        
 
                 if ($dog_image['error'] === UPLOAD_ERR_OK) {
                     $uploadDir = '../../../static/upload/';
@@ -188,6 +185,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'status' => 200,
                 'data' => $result
             ]);
+        }else if ($_POST['requestType'] == 'CreatePageant') {
+
+            $name=$_POST['name'];
+            $description=$_POST['description'];
+
+            $result = $db->CreatePageant($name,$description);
+            
+            if ($result) {
+                    echo json_encode([
+                        'status' => 200,
+                        'message' => 'Added successfully.'
+                    ]);
+            } else {
+                    echo json_encode([
+                        'status' => 500,
+                        'message' => 'No changes made or error updating data.'
+                    ]);
+            }
+
         }else {
             echo 'Else';
         }
@@ -222,6 +238,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }else if ($_GET['requestType'] == 'fetch_top_10_exclusive') {
 
             $result = $db->fetch_top_10_exclusive();
+            echo json_encode([
+                'status' => 200,
+                'data' => $result
+            ]);
+        }else if ($_GET['requestType'] == 'fetch_all_pageant') {
+            $result = $db->fetch_all_pageant();
             echo json_encode([
                 'status' => 200,
                 'data' => $result

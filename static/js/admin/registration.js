@@ -28,7 +28,7 @@ $('#frmDogRegister').on('submit', function(e) {
             data: formData,
             contentType: false,
             processData: false, 
-            dataType: "json", // Important to auto-parse JSON response
+            dataType: "json", 
             success: function(response) {
                 console.log(response);
 
