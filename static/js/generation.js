@@ -23,17 +23,18 @@ $(document).ready(function () {
 
 
 
-                    $('#result_dog_name').text(data.main_dog_name);
-                    $('#dog_breeder_name').text(data.dog_breeder_name);
-                    $('#dog_owner_name').text(data.dog_owner_name);
-                    $('#dog_country').text(data.dog_country);
-                    $('#dog_facebook_name').text(data.dog_facebook_name);
-                    $('#dog_date_of_birth').text(data.dog_date_of_birth);
-                    $('#dog_contact_number').text(data.dog_contact_number);
-                    $('#dog_code').text(data.dog_code);
-                    $('#dog_color').text(data.dog_color);
-                    $('#dog_height').text(data.dog_height);
-                    $('#dog_ig_name').text(data.dog_ig_name);
+                    $('#result_dog_name').text(data.main_dog_name ?? 'N/A');
+                    $('.dog_breeder_name').text(data.dog_breeder_name ?? 'N/A');
+                    $('.dog_owner_name').text(data.dog_owner_name ?? 'N/A');
+                    $('.dog_country').text(data.dog_country ?? 'N/A');
+                    $('#dog_facebook_name').text(data.dog_facebook_name ?? 'N/A');
+                    $('.dog_date_of_birth').text(data.dog_date_of_birth ?? 'N/A');
+                    $('#dog_contact_number').text(data.dog_contact_number ?? 'N/A');
+                    $('#dog_code').text(data.dog_code ?? 'N/A');
+                    $('.dog_color').text(data.dog_color ?? 'N/A');
+                    $('.dog_height').text(data.dog_height ?? 'N/A');
+                    $('#dog_ig_name').text(data.dog_ig_name ?? 'N/A');
+
 
 
                     $('#dog_facebook_link').attr('href', data.dog_facebook_link);
