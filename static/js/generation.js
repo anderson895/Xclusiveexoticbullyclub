@@ -14,10 +14,10 @@ $(document).ready(function () {
                     console.log(data.dog_registered_status);
 
                 if (data.dog_registered_status === 0) {
-                    $('#generationtree').hide();
+                    $('.markAsRegistered').hide();
                     $('#noGenerationNotice').removeClass('hidden'); // Show notice
                 } else {
-                    $('#generationtree').show();
+                    $('.markAsRegistered').show();
                     $('#noGenerationNotice').addClass('hidden'); // Hide notice
                 }
 
