@@ -74,27 +74,29 @@ $(document).ready(function () {
         return url.searchParams.get(name);
     }
 
-   function updateImageOrIcon(selector, imagePath) {
+  
+    function updateImageOrIcon(selector, imagePath, targetDogId) {
             const $img = $(selector);
-            const $existingIcon = $img.siblings('.material-icons');
-
-            if ($existingIcon.length) {
-                $existingIcon.remove();
-            }
+            $img.off('click'); // Remove previous click handlers
 
             if (imagePath && imagePath.trim() !== '') {
                 $img.attr('src', '../static/upload/' + imagePath)
                     .addClass('cursor-pointer hover:scale-105 transition-transform duration-200')
                     .show();
             } else {
-                $img.hide().after(`
-                    <span class="material-icons text-yellow-500 text-5xl cursor-pointer hover:text-yellow-600 transition-colors duration-200">
-                        pets
-                    </span>
-                `);
+                // 👇 Use default.png if imagePath is empty or invalid
+                $img.attr('src', '../static/assets/icons/default.png')
+                    .addClass('bg-yellow-400 cursor-pointer hover:scale-105 transition-transform duration-200')
+                    .show();
             }
-        }
 
+            // ✅ Apply click event if dog ID is available
+            if (targetDogId) {
+                $img.on('click', function () {
+                    window.location.href = 'generation.php?dog_id=' + targetDogId;
+                });
+            }
+    }
 
     function updateDog(id, name, image,genid) {
         const imgSelector = '#' + id;
