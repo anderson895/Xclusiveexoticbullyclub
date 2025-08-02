@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2025 at 10:14 AM
+-- Generation Time: Aug 02, 2025 at 10:39 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -49,7 +49,7 @@ INSERT INTO `admin` (`admin_id`, `admin_fullname`, `admin_email`, `admin_passwor
 
 CREATE TABLE `dogs` (
   `dog_id` int(11) NOT NULL,
-  `dog_code` varchar(60) NOT NULL,
+  `dog_code` varchar(255) NOT NULL,
   `dog_name` varchar(60) NOT NULL,
   `dog_date_registration` date DEFAULT NULL,
   `dog_owner_name` varchar(60) DEFAULT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE `dogs` (
 --
 
 INSERT INTO `dogs` (`dog_id`, `dog_code`, `dog_name`, `dog_date_registration`, `dog_owner_name`, `dog_breeder_name`, `dog_image`, `dog_banner`, `dog_country`, `dog_color`, `dog_height`, `dog_date_of_birth`, `dog_contact_number`, `dog_facebook_name`, `dog_facebook_link`, `dog_ig_name`, `dog_ig_link`, `dog_type_status`, `dog_registered_status`) VALUES
-(41, '99000005766653', 'TBC MIAGI', NULL, 'JORGE SOTO', 'JORGE SOTO', 'dog_688dc85bb80d92.63592581.jpg', 'banner_688dc8888f9891.70421033.jpg', 'USA', 'blue', 'N/A', '2011-01-18', '09999', 'JORGE LUIS SOTO', 'https://www.facebook.com/jorge.luis.soto.59319?mibextid=wwXIfr&rdid=P1FmWcJE1YdwOeIj&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19KcYmyrS3%2F%3Fmibextid%3DwwXIfr#', 'thebullycampline', 'https://www.instagram.com/thebullycampline/', 'exclusive', 1);
+(41, '888000001', 'TBC MIAGI', NULL, 'JORGE SOTO', 'JORGE SOTO', 'dog_688dc85bb80d92.63592581.jpg', 'banner_688dc8888f9891.70421033.jpg', 'USA', 'blue', 'N/A', '2011-01-18', '09999', 'JORGE LUIS SOTO', 'https://www.facebook.com/jorge.luis.soto.59319?mibextid=wwXIfr&rdid=P1FmWcJE1YdwOeIj&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19KcYmyrS3%2F%3Fmibextid%3DwwXIfr#', 'thebullycampline', 'https://www.instagram.com/thebullycampline/', 'exclusive', 1);
 
 -- --------------------------------------------------------
 
