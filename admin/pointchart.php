@@ -75,10 +75,10 @@ include "../src/components/admin/nav.php";
     <button id="closeAddPageantModal" class="absolute top-2 right-2 text-white hover:text-red-500 text-xl">&times;</button>
 
     <div id="modalContent" class="space-y-2">
-      <h3 class="text-lg font-bold text-[#FFD700]">Add New Entry</h3>
+      <h3 class="text-lg font-bold text-[#FFD700]">Create Show</h3>
       <form id="frmCreatePageant" class="space-y-4">
         <div>
-          <label for="name" class="block text-sm font-medium">Name</label>
+          <label for="name" class="block text-sm font-medium">Show Name</label>
           <input type="text" id="name" name="name" required class="w-full px-3 py-2 rounded-md bg-[#0D0D0D] border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
         </div>
         <div>

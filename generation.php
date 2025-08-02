@@ -5,28 +5,24 @@
 <div class="flex items-center justify-between p-4 bg-black border-b border-gray-700 flex-wrap ">
   
 
-  <div class="flex flex-col sm:flex-row sm:items-center mt-2 sm:mt-0 text-sm text-gray-300 markAsRegistered">
-    <div class="flex items-center space-x-1 mb-2 sm:mb-0 mx-2">
-      <img src="static/assets/icons/facebook.png" alt="Facebook" class="w-4 h-4">
-      <span id="dog_facebook_name"></span>
-    </div>
+<div class="flex flex-col sm:flex-row sm:items-center mt-2 sm:mt-0 text-sm text-gray-300 markAsRegistered space-y-2 sm:space-y-0 sm:space-x-6">
+  <a href="#" id="dog_facebook_link" class="flex items-center space-x-2 mx-2" target="_blank" rel="noopener">
+    <img src="static/assets/icons/facebook.png" alt="Facebook" class="w-4 h-4">
+    <span id="dog_facebook_name"></span>
+  </a>
 
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    <div class="flex items-center space-x-1 mb-2 sm:mb-0 mx-2">
-      <img src="static/assets/icons/instagram.png" alt="Instagram" class="w-4 h-4">
-      <span id="dog_ig_name"></span>
-    </div>
-    &nbsp;
-    &nbsp;
-    &nbsp;
-    <div class="flex items-center space-x-1 mx-2">
-      <img src="static/assets/icons/phone.png" alt="Phone" class="w-4 h-4">
+  <a href="#" id="dog_ig_link" class="flex items-center space-x-2 mx-2" target="_blank" rel="noopener">
+    <img src="static/assets/icons/instagram.png" alt="Instagram" class="w-4 h-4">
+    <span id="dog_ig_name"></span>
+  </a>
+
+
+  <div class="flex items-center space-x-2 mx-2">
+    <img src="static/assets/icons/phone.png" alt="Phone" class="w-4 h-4">
     <span id="dog_contact_number"></span>
-    </div>
   </div>
 </div>
+
 
 
 <div class="w-full mx-auto mt-6 bg-gradient-to-br from-zinc-900 to-black text-white rounded-2xl overflow-hidden shadow-2xl">
@@ -63,9 +59,11 @@
   <!-- Image Section -->
   <div class="w-full sm:w-1/2 aspect-[4/3] sm:aspect-auto">
     <img
-      src="https://utfs.io/f/f54d38cd-157d-41fe-a6c4-8cca8439e265-oogk4m.jpg"
+      id="result_dog_banner"
+      src="#"
       alt="Dog Banner"
       class="w-full h-full object-cover"
+
     />
   </div>
 

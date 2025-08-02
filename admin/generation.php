@@ -49,9 +49,10 @@ include "../src/components/admin/nav.php";
   <!-- Image Section -->
   <div class="w-full sm:w-1/2 aspect-[4/3] sm:aspect-auto">
     <img
-      src="https://utfs.io/f/f54d38cd-157d-41fe-a6c4-8cca8439e265-oogk4m.jpg"
+      src="#"
       alt="Dog Banner"
       class="w-full h-full object-cover"
+      id="result_dog_banner"
     />
   </div>
 

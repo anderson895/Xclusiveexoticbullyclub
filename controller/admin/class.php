@@ -505,6 +505,7 @@ public function fetch_dogs_generation($dog_id) {
         SELECT 
             d.dog_name AS main_dog_name,
             d.dog_image AS main_dog_image,
+            d.dog_banner AS main_dog_banner,
             d.dog_registered_status, 
             d.dog_code, 
             d.dog_owner_name, 
@@ -514,7 +515,9 @@ public function fetch_dogs_generation($dog_id) {
             d.dog_height, 
             d.dog_contact_number, 
             d.dog_facebook_name, 
+            d.dog_facebook_link, 
             d.dog_ig_name, 
+            d.dog_ig_link, 
             d.dog_date_of_birth, 
 
             gen.*,

@@ -36,9 +36,16 @@ $(document).ready(function () {
                     $('#dog_ig_name').text(data.dog_ig_name);
 
 
+                    $('#dog_facebook_link').attr('href', data.dog_facebook_link);
+                    $('#dog_ig_link').attr('href', data.dog_ig_link);
+
+
 
 
                     updateImageOrIcon('#result_dog_image', data.main_dog_image);
+                    updateImageOrIcon('#result_dog_banner', data.main_dog_banner);
+
+
                     updateDog('father', data.father_name, data.father_image, data.father_dog_id);
                     updateDog('mother', data.mother_name, data.mother_image, data.mother_dog_id);
 

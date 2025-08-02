@@ -47,6 +47,7 @@ $(document).ready(function () {
 
                     $('#result_dog_name').text(data.main_dog_name ?? '');
                     updateImageOrIcon('#result_dog_image', data.main_dog_image);
+                    updateImageOrIcon('#result_dog_banner', data.main_dog_banner);
                     updateDog('father', data.father_name, data.father_image,data.gen_dog_id);
                     updateDog('mother', data.mother_name, data.mother_image,data.gen_dog_id);
                     updateDog('grandfather1', data.grandfather1_name, data.grandfather1_image,data.gen_dog_id);
