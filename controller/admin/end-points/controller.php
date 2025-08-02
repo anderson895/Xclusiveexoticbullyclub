@@ -25,31 +25,46 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
         }else if ($_POST['requestType'] == 'DogRegister') {
-                $dog_name = $_POST['dog_name'];
-                $owner_name = $_POST['owner_name'];
-                $breeder_name = $_POST['breeder_name'];
 
-                $country = $_POST['country'];
-                $color = $_POST['color'];
-                $height = $_POST['height'];
-                $dob = $_POST['dob'];
-                $contact_number = $_POST['contact_number'];
-                $facebook_name = $_POST['facebook_name'];
-                $ig_name = $_POST['ig_name'];
-                $type = $_POST['type'];
-
+                $dog_name        = $_POST['dog_name'];
+                $owner_name      = $_POST['owner_name'];
+                $breeder_name    = $_POST['breeder_name'];
+                $country         = $_POST['country'];
+                $color           = $_POST['color'];
+                $height          = $_POST['height'];
+                $dob             = $_POST['dob'];
+                $contact_number  = $_POST['contact_number'];
+                $facebook_name   = $_POST['facebook_name'];
+                $facebook_link   = $_POST['facebook_link'];
+                $ig_name         = $_POST['ig_name'];
+                $ig_link         = $_POST['ig_link'];
+                $type            = $_POST['type'];
+                $registration    = $_POST['registration'];
 
                 // FILES
                 $dog_image = $_FILES['dog_image'];
-                
+                $imgBanner = $_FILES['imgBanner'];
 
-                if ($dog_image['error'] === UPLOAD_ERR_OK) {
-                    $uploadDir = '../../../static/upload/';
-                    $fileExtension = pathinfo($dog_image['name'], PATHINFO_EXTENSION);
-                    $uniqueFileName = uniqid('dog_', true) . '.' . $fileExtension;
-                    $uploadFilePath = $uploadDir . $uniqueFileName;
+                $uploadDir = '../../../static/upload/';
+                $dogImageFileName = '';
+                $dogBannerFileName = '';
 
-                    if (move_uploaded_file($dog_image['tmp_name'], $uploadFilePath)) {
+                if ($dog_image['error'] === UPLOAD_ERR_OK && $imgBanner['error'] === UPLOAD_ERR_OK) {
+                    // Upload Dog Image
+                    $dogImageExtension = pathinfo($dog_image['name'], PATHINFO_EXTENSION);
+                    $dogImageFileName = uniqid('dog_', true) . '.' . $dogImageExtension;
+                    $dogImagePath = $uploadDir . $dogImageFileName;
+
+                    // Upload Banner Image
+                    $bannerExtension = pathinfo($imgBanner['name'], PATHINFO_EXTENSION);
+                    $dogBannerFileName = uniqid('dog_banner_', true) . '.' . $bannerExtension;
+                    $bannerPath = $uploadDir . $dogBannerFileName;
+
+                    // Move both files
+                    $dogImageUploaded = move_uploaded_file($dog_image['tmp_name'], $dogImagePath);
+                    $bannerUploaded = move_uploaded_file($imgBanner['tmp_name'], $bannerPath);
+
+                    if ($dogImageUploaded && $bannerUploaded) {
                         $result = $db->DogRegister(
                             $dog_name,
                             $owner_name,
@@ -61,12 +76,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $contact_number,
                             $facebook_name,
                             $ig_name,
-                            $uniqueFileName,
-                            $type
+                            $dogImageFileName,
+                            $type,
+                            $facebook_link,
+                            $ig_link,
+                            $dogBannerFileName
                         );
 
-
-                       if ($result) {
+                        if ($result) {
                             echo json_encode([
                                 'status' => 200,
                                 'message' => 'Dog successfully registered.'
@@ -77,15 +94,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 'message' => 'Error saving data.'
                             ]);
                         }
-
-
                     } else {
-                        echo "Error uploading image. Please try again.";
+                        echo json_encode([
+                            'status' => 500,
+                            'message' => 'Error uploading one or both images.'
+                        ]);
                     }
                 } else {
-                    echo "No image uploaded or there was an error with the image.";
+                    echo json_encode([
+                        'status' => 400,
+                        'message' => 'Missing or invalid image upload.'
+                    ]);
                 }
-
 
 
 
@@ -93,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         } else if ($_POST['requestType'] == 'update_dog_details') {
 
-            $dog_type_status = $_POST['dog_type_status'];
+           $dog_type_status = $_POST['dog_type_status'];
             $dog_id = $_POST['dog_id'];
             $dog_name = $_POST['dog_name'];
             $owner_name = $_POST['dog_owner_name'];
@@ -105,19 +125,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $contact_number = $_POST['dog_contact_number'];
             $facebook_name = $_POST['dog_facebook_name'];
             $ig_name = $_POST['dog_ig_name'];
+            $facebook_link = $_POST['dog_facebook_link'];
+            $ig_link = $_POST['dog_ig_link'];
 
-            // Check if a file was uploaded
+            // Profile Image
             $dog_image = $_FILES['dog_image'];
-            $uniqueFileName =null;
+            $uniqueFileName = null;
             if (isset($_FILES['dog_image']) && $_FILES['dog_image']['error'] === UPLOAD_ERR_OK) {
                 $uploadDir = '../../../static/upload/';
                 $fileExtension = pathinfo($dog_image['name'], PATHINFO_EXTENSION);
                 $uniqueFileName = uniqid('dog_', true) . '.' . $fileExtension;
-                $uploadFilePath = $uploadDir . $uniqueFileName;
-                move_uploaded_file($dog_image['tmp_name'], '../../../static/upload/' . $uniqueFileName);
+                move_uploaded_file($dog_image['tmp_name'], $uploadDir . $uniqueFileName);
             }
 
-           $result = $db->UpdateDog(
+            // Banner Image
+            $dog_banner = $_FILES['dog_banner'];
+            $uniqueBannerFileName = null;
+            if (isset($_FILES['dog_banner']) && $_FILES['dog_banner']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = '../../../static/upload/';
+                $fileExtension = pathinfo($dog_banner['name'], PATHINFO_EXTENSION);
+                $uniqueBannerFileName = uniqid('banner_', true) . '.' . $fileExtension;
+                move_uploaded_file($dog_banner['tmp_name'], $uploadDir . $uniqueBannerFileName);
+            }
+
+            // Update
+            $result = $db->UpdateDog(
                 $dog_id,
                 $dog_name,
                 $owner_name,
@@ -130,20 +162,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $facebook_name,
                 $ig_name,
                 $uniqueFileName,
-                $dog_type_status
+                $dog_type_status,
+                $facebook_link,
+                $ig_link,
+                $uniqueBannerFileName
             );
 
             if ($result) {
-                    echo json_encode([
-                        'status' => 200,
-                        'message' => 'Dog updated successfully.'
-                    ]);
-                } else {
-                    echo json_encode([
-                        'status' => 500,
-                        'message' => 'No changes made or error updating data.'
-                    ]);
-                }
+                echo json_encode([
+                    'status' => 200,
+                    'message' => 'Dog updated successfully.'
+                ]);
+            } else {
+                echo json_encode([
+                    'status' => 500,
+                    'message' => 'No changes made or error updating data.'
+                ]);
+            }
+
 
 
             exit;

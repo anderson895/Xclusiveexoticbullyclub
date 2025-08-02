@@ -28,8 +28,15 @@ include "../src/components/admin/nav.php";
 
         <!-- Dog Image Upload -->
         <div class="col-span-1 md:col-span-2">
-            <label class="block text-sm font-semibold mb-2">DOG IMAGE</label>
+            <label class="block text-sm font-semibold mb-2">Profile Picture</label>
             <input type="file" id="dog_image" name="dog_image" accept="image/*"
+                class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-600 file:bg-[#FFD700] file:text-black file:font-semibold file:border-none file:px-4 file:py-2">
+        </div>
+
+         <!-- Dog Banner Upload -->
+        <div class="col-span-1 md:col-span-2">
+            <label class="block text-sm font-semibold mb-2">Upload Banner</label>
+            <input type="file" id="imgBanner" name="imgBanner" accept="image/*"
                 class="w-full bg-gray-800 text-white p-3 rounded-md border border-gray-600 file:bg-[#FFD700] file:text-black file:font-semibold file:border-none file:px-4 file:py-2">
         </div>
 
@@ -91,19 +98,44 @@ include "../src/components/admin/nav.php";
                 class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
         </div>
 
-        <!-- Facebook Name -->
+      <!-- Facebook Name -->
         <div>
-            <label class="block text-sm font-semibold mb-2">FACEBOOK NAME:</label>
-            <input type="text" name="facebook_name"
+            <label for="facebook_name" class="block text-sm font-semibold mb-2">FACEBOOK NAME:</label>
+            <input type="text" id="facebook_name" name="facebook_name"
+                class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
+        </div>
+
+        <!-- Facebook Link -->
+        <div>
+            <label for="facebook_link" class="block text-sm font-semibold mb-2">FACEBOOK LINK:</label>
+            <input type="text" id="facebook_link" name="facebook_link"
                 class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
         </div>
 
         <!-- IG Name -->
         <div>
-            <label class="block text-sm font-semibold mb-2">IG NAME:</label>
-            <input type="text" name="ig_name"
+            <label for="ig_name" class="block text-sm font-semibold mb-2">IG NAME:</label>
+            <input type="text" id="ig_name" name="ig_name"
                 class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
         </div>
+
+        <!-- IG Link -->
+        <div>
+            <label for="ig_link" class="block text-sm font-semibold mb-2">IG LINK:</label>
+            <input type="text" id="ig_link" name="ig_link"
+                class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
+        </div>
+
+
+       
+
+
+        <div>
+            <label for="registration" class="block text-sm font-semibold mb-2">REGISTRATION:</label>
+            <input type="date" id="registration" name="registration"
+                class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
+        </div>
+
 
         <!-- Type (Dropdown) -->
         <div class="md:col-span-2">

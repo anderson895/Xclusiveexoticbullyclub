@@ -71,19 +71,19 @@ class global_class extends db_connect
 
 
     
-    
-
-   public function DogRegister(
+    public function DogRegister(
     $dog_name, $owner_name, $breeder_name, $country, $color,
-    $height, $dob, $contact_number, $facebook_name, $ig_name, $uniqueFileName, $type
+    $height, $dob, $contact_number, $facebook_name, $ig_name,
+    $dog_image, $type, $facebook_link, $ig_link, $dog_banner
 ) {
     $dog_code = $this->generateDogCode();
 
     $query = "INSERT INTO dogs (
         dog_code, dog_name, dog_owner_name, dog_breeder_name, dog_image, dog_country,
         dog_color, dog_height, dog_date_of_birth, dog_contact_number,
-        dog_facebook_name, dog_ig_name, dog_type_status, dog_registered_status
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)";
+        dog_facebook_name, dog_ig_name, dog_type_status, dog_registered_status,
+        dog_facebook_link, dog_ig_link, dog_banner
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?)";
 
     $stmt = $this->conn->prepare($query);
     if (!$stmt) {
@@ -91,12 +91,12 @@ class global_class extends db_connect
     }
 
     $stmt->bind_param(
-        "sssssssssssss",
+        "ssssssssssssssss",
         $dog_code,
         $dog_name,
         $owner_name,
         $breeder_name,
-        $uniqueFileName,
+        $dog_image,
         $country,
         $color,
         $height,
@@ -104,7 +104,10 @@ class global_class extends db_connect
         $contact_number,
         $facebook_name,
         $ig_name,
-        $type
+        $type,
+        $facebook_link,
+        $ig_link,
+        $dog_banner
     );
 
     $result = $stmt->execute();
@@ -134,6 +137,8 @@ class global_class extends db_connect
 
 
 
+
+
         private function generateDogCode() {
                 do {
                     $code = '9900000' . str_pad(mt_rand(0, 9999999), 7, '0', STR_PAD_LEFT);
@@ -156,108 +161,110 @@ class global_class extends db_connect
 
 
       public function UpdateDog(
-            $dog_id, $dog_name, $owner_name, $breeder_name, $country, $color,
-            $height, $dob, $contact_number, $facebook_name, $ig_name,
-            $uniqueFileName = null, $dog_type_status
-        ) {
-            // Step 1: Fetch old image if a new one is uploaded
-            if ($uniqueFileName) {
-                $selectQuery = "SELECT dog_image FROM dogs WHERE dog_id = ?";
-                $selectStmt = $this->conn->prepare($selectQuery);
-                $selectStmt->bind_param("s", $dog_id);
-                $selectStmt->execute();
-                $selectStmt->bind_result($oldImage);
-                $selectStmt->fetch();
-                $selectStmt->close();
+    $dog_id, $dog_name, $owner_name, $breeder_name, $country, $color,
+    $height, $dob, $contact_number, $facebook_name, $ig_name,
+    $uniqueFileName = null, $dog_type_status,
+    $facebook_link = null, $ig_link = null, $bannerImage = null
+) {
+    // Remove old dog_image if new one is uploaded
+    if ($uniqueFileName) {
+        $selectQuery = "SELECT dog_image FROM dogs WHERE dog_id = ?";
+        $selectStmt = $this->conn->prepare($selectQuery);
+        $selectStmt->bind_param("s", $dog_id);
+        $selectStmt->execute();
+        $selectStmt->bind_result($oldImage);
+        $selectStmt->fetch();
+        $selectStmt->close();
 
-                // Step 2: Unlink old image if exists and not empty
-                if (!empty($oldImage)) {
-                    $oldImagePath = "../../../static/upload/" . $oldImage; 
-                    if (file_exists($oldImagePath)) {
-                        unlink($oldImagePath);
-                    }
-                }
+        if (!empty($oldImage)) {
+            $oldImagePath = "../../../static/upload/" . $oldImage;
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
             }
-
-            // Step 3: Build query
-           if ($uniqueFileName) {
-                $query = "UPDATE dogs SET 
-                    dog_name = ?, 
-                    dog_owner_name = ?, 
-                    dog_breeder_name = ?, 
-                    dog_image = ?, 
-                    dog_country = ?, 
-                    dog_color = ?, 
-                    dog_height = ?, 
-                    dog_date_of_birth = ?, 
-                    dog_contact_number = ?, 
-                    dog_facebook_name = ?, 
-                    dog_ig_name = ?,
-                    dog_type_status = ?
-                WHERE dog_id = ?";
-            } else {
-                $query = "UPDATE dogs SET 
-                    dog_name = ?, 
-                    dog_owner_name = ?, 
-                    dog_breeder_name = ?, 
-                    dog_country = ?, 
-                    dog_color = ?, 
-                    dog_height = ?, 
-                    dog_date_of_birth = ?, 
-                    dog_contact_number = ?, 
-                    dog_facebook_name = ?, 
-                    dog_ig_name = ?,
-                    dog_type_status = ?
-                WHERE dog_id = ?";
-            }
-
-
-            $stmt = $this->conn->prepare($query);
-            if (!$stmt) {
-                die("Prepare failed: " . $this->conn->error);
-            }
-
-            if ($uniqueFileName) {
-                $stmt->bind_param(
-                    "sssssssssssss",
-                    $dog_name,
-                    $owner_name,
-                    $breeder_name,
-                    $uniqueFileName,
-                    $country,
-                    $color,
-                    $height,
-                    $dob,
-                    $contact_number,
-                    $facebook_name,
-                    $ig_name,
-                    $dog_type_status,
-                    $dog_id
-                );
-            } else {
-                $stmt->bind_param(
-                    "ssssssssssss",
-                    $dog_name,
-                    $owner_name,
-                    $breeder_name,
-                    $country,
-                    $color,
-                    $height,
-                    $dob,
-                    $contact_number,
-                    $facebook_name,
-                    $ig_name,
-                    $dog_type_status,
-                    $dog_id
-                );
-            }
-
-
-            $stmt->execute();
-            $stmt->close();
-
-            return $stmt;
         }
+    }
+
+    // Remove old banner if new one is uploaded
+    if ($bannerImage) {
+        $selectQuery = "SELECT dog_banner FROM dogs WHERE dog_id = ?";
+        $selectStmt = $this->conn->prepare($selectQuery);
+        $selectStmt->bind_param("s", $dog_id);
+        $selectStmt->execute();
+        $selectStmt->bind_result($oldBanner);
+        $selectStmt->fetch();
+        $selectStmt->close();
+
+        if (!empty($oldBanner)) {
+            $oldBannerPath = "../../../static/upload/" . $oldBanner;
+            if (file_exists($oldBannerPath)) {
+                unlink($oldBannerPath);
+            }
+        }
+    }
+
+    // Dynamic query builder
+    $fields = [
+        "dog_name = ?",
+        "dog_owner_name = ?",
+        "dog_breeder_name = ?",
+        "dog_country = ?",
+        "dog_color = ?",
+        "dog_height = ?",
+        "dog_date_of_birth = ?",
+        "dog_contact_number = ?",
+        "dog_facebook_name = ?",
+        "dog_ig_name = ?",
+        "dog_type_status = ?",
+        "dog_facebook_link = ?",
+        "dog_ig_link = ?"
+    ];
+    $params = [
+        $dog_name,
+        $owner_name,
+        $breeder_name,
+        $country,
+        $color,
+        $height,
+        $dob,
+        $contact_number,
+        $facebook_name,
+        $ig_name,
+        $dog_type_status,
+        $facebook_link,
+        $ig_link
+    ];
+    $types = "sssssssssssss";
+
+    if ($uniqueFileName) {
+        $fields[] = "dog_image = ?";
+        $params[] = $uniqueFileName;
+        $types .= "s";
+    }
+
+    if ($bannerImage) {
+        $fields[] = "dog_banner = ?";
+        $params[] = $bannerImage;
+        $types .= "s";
+    }
+
+    $fields[] = "dog_id = ?";
+    $params[] = $dog_id;
+    $types .= "s";
+
+    $query = "UPDATE dogs SET " . implode(", ", array_slice($fields, 0, -1)) . " WHERE dog_id = ?";
+    $stmt = $this->conn->prepare($query);
+    if (!$stmt) {
+        die("Prepare failed: " . $this->conn->error);
+    }
+
+    $stmt->bind_param($types, ...$params);
+    $stmt->execute();
+    $stmt->close();
+
+    return true;
+}
+
+
 
 
 
