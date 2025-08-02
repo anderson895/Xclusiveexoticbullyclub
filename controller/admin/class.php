@@ -296,6 +296,48 @@ class global_class extends db_connect
 
 
 
+
+
+    public function fetch_search_registered_dogs($search = '') {
+            if (!empty($search)) {
+                $search = "%{$search}%";
+                $query = $this->conn->prepare("
+                    SELECT * FROM dogs 
+                    WHERE dog_registered_status = '1'
+                    AND (
+                        dog_name LIKE ? OR
+                        dog_code LIKE ? OR
+                        dog_owner_name LIKE ? OR
+                        dog_breeder_name LIKE ?
+                    )
+                    ORDER BY dog_id DESC
+                ");
+                $query->bind_param('ssss', $search, $search, $search, $search);
+            } else {
+                $query = $this->conn->prepare("
+                    SELECT * FROM dogs 
+                    WHERE dog_registered_status = '1'
+                    ORDER BY dog_id DESC
+                ");
+            }
+
+            if ($query->execute()) {
+                $result = $query->get_result();
+                $dogs = [];
+
+                while ($row = $result->fetch_assoc()) {
+                    $dogs[] = $row;
+                }
+
+                return $dogs;
+            }
+            return []; 
+        }
+
+
+
+
+
 public function fetch_all_pageant() {
     $query = $this->conn->prepare("SELECT * FROM pageant ORDER BY pag_id DESC");
 
@@ -645,6 +687,25 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
         $stmt->close();
         return true;
     }
+
+
+    
+       public function AddCategoryShow($showname, $contestants_json, $pagId) {
+            $query = "INSERT INTO pageant_category (pc_pageant_id, pc_category_name, pc_contestant)
+                    VALUES (?, ?, ?)";
+
+            $stmt = $this->conn->prepare($query);
+            $stmt->bind_param("sss", $pagId, $showname, $contestants_json);
+
+            $result = $stmt->execute();
+            $stmt->close();
+
+            return $result;
+        }
+
+
+
+
 
 
 

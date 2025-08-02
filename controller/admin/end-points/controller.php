@@ -207,9 +207,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }else if ($_POST['requestType'] == 'removeDog') {
 
             $dog_id=$_POST['dog_id'];
-
             $result = $db->removeDog($dog_id);
+            if ($result) {
+                    echo json_encode([
+                        'status' => 200,
+                        'message' => 'Remove successfully.'
+                    ]);
+            } else {
+                    echo json_encode([
+                        'status' => 500,
+                        'message' => 'No changes made or error updating data.'
+                    ]);
+            }
+
+        }else if ($_POST['requestType'] == 'AddCategoryShow') {
+
+            // echo "<pre>";
+            // print_r($_POST);
+            // echo "</pre>";
+            $showname=$_POST['name'];
+            $contestants=$_POST['contestants'];
+            $pagId=$_POST['pagId'];
+
+            $contestants_json = json_encode($contestants);
             
+            $result = $db->AddCategoryShow($showname,$contestants_json,$pagId);
             if ($result) {
                     echo json_encode([
                         'status' => 200,
@@ -237,6 +259,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'status' => 200,
                 'data' => $result
             ]);
+        }else if ($_GET['requestType'] == 'fetch_search_registered_dogs') {
+            $search = $_GET['search'] ?? '';
+            
+            $dogs = $db->fetch_search_registered_dogs($search); 
+                echo json_encode([
+                    'status' => 200,
+                    'data' => $dogs
+                ]);
+                exit;
+
         }else if ($_GET['requestType'] == 'fetch_all_registered_dogs_once') {
 
             $dogId=$_GET['dogId'];            

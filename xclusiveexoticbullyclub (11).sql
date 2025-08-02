@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2025 at 10:51 AM
+-- Generation Time: Aug 02, 2025 at 08:10 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -63,7 +63,7 @@ CREATE TABLE `dogs` (
   `dog_facebook_name` varchar(60) DEFAULT NULL,
   `dog_ig_name` varchar(60) DEFAULT NULL,
   `dog_type_status` varchar(60) DEFAULT NULL,
-  `dog_registered_status` int(11) NOT NULL COMMENT '0=not registered,1=registered'
+  `dog_registered_status` int(11) NOT NULL COMMENT '0=not registered,1=registered,2=archived'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -86,13 +86,14 @@ INSERT INTO `dogs` (`dog_id`, `dog_code`, `dog_name`, `dog_owner_name`, `dog_bre
 (27, '99000008218255', 'chubby', 'juan dela cruz', 'joshua padilla', '2025-07-31 17:29:03', 'dog_688ba14702f6b2.11945236.avif', 'philippines', 'brown', '4ft', '2025-08-01', '09454454744', 'chubby', 'chubby', 'exclusive', 1),
 (28, '99000009133247', 'alucard', NULL, NULL, '2025-07-31 17:01:18', 'dog_688ba15e961a01.25065870.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (29, '99000007531350', 'lebron', NULL, NULL, '2025-07-31 17:02:02', 'dog_688ba18a830450.52300802.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(30, '99000003461104', 'chuchay', 'april jane', 'joshua padilla', '2025-07-31 17:32:58', 'dog_688ba8ca1123b8.27562269.jpg', 'philippines', 'brown', '15cm', '2025-08-01', '09454454744', 'chuchay', 'chuchay', 'regular', 1),
+(30, '99000003461104', 'chuchay', 'april jane', 'joshua padilla', '2025-08-02 01:06:38', 'dog_688ba8ca1123b8.27562269.jpg', 'philippines', 'brown', '15cm', '2025-08-01', '09454454744', 'chuchay', 'chuchay', 'exclusive', 2),
 (31, '99000001989421', 'awdaw', 'DWAD', 'GREG', '2025-07-31 17:34:05', 'dog_688ba90d6fdb41.19073794.jpg', 'TRH', 'R5H', 'TJ7', '2025-08-20', 'AWAW', '2AD', 'AWAWDWAD', 'regular', 1),
 (33, '99000003223376', 'bobby', 'bobby', 'bobby', '2025-07-31 17:39:12', 'dog_688baa409f2a58.66027668.webp', 'bobby', 'bobby', 'bobby', '2025-08-01', '09454454744', 'awdawd', 'awdwa', 'exclusive', 1),
 (34, '99000004859503', 'paemla', NULL, NULL, '2025-07-31 18:40:47', 'dog_688bb8af0e4f45.83773736.avif', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (35, '99000003571079', 'kokey', NULL, NULL, '2025-07-31 18:41:05', 'dog_688bb8c155cd86.35200608.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (36, '99000001553573', 'jun jun', NULL, NULL, '2025-07-31 18:41:24', 'dog_688bb8d43d7206.87002647.avif', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(37, '99000006248874', 'test', NULL, NULL, '2025-07-31 18:41:38', 'dog_688bb8e228ac89.54008414.avif', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
+(37, '99000006248874', 'test', NULL, NULL, '2025-07-31 18:41:38', 'dog_688bb8e228ac89.54008414.avif', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(38, '99000008582419', 'kong kong', NULL, NULL, '2025-08-02 03:52:15', 'dog_688d8b6fc67123.47070007.webp', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -125,7 +126,7 @@ CREATE TABLE `generation` (
 
 INSERT INTO `generation` (`gen_id`, `gen_dog_id`, `father_dog_id`, `mother_dog_id`, `grandfather1_dog_id`, `grandmother1_dog_id`, `grandfather2_dog_id`, `grandmother2_dog_id`, `ggfather1_dog_id`, `ggmother1_dog_id`, `ggfather2_dog_id`, `ggmother2_dog_id`, `ggfather3_dog_id`, `ggmother3_dog_id`, `ggfather4_dog_id`, `ggmother4_dog_id`) VALUES
 (3, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14, 20),
-(4, 14, NULL, NULL, NULL, NULL, NULL, NULL, 19, NULL, NULL, NULL, NULL, NULL, 13, 18),
+(4, 14, NULL, NULL, NULL, 38, 27, NULL, 19, NULL, NULL, NULL, NULL, NULL, 13, 18),
 (8, 21, 22, 13, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (9, 22, 21, 23, 24, 35, 26, 34, 31, 30, 13, 27, 36, 33, 37, 14),
 (10, 27, 28, 13, 21, 22, 29, 14, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -165,9 +166,17 @@ INSERT INTO `pageant` (`pag_id`, `pag_name`, `pag_description`, `pag_date_added`
 
 CREATE TABLE `pageant_category` (
   `pc_id` int(11) NOT NULL,
+  `pc_pageant_id` int(11) NOT NULL,
   `pc_category_name` text NOT NULL,
   `pc_contestant` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'list all the id of contestant here in array format'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pageant_category`
+--
+
+INSERT INTO `pageant_category` (`pc_id`, `pc_pageant_id`, `pc_category_name`, `pc_contestant`) VALUES
+(20, 5, 'talent', '[{\"id\":\"27\",\"points\":\"60\"},{\"id\":\"22\",\"points\":\"40\"},{\"id\":\"14\",\"points\":\"2\"}]');
 
 --
 -- Indexes for dumped tables
@@ -232,7 +241,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `dogs`
 --
 ALTER TABLE `dogs`
-  MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `generation`
@@ -250,7 +259,7 @@ ALTER TABLE `pageant`
 -- AUTO_INCREMENT for table `pageant_category`
 --
 ALTER TABLE `pageant_category`
-  MODIFY `pc_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
