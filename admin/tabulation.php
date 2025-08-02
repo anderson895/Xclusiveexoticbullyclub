@@ -32,10 +32,11 @@ include "../src/components/admin/nav.php";
     + Create Category
   </button>
 </div>
+</div>
 
 
 <!-- Container where the result will be shown -->
-<div id="resultsContainer" class="mt-8 space-y-6 px-6 text-[#CCCCCC]"></div>
+<div id="outputBody" class="mt-6 rounded-lg p-6 text-[#CCCCCC]"></div>
 
 
 <!-- Modal -->

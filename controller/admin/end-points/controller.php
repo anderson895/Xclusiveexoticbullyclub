@@ -298,6 +298,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'status' => 200,
                 'data' => $result
             ]);
+        }else if ($_GET['requestType'] == 'fetch_pageant_category') {
+
+            $pagId=$_GET['pagId'];
+            $result = $db->fetch_pageant_category($pagId);
+            echo json_encode([
+                'status' => 200,
+                'data' => $result
+            ]);
         }else{
             echo "404";
         }

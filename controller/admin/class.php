@@ -13,6 +13,13 @@ class global_class extends db_connect
     }
 
 
+  
+
+
+
+
+
+
      public function fetch_all_categories(){
         $query = $this->conn->prepare("SELECT * 
         FROM category where status='1'"    
@@ -352,6 +359,46 @@ public function fetch_all_pageant() {
         return $dogs;
     }
     return []; 
+}
+
+public function fetch_pageant_category($pagId) {
+    $query = $this->conn->prepare("SELECT * FROM pageant_category WHERE pc_pageant_id = ? ORDER BY pc_pageant_id DESC");
+    $query->bind_param("i", $pagId);
+
+    if ($query->execute()) {
+        $result = $query->get_result();
+        $pageants = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $contestants = json_decode($row['pc_contestant'], true); // e.g., [{id: 27, points: 60}, ...]
+
+            $fullContestants = [];
+
+            foreach ($contestants as $contestant) {
+                $dog_id = $contestant['id'];
+                $dogQuery = $this->conn->prepare("SELECT dog_country, dog_id, dog_code, dog_name FROM dogs WHERE dog_id = ?");
+                $dogQuery->bind_param("i", $dog_id);
+                $dogQuery->execute();
+                $dogResult = $dogQuery->get_result();
+
+                if ($dogRow = $dogResult->fetch_assoc()) {
+                    // Merge dog data with contestant info (id + points)
+                    $fullContestants[] = array_merge($contestant, $dogRow);
+                } else {
+                    // Still include contestant with dog data missing
+                    $fullContestants[] = $contestant;
+                }
+            }
+
+            $row['contestants'] = $fullContestants;
+            unset($row['pc_contestant']); // optional: remove raw JSON string if no longer needed
+            $pageants[] = $row;
+        }
+
+        return $pageants;
+    }
+
+    return [];
 }
 
 
@@ -702,6 +749,10 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
 
             return $result;
         }
+
+
+
+
 
 
 

@@ -42,9 +42,7 @@ $(document).ready(function () {
   //           <tr class="bg-[#333] text-[#FFD700]">
   //             <th class="p-2 border border-[#444]">#</th>
   //             <th class="p-2 border border-[#444]">Contestant Name</th>
-  //             <th class="p-2 border border-[#444]">Grade Ring 1</th>
-  //             <th class="p-2 border border-[#444]">Grade Ring 2</th>
-  //             <th class="p-2 border border-[#444]">Total</th>
+  //             <th class="p-2 border border-[#444]">Points</th>
   //           </tr>
   //         </thead>
   //         <tbody>
@@ -261,14 +259,18 @@ $(document).ready(function () {
       });
     });
 
-    // FORM SUBMIT
-    $('#frmCreatePageant').on('submit', function (e) {
-      e.preventDefault();
+    // ALL REQUEST 
 
       const queryString = window.location.search;
       const urlParams = new URLSearchParams(queryString);
       const pagId = urlParams.get('pag_id');
 
+
+    
+    $('#frmCreatePageant').on('submit', function (e) {
+      e.preventDefault();
+
+   
       const categoryName = $('#name').val().trim();
       const contestantArray = [];
 
@@ -321,12 +323,80 @@ $(document).ready(function () {
           } else {
             Swal.fire('Error', response.message || 'Something went wrong.', 'error');
           }
-        },
-        error: function (xhr, status, error) {
-          $('.spinner').hide();
-          console.error("AJAX Error:", xhr.responseText);
-          Swal.fire('Error', 'An unexpected error occurred.', 'error');
         }
       });
     });
+
+
+$.ajax({
+  url: "../controller/admin/end-points/controller.php",
+  method: "GET",
+  data: { pagId: pagId, requestType: "fetch_pageant_category" },
+  dataType: "json",
+  success: function (response) {
+    if (response.status === 200 && response.data.length > 0) {
+      response.data.forEach((categoryData) => {
+        const categoryName = categoryData.pc_category_name;
+        const contestants = categoryData.contestants; // use directly
+
+        let resultHTML = `
+          <div class="bg-[#1A1A1A] rounded-lg p-4 shadow-md mb-6">
+            <h2 class="text-xl font-bold text-[#FFD700] mb-4">Category: ${categoryName}</h2>
+            <table class="w-full text-left border-collapse border border-[#444]">
+              <thead>
+                <tr class="bg-[#333] text-[#FFD700]">
+                  <th class="p-2 border border-[#444]">#</th>
+                  <th class="p-2 border border-[#444]">Dog Name</th>
+                  <th class="p-2 border border-[#444]">Points</th>
+                  <th class="p-2 border border-[#444]">XEBC No</th>
+                  <th class="p-2 border border-[#444]">Country</th>
+                </tr>
+              </thead>
+              <tbody>
+        `;
+
+        contestants.forEach((dog, index) => {
+          resultHTML += `
+            <tr class="hover:bg-[#2a2a2a]">
+              <td class="p-2 border border-[#444]">${index + 1}</td>
+              <td class="p-2 border border-[#444] contestant-name">${dog.dog_name}</td>
+              <td class="p-2 border border-[#444] text-[#FFD700] font-bold ">${dog.points}</td>
+              <td class="p-2 border border-[#444] text-[#FFD700] font-bold ">${dog.dog_code}</td>
+              <td class="p-2 border border-[#444] text-[#FFD700] font-bold ">${dog.dog_country}</td>
+            </tr>
+          `;
+        });
+
+        resultHTML += `
+              </tbody>
+            </table>
+            <div class="text-right mt-4 space-x-2">
+              <button class="addNewContestant bg-blue-500 hover:bg-blue-600 text-black font-semibold px-4 py-2 rounded">+ Add Contestant</button>
+              <button class="saveGrades bg-green-500 hover:bg-green-600 text-black font-semibold px-4 py-2 rounded">Update Grades</button>
+            </div>
+          </div>
+        `;
+
+        $('#outputBody').append(resultHTML);
+      });
+    } else {
+      $('#outputBody').html('<p class="text-red-500">No category data found.</p>');
+    }
+  },
+  error: function (xhr, status, error) {
+    console.error("AJAX Error:", status, error);
+    $('#outputBody').html('<p class="text-red-500">Failed to load data.</p>');
+  }
+});
+
+
+
+
+
   });
+
+
+
+
+
+
