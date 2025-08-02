@@ -139,22 +139,23 @@ class global_class extends db_connect
 
 
 
-        private function generateDogCode() {
-                do {
-                    $code = '9900000' . str_pad(mt_rand(0, 9999999), 7, '0', STR_PAD_LEFT);
+    private function generateDogCode() {
+        // Define the starting point
+        $startCode = 888000001;
 
-                    // Check if code exists
-                    $stmt = $this->conn->prepare("SELECT dog_id FROM dogs WHERE dog_code = ?");
-                    $stmt->bind_param("s", $code);
-                    $stmt->execute();
-                    $stmt->store_result();
-                    $exists = $stmt->num_rows > 0;
-                    $stmt->close();
+        // Get the current highest dog code that starts with 888
+        $query = "SELECT MAX(dog_code) AS max_code FROM dogs WHERE dog_code LIKE '888%'";
+        $result = $this->conn->query($query);
 
-                } while ($exists);
+        if ($result && $row = $result->fetch_assoc()) {
+            $lastCode = (int)$row['max_code'];
+            $newCode = $lastCode >= $startCode ? $lastCode + 1 : $startCode;
+        } else {
+            $newCode = $startCode;
+        }
 
-                return $code;
-            }
+        return str_pad($newCode, 9, '0', STR_PAD_LEFT); // e.g., "888000001"
+    }
 
 
 
