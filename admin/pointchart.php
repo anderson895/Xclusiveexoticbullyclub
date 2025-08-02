@@ -36,7 +36,7 @@ include "../src/components/admin/nav.php";
     id="addPageantBtn"
     class="ml-4 bg-[#FFD700] text-black font-semibold px-4 py-2 rounded-md hover:bg-yellow-500 transition"
   >
-    + Add
+    + Create Show
   </button>
 </div>
 
@@ -48,7 +48,7 @@ include "../src/components/admin/nav.php";
         <tr>
 
           <th class="p-3">#</th>
-          <th class="p-3 text-center">Name</th>
+          <th class="p-3 text-center">Show Name</th>
           <th class="p-3 text-center">Description</th>
           
           <th class="p-3 text-center">Action</th>

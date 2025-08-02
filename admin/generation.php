@@ -15,16 +15,16 @@ include "../src/components/admin/nav.php";
 </div>
 <!-- Result Dog Display -->
 
+
+
 <div class="w-full mx-auto mt-6 bg-gradient-to-br from-zinc-900 to-black text-white rounded-2xl overflow-hidden shadow-2xl">
-
-
   <!-- Header: Avatar, Name, CBR No. -->
-  <div class="px-5 py-5 bg-[#0D0D0D] border-b border-gray-700 rounded-t-2xl">
+  <div class="px-5 py-5 bg-[#0D0D0D] border-b border-gray-700 rounded-t-2xl ">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
       <div class="flex items-start gap-4">
         <!-- Dog Avatar -->
         <img
-          src="https://via.placeholder.com/48"
+          src="#"
           alt="Dog Avatar"
           id="result_dog_image"
           class="w-14 h-14 rounded-full border-2 border-yellow-400 object-cover shadow"
@@ -44,7 +44,7 @@ include "../src/components/admin/nav.php";
 
   </div>
 <!-- Container Section -->
-<div class="flex flex-col sm:flex-row bg-[#0D0D0D] overflow-hidden border border-gray-700 text-white">
+<div class="flex flex-col sm:flex-row bg-[#0D0D0D] overflow-hidden border border-gray-700 text-white markAsRegistered">
 
   <!-- Image Section -->
   <div class="w-full sm:w-1/2 aspect-[4/3] sm:aspect-auto">
@@ -56,7 +56,7 @@ include "../src/components/admin/nav.php";
   </div>
 
   <!-- Details Section -->
-<div class="w-full sm:w-1/2 px-5 py-6 space-y-6 text-sm flex flex-col items-center text-center mt-6">
+<div class="w-full sm:w-1/2 px-5 py-6 space-y-6 text-sm flex flex-col items-center text-center mt-2 ">
 
 
   <!-- Dog Info -->
@@ -89,112 +89,117 @@ include "../src/components/admin/nav.php";
 
 
 
+<!--generation tree section -->
+<div class="max-w-screen-xl mx-auto space-y-8 pb-20 px-2 mt-8 markAsRegistered" >
 
 
-<div class="max-w-screen-xl mx-auto space-y-16 px-4 mt-20 mb-20">
-
-  <!-- Generation 1 -->
-  <div class="flex justify-center flex-wrap gap-4">
-    <div class="flex flex-col items-center">
-      <img src="#" alt="Father" name="father" id="father" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-      <span class="text-sm mt-1 text-yellow-600 font-semibold uppercase">Father</span>
-    </div>
-    <div class="flex flex-col items-center">
-      <img src="#" alt="Mother" name="mother" id="mother" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-      <span class="text-sm mt-1 text-yellow-600 font-semibold uppercase">Mother</span>
-    </div>
-  </div>
-
-  <!-- Generation 2 -->
-  <div class="flex justify-center flex-wrap gap-8 md:gap-32">
-    <!-- Couple 1 -->
-    <div class="flex flex-col items-center gap-4">
-      <div class="flex flex-wrap justify-center gap-4">
+      <!-- Generation 1: 1 Couple -->
+      <div class="flex justify-center flex-wrap gap-1 md:gap-3">
         <div class="flex flex-col items-center">
-          <img src="#" alt="Grand Father" name="grandfather1" id="grandfather1" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-          <span class="text-sm mt-1 text-yellow-600 font-semibold uppercase">Grand Father</span>
+          <img src="#" alt="Father" name="father" id="father" class="w-16 h-16 md:w-20 md:h-20 rounded-full border border-yellow-400 object-cover" />
+          <span class="text-[10px] md:text-sm mt-[1px] text-yellow-600 font-semibold uppercase">Father</span>
         </div>
         <div class="flex flex-col items-center">
-          <img src="#" alt="Grand Mother" name="grandmother1" id="grandmother1" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-          <span class="text-sm mt-1 text-yellow-600 font-semibold uppercase">Grand Mother</span>
+          <img src="#" alt="Mother" name="mother" id="mother" class="w-16 h-16 md:w-20 md:h-20 rounded-full border border-yellow-400 object-cover" />
+          <span class="text-[10px] md:text-sm mt-[1px] text-yellow-600 font-semibold uppercase">Mother</span>
         </div>
       </div>
-    </div>
 
-    <!-- Couple 2 -->
-    <div class="flex flex-col items-center gap-4">
-      <div class="flex flex-wrap justify-center gap-4">
-        <div class="flex flex-col items-center">
-          <img src="#" alt="Grand Father" name="grandfather2" id="grandfather2" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-          <span class="text-sm mt-1 text-yellow-600 font-semibold uppercase">Grand Father</span>
+
+
+        <!-- Generation 2: 2 Couples -->
+        <div class="flex justify-center flex-wrap gap-2 md:gap-8">
+        <!-- Couple 1 -->
+        <div class="flex flex-col items-center gap-1">
+          <div class="flex flex-wrap justify-center gap-1">
+            <div class="flex flex-col items-center">
+              <img src="#" alt="Grand Father" name="grandfather1" id="grandfather1" class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-yellow-400 object-cover" />
+              <span class="text-[9px] md:text-xs mt-[2px] text-yellow-600 font-semibold uppercase">Grand Father</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <img src="#" alt="Grand Mother" name="grandmother1" id="grandmother1" class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-yellow-400 object-cover" />
+              <span class="text-[9px] md:text-xs mt-[2px] text-yellow-600 font-semibold uppercase">Grand Mother</span>
+            </div>
+          </div>
         </div>
-        <div class="flex flex-col items-center">
-          <img src="#" alt="Grand Mother" name="grandmother2" id="grandmother2" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-          <span class="text-sm mt-1 text-yellow-600 font-semibold uppercase">Grand Mother</span>
+
+        <!-- Couple 2 -->
+        <div class="flex flex-col items-center gap-1">
+          <div class="flex flex-wrap justify-center gap-1">
+            <div class="flex flex-col items-center">
+              <img src="#" alt="Grand Father" name="grandfather2" id="grandfather2" class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-yellow-400 object-cover" />
+              <span class="text-[9px] md:text-xs mt-[2px] text-yellow-600 font-semibold uppercase">Grand Father</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <img src="#" alt="Grand Mother" name="grandmother2" id="grandmother2" class="w-12 h-12 md:w-16 md:h-16 rounded-full border-2 border-yellow-400 object-cover" />
+              <span class="text-[9px] md:text-xs mt-[2px] text-yellow-600 font-semibold uppercase">Grand Mother</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Generation 3 -->
-  <div class="flex justify-center flex-wrap gap-8 md:gap-16">
-    <!-- Repeat for 4 couples -->
-    <!-- Couple 1 -->
-    <div class="flex flex-col items-center gap-4">
-      <div class="flex flex-wrap justify-center gap-4">
-        <div class="flex flex-col items-center">
-          <img src="#" alt="Great Grand Father" name="ggfather1" id="ggfather1" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Great Grand Father</span>
+
+        <!-- Generation 3: 4 Couples - Optimized for Mobile 1 Row -->
+      <div class="flex justify-center flex-wrap gap-[4px] md:gap-x-6">
+        <!-- Couple 1 -->
+        <div class="flex flex-col items-center gap-[2px] mx-[1px]">
+          <div class="flex justify-center gap-[2px]">
+            <div class="flex flex-col items-center">
+              <img src="#" alt="Great Grand Father" name="ggfather1" id="ggfather1" class="w-8 h-8 md:w-12 md:h-12 rounded-full border border-yellow-400 object-cover" />
+              <span class="text-[7px] md:text-[9px] mt-[1px] text-yellow-600 font-semibold uppercase text-center">Great Grand Father</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <img src="#" alt="Great Grand Mother" name="ggmother1" id="ggmother1" class="w-8 h-8 md:w-12 md:h-12 rounded-full border border-yellow-400 object-cover" />
+              <span class="text-[7px] md:text-[9px] mt-[1px] text-yellow-600 font-semibold uppercase text-center">Great Grand Mother</span>
+            </div>
+          </div>
         </div>
-        <div class="flex flex-col items-center">
-          <img src="#" alt="Great Grand Mother" name="ggmother1" id="ggmother1" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Great Grand Mother</span>
+
+        <!-- Couple 2 -->
+        <div class="flex flex-col items-center gap-[2px] mx-[1px]">
+          <div class="flex justify-center gap-[2px]">
+            <div class="flex flex-col items-center">
+              <img src="#" alt="Great Grand Father" name="ggfather2" id="ggfather2" class="w-8 h-8 md:w-12 md:h-12 rounded-full border border-yellow-400 object-cover" />
+              <span class="text-[7px] md:text-[9px] mt-[1px] text-yellow-600 font-semibold uppercase text-center">Great Grand Father</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <img src="#" alt="Great Grand Mother" name="ggmother2" id="ggmother2" class="w-8 h-8 md:w-12 md:h-12 rounded-full border border-yellow-400 object-cover" />
+              <span class="text-[7px] md:text-[9px] mt-[1px] text-yellow-600 font-semibold uppercase text-center">Great Grand Mother</span>
+            </div>
+          </div>
         </div>
-      </div>
+
+        <!-- Couple 3 -->
+        <div class="flex flex-col items-center gap-[2px] mx-[1px]">
+          <div class="flex justify-center gap-[2px]">
+            <div class="flex flex-col items-center">
+              <img src="#" alt="Great Grand Father" name="ggfather3" id="ggfather3" class="w-8 h-8 md:w-12 md:h-12 rounded-full border border-yellow-400 object-cover" />
+              <span class="text-[7px] md:text-[9px] mt-[1px] text-yellow-600 font-semibold uppercase text-center">Great Grand Father</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <img src="#" alt="Great Grand Mother" name="ggmother3" id="ggmother3" class="w-8 h-8 md:w-12 md:h-12 rounded-full border border-yellow-400 object-cover" />
+              <span class="text-[7px] md:text-[9px] mt-[1px] text-yellow-600 font-semibold uppercase text-center">Great Grand Mother</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Couple 4 -->
+        <div class="flex flex-col items-center gap-[2px] mx-[1px]">
+          <div class="flex justify-center gap-[2px]">
+            <div class="flex flex-col items-center">
+              <img src="#" alt="Great Grand Father" name="ggfather4" id="ggfather4" class="w-8 h-8 md:w-12 md:h-12 rounded-full border border-yellow-400 object-cover" />
+              <span class="text-[7px] md:text-[9px] mt-[1px] text-yellow-600 font-semibold uppercase text-center">Great Grand Father</span>
+            </div>
+            <div class="flex flex-col items-center">
+              <img src="#" alt="Great Grand Mother" name="ggmother4" id="ggmother4" class="w-8 h-8 md:w-12 md:h-12 rounded-full border border-yellow-400 object-cover" />
+              <span class="text-[7px] md:text-[9px] mt-[1px] text-yellow-600 font-semibold uppercase text-center">Great Grand Mother</span>
+            </div>
+          </div>
+        </div>
     </div>
 
-    <!-- Couple 2 -->
-    <div class="flex flex-col items-center gap-4">
-      <div class="flex flex-wrap justify-center gap-4">
-        <div class="flex flex-col items-center">
-          <img src="#" alt="Great Grand Father" name="ggfather2" id="ggfather2" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Great Grand Father</span>
-        </div>
-        <div class="flex flex-col items-center">
-          <img src="#" alt="Great Grand Mother" name="ggmother2" id="ggmother2" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Great Grand Mother</span>
-        </div>
-      </div>
-    </div>
 
-    <!-- Couple 3 -->
-    <div class="flex flex-col items-center gap-4">
-      <div class="flex flex-wrap justify-center gap-4">
-        <div class="flex flex-col items-center">
-          <img src="#" alt="Great Grand Father" name="ggfather3" id="ggfather3" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Great Grand Father</span>
-        </div>
-        <div class="flex flex-col items-center">
-          <img src="#" alt="Great Grand Mother" name="ggmother3" id="ggmother3" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Great Grand Mother</span>
-        </div>
-      </div>
-    </div>
 
-    <!-- Couple 4 -->
-    <div class="flex flex-col items-center gap-4">
-      <div class="flex flex-wrap justify-center gap-4">
-        <div class="flex flex-col items-center">
-          <img src="#" alt="Great Grand Father" name="ggfather4" id="ggfather4" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Great Grand Father</span>
-        </div>
-        <div class="flex flex-col items-center">
-          <img src="#" alt="Great Grand Mother" name="ggmother4" id="ggmother4" class="w-28 h-28 rounded-full border-4 border-yellow-400 object-cover" />
-          <span class="text-xs mt-1 text-yellow-600 font-semibold uppercase">Great Grand Mother</span>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
 
 
@@ -216,7 +221,7 @@ include "../src/components/admin/nav.php";
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Dog Type</label>
-        <select id="dogType" name="dogType" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
+        <select id="dogType" name="dogType" class="text-black w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
           <option value="registered">Registered</option>
           <option value="not_registered">Not Registered</option>
         </select>
@@ -227,7 +232,7 @@ include "../src/components/admin/nav.php";
             <label for="registeredDog" class="block text-sm font-medium text-gray-700 mb-1">
                 Select Registered Dog
             </label>
-            <select id="registeredDog" name="dog_id" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
+            <select id="registeredDog" name="dog_id" class="text-black w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
                 <option value="">-- Select Dog --</option>
             </select>
         </div>
@@ -237,7 +242,7 @@ include "../src/components/admin/nav.php";
       <div id="notRegisteredSection" class="hidden space-y-4">
         <div>
           <label for="dogName" class="block text-sm font-medium text-gray-700 mb-1">Dog Name</label>
-          <input type="text" id="dogName" name="dogName" class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
+          <input type="text" id="dogName" name="dogName" class="text-black w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
         </div>
         <div>
           <label for="dogImage" class="block text-sm font-medium text-gray-700 mb-1">Dog Image</label>
