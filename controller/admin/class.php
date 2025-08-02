@@ -649,6 +649,20 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
 
 
 
+      public function removeDog($dog_id) {
+            $query = "UPDATE `dogs` 
+                    SET `dog_registered_status` = 2
+                    WHERE `dog_id` = $dog_id";
+
+                // Execute the query
+                if ($this->conn->query($query)) {
+                    return 'success';
+                } else {
+                    return 'Error: ' . $this->conn->error;
+                }
+        }
+
+
 
 
 

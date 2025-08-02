@@ -22,12 +22,23 @@ $(document).ready(function () {
               <td class="p-3">${dog.dog_type_status}</td>
               <td class="p-3">${dog.dog_date_of_birth}</td>
               <td class="p-3 text-center">
-                <button class="viewDetailsBtn bg-[#FFD700] hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
+               <!-- Details Button (Yellow) -->
+                <button class="viewDetailsBtn bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
                   data-dog='${JSON.stringify(dog)}'>Details</button>
+
+                <!-- Generation Link (Gray) -->
                 <a href="generation?dog_id=${dog.dog_id}" 
-                    class="inline-block bg-[#FFD700] hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition">
-                    Generation
+                  class="inline-block bg-yellow-400 hover:bg-gray-400 text-black px-3 py-1 rounded text-xs font-semibold transition">
+                  Generation
                 </a>
+
+                <!-- Remove Button (Red) -->
+                <button class="removeBtn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition"
+                  data-dog='${JSON.stringify(dog)}'
+                  data-dog_id='${dog.dog_id}'
+                  data-dog_name='${dog.dog_name}'
+                  >Remove</button>
+
 
               </td>
             </tr>
@@ -156,3 +167,58 @@ $(document).on("submit", "#updateDogForm", function (e) {
 });
 
 
+
+
+
+
+
+
+    $(document).on('click', '.removeBtn', function(e) {
+        e.preventDefault();
+        var dog_id = $(this).data('dog_id');
+        var dog_name = $(this).data('dog_name');
+        console.log(dog_id);
+    
+        Swal.fire({
+            title: `Are you sure to Remove <span style="color:red;">${dog_name}</span> ?`,
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, remove it!',
+            cancelButtonText: 'No, cancel!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "../controller/admin/end-points/controller.php",
+                    type: 'POST',
+                    data: { dog_id: dog_id, requestType: 'removeDog' },
+                    dataType: 'json', 
+                    success: function(response) {
+                      console.log(response);
+                        if (response.status === 200) {
+                            Swal.fire(
+                                'Removed!',
+                                response.message, 
+                                'success'
+                            ).then(() => {
+                                location.reload(); 
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                response.message, 
+                                'error'
+                            );
+                        }
+                    },
+                    error: function() {
+                        Swal.fire(
+                            'Error!',
+                            'There was a problem with the request.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    });
