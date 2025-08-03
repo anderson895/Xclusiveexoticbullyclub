@@ -266,9 +266,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         }else if ($_POST['requestType'] == 'AddCategoryShow') {
 
-            // echo "<pre>";
-            // print_r($_POST);
-            // echo "</pre>";
             $showname=$_POST['name'];
             $contestants=$_POST['contestants'];
             $pagId=$_POST['pagId'];
@@ -279,7 +276,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($result) {
                     echo json_encode([
                         'status' => 200,
-                        'message' => 'Remove successfully.'
+                        'message' => 'successfully Added.'
+                    ]);
+            } else {
+                    echo json_encode([
+                        'status' => 500,
+                        'message' => 'No changes made or error updating data.'
+                    ]);
+            }
+
+        }else if ($_POST['requestType'] == 'UpdateCategoryContestants') {
+
+            // echo "<pre>";
+            // print_r($_POST);
+            // echo "</pre>";
+            
+            $pc_id=$_POST['pc_id'];
+            $contestants=$_POST['contestants'];
+            $contestants_json = json_encode($contestants);
+            $result = $db->UpdateCategoryContestants($pc_id,$contestants_json);
+            if ($result) {
+                    echo json_encode([
+                        'status' => 200,
+                        'message' => 'Update successfully.'
                     ]);
             } else {
                     echo json_encode([
@@ -289,7 +308,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
         }else {
-            echo 'Else';
+            echo '404';
         }
     } else {
         echo 'Access Denied! No Request Type.';
@@ -346,6 +365,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $pagId=$_GET['pagId'];
             $result = $db->fetch_pageant_category($pagId);
+            echo json_encode([
+                'status' => 200,
+                'data' => $result
+            ]);
+        }else if ($_GET['requestType'] == 'fetch_category_contestants') {
+
+            $pc_id=$_GET['pc_id'];
+            $result = $db->fetch_category_contestants($pc_id);
             echo json_encode([
                 'status' => 200,
                 'data' => $result

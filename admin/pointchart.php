@@ -83,7 +83,7 @@ include "../src/components/admin/nav.php";
         </div>
         <div>
           <label for="description" class="block text-sm font-medium">Description</label>
-          <textarea id="description" name="description" required class="w-full px-3 py-2 rounded-md bg-[#0D0D0D] border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]"></textarea>
+          <textarea id="description" name="description" class="w-full px-3 py-2 rounded-md bg-[#0D0D0D] border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]"></textarea>
         </div>
         <div class="text-right">
           <button type="submit" class="bg-[#FFD700] text-black font-semibold px-4 py-2 rounded-md hover:bg-yellow-500">Save</button>

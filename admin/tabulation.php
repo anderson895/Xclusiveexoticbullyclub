@@ -96,21 +96,31 @@ include "../src/components/admin/nav.php";
 
 
 
+<!-- Update Contestant Modal -->
+<div id="updateContestantModal" class="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center" style="display:none;">
+  <form id="frmUpdateContestants" class="bg-[#1A1A1A] p-6 rounded-lg shadow-lg w-full max-w-2xl relative">
+    <input type="hidden" id="update_pc_id" name="pc_id">
 
-<!-- Add Contestant Modal -->
-<div id="addContestantModal" class="fixed inset-0 z-50  flex items-center justify-center bg-black/30 backdrop-blur-sm" style="display:none;">
-  <div class="bg-[#1A1A1A] rounded-lg shadow-lg w-full max-w-md p-6 text-[#CCCCCC] relative">
-    <button id="closeAddContestantModal" class="absolute top-2 right-2 text-white hover:text-red-500 text-xl">&times;</button>
-    <h2 class="text-lg font-bold text-[#FFD700] mb-4">Add New Contestant</h2>
-    <form id="frmNewContestant">
-    <input type="text" id="newContestantName" class="w-full px-3 py-2 rounded-md bg-[#0D0D0D] border border-gray-600 focus:outline-none" placeholder="Enter contestant name">
-    <div class="text-right mt-4">
-      <button id="confirmAddContestant" class="bg-blue-500 hover:bg-blue-600 text-black font-semibold px-4 py-2 rounded">Add</button>
+    <h2 class="text-xl font-bold text-[#FFD700] mb-4">Update Contestants</h2>
+   <div class="flex justify-between items-center mb-4">
+      <button type="button" id="addUpdateContestantField" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-3 py-1 rounded-md">
+        + Add Another Contestant
+      </button>
+      <button type="button" id="selectAllUpdateContestants" class="bg-yellow-500 hover:bg-yellow-600 text-black text-sm font-semibold px-3 py-1 rounded-md">
+        Select All Contestants
+      </button>
     </div>
-    </form>
-  </div>
-</div>
+    <div id="contestant_list"></div>
 
+
+    <div class="text-right mt-4 space-x-2">
+      <button type="button" id="closeUpdateContestantModal" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">Cancel</button>
+      <button type="submit" class="bg-green-500 hover:bg-green-600 text-black font-semibold px-4 py-2 rounded">Update</button>
+    </div>
+
+   
+  </form>
+</div>
 
 
 
