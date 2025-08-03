@@ -99,33 +99,53 @@ include "../src/components/admin/nav.php";
 
 
 
-
-
 <!-- Update Contestant Modal -->
-<div id="updateContestantModal" class="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center" style="display:none;">
-  <form id="frmUpdateContestants" class="bg-[#1A1A1A] p-6 rounded-lg shadow-lg w-full max-w-2xl relative">
+<div id="updateContestantModal" class="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-center justify-center p-4" style="display:none;">
+  <form 
+    id="frmUpdateContestants" 
+    class="bg-[#1A1A1A] p-4 sm:p-6 rounded-lg shadow-lg w-full max-w-2xl max-h-screen overflow-y-auto relative"
+  >
     <input type="hidden" id="update_pc_id" name="pc_id">
 
-    <h2 class="text-xl font-bold text-[#FFD700] mb-4">Update Contestants</h2>
-   <div class="flex justify-between items-center mb-4">
-      <button type="button" id="addUpdateContestantField" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-3 py-1 rounded-md">
+    <h2 class="text-lg sm:text-xl font-bold text-[#FFD700] mb-4">Update Contestants</h2>
+    
+    <div class="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-2 mb-4">
+      <button 
+        type="button" 
+        id="addUpdateContestantField" 
+        class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-3 py-1 rounded-md w-full sm:w-auto"
+      >
         + Add Another Contestant
       </button>
-      <button type="button" id="selectAllUpdateContestants" class="bg-yellow-500 hover:bg-yellow-600 text-black text-sm font-semibold px-3 py-1 rounded-md">
+      <button 
+        type="button" 
+        id="selectAllUpdateContestants" 
+        class="bg-yellow-500 hover:bg-yellow-600 text-black text-sm font-semibold px-3 py-1 rounded-md w-full sm:w-auto"
+      >
         Select All Contestants
       </button>
     </div>
-    <div id="contestant_list"></div>
 
+    <div id="contestant_list" class="space-y-2"></div>
 
-    <div class="text-right mt-4 space-x-2">
-      <button type="button" id="closeUpdateContestantModal" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">Cancel</button>
-      <button type="submit" class="bg-green-500 hover:bg-green-600 text-black font-semibold px-4 py-2 rounded">Update</button>
+    <div class="flex flex-col sm:flex-row justify-end gap-2 mt-4">
+      <button 
+        type="button" 
+        id="closeUpdateContestantModal" 
+        class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded w-full sm:w-auto"
+      >
+        Cancel
+      </button>
+      <button 
+        type="submit" 
+        class="bg-green-500 hover:bg-green-600 text-black font-semibold px-4 py-2 rounded w-full sm:w-auto"
+      >
+        Update
+      </button>
     </div>
-
-   
   </form>
 </div>
+
 
 
 
