@@ -94,7 +94,7 @@ $(document).ready(function () {
             // ✅ Apply click event if dog ID is available
             if (targetDogId) {
                 $img.on('click', function () {
-                    window.location.href = 'generation.php?dog_id=' + targetDogId;
+                    window.location.href = 'generation?dog_id=' + targetDogId;
                 });
             }
     }

@@ -13,7 +13,7 @@ $(document).ready(function () {
           const card = `
            
             <div class="swiper-slide bg-[#2B2B2B] p-6 rounded-xl border border-[#333] w-72 shadow-lg relative text-center">
-               <a href="generation.php?dog_id=${dog.dog_id}">
+               <a href="generation?dog_id=${dog.dog_id}">
               <!-- Rank -->
               <div class="absolute top-3 right-3 bg-[#FFD700] text-black text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 z-10 shadow">
                 <span class="material-icons text-sm text-black">emoji_events</span> Xclusive

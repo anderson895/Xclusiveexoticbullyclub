@@ -106,7 +106,7 @@ $('#searchForm').on('submit', function (e) {
   if (results.length > 0) {
     results.forEach((result) => {
       $output.append(`
-        <div onclick="window.location.href='generation.php?dog_id=${result.dog_id}'"
+        <div onclick="window.location.href='generation?dog_id=${result.dog_id}'"
           class="cursor-pointer flex flex-col sm:flex-row bg-white/5 hover:bg-white/10 hover:scale-[1.02] transition-all duration-300 ease-in-out text-white rounded-lg overflow-hidden shadow-lg border border-white/10">
           
           <img src="static/upload/${result.dog_image}" alt="${result.dog_name}" class="w-full sm:w-40 h-60 sm:h-40 object-cover flex-shrink-0">
