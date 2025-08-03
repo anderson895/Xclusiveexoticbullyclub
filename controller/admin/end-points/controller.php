@@ -286,11 +286,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
         }else if ($_POST['requestType'] == 'UpdateCategoryContestants') {
-
-            // echo "<pre>";
-            // print_r($_POST);
-            // echo "</pre>";
-            
             $pc_id=$_POST['pc_id'];
             $contestants=$_POST['contestants'];
             $contestants_json = json_encode($contestants);
@@ -299,6 +294,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo json_encode([
                         'status' => 200,
                         'message' => 'Update successfully.'
+                    ]);
+            } else {
+                    echo json_encode([
+                        'status' => 500,
+                        'message' => 'No changes made or error updating data.'
+                    ]);
+            }
+
+        }else if ($_POST['requestType'] == 'removeShow') {
+
+            $pc_id=$_POST['pc_id'];
+            $result = $db->removeShow($pc_id);
+            if ($result) {
+                    echo json_encode([
+                        'status' => 200,
+                        'message' => 'Remove successfully.'
                     ]);
             } else {
                     echo json_encode([

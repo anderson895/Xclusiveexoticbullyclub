@@ -22,23 +22,27 @@ include "../src/components/admin/nav.php";
 <div class="bg-[#1A1A1A] rounded-lg shadow-lg p-6 text-[#CCCCCC]">
 
   <!-- Search Input -->
- <div class="mb-4 flex justify-between items-center">
+<div class="mb-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
   <!-- Search Input -->
   <input
     type="text"
     id="searchInput"
-    class="w-full max-w-xs px-4 py-2 rounded-md bg-[#0D0D0D] border border-gray-600 text-[#CCCCCC] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FFD700]"
+    class="w-full sm:max-w-xs px-4 py-2 rounded-md bg-[#0D0D0D] border border-gray-600 
+           text-[#CCCCCC] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#FFD700]"
     placeholder="Search..."
   />
 
   <!-- Add Button -->
   <button
     id="addPageantBtn"
-    class="ml-4 bg-[#FFD700] text-black font-semibold px-4 py-2 rounded-md hover:bg-yellow-500 transition"
+    class="w-full sm:w-auto bg-[#FFD700] text-black font-semibold 
+           text-sm sm:text-base px-3 py-1.5 sm:px-4 sm:py-2 rounded-md 
+           hover:bg-yellow-500 transition"
   >
     + Create Show
   </button>
 </div>
+
 
 
   <!-- Table Container -->

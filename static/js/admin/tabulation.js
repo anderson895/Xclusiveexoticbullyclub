@@ -258,10 +258,20 @@ $.ajax({
         resultHTML += `
               </tbody>
             </table>
-            <div class="text-right mt-4 space-x-2">
-                <button class="updateContestant bg-green-500 hover:bg-green-600 text-black font-semibold px-4 py-2 rounded" data-pc_id=${categoryData.pc_id}>Update Grades</button>
-            </div>
+           <div class="flex flex-col sm:flex-row justify-end gap-2 mt-4">
+            <button 
+              class="updateContestant bg-green-500 hover:bg-green-600 text-black font-semibold px-4 py-2 rounded" 
+              data-pc_id="${categoryData.pc_id}">
+              Update Grades
+            </button>
+           <button 
+              class="removeShow bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded" 
+              data-pc_id="${categoryData.pc_id}" data-category_name="${categoryName}">
+              Remove Show
+            </button>
+
           </div>
+
         `;
 
         $('#outputBody').append(resultHTML);
@@ -472,6 +482,56 @@ $('#frmUpdateContestants').on('submit', function (e) {
 
 
 
+
+    $(document).on('click', '.removeShow', function(e) {
+        e.preventDefault();
+        var pc_id = $(this).data('pc_id');
+        var category_name = $(this).data('category_name');
+        console.log(pc_id);
+    
+        Swal.fire({
+            title: `Are you sure to Remove <span style="color:red;">${category_name}</span> ?`,
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, remove it!',
+            cancelButtonText: 'No, cancel!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "../controller/admin/end-points/controller.php",
+                    type: 'POST',
+                    data: { pc_id: pc_id, requestType: 'removeShow' },
+                    dataType: 'json', 
+                    success: function(response) {
+                      console.log(response);
+                        if (response.status === 200) {
+                            Swal.fire(
+                                'Removed!',
+                                response.message, 
+                                'success'
+                            ).then(() => {
+                                location.reload(); 
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                response.message, 
+                                'error'
+                            );
+                        }
+                    },
+                    error: function() {
+                        Swal.fire(
+                            'Error!',
+                            'There was a problem with the request.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    });
 
 
 

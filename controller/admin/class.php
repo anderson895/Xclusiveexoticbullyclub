@@ -401,8 +401,9 @@ public function fetch_all_pageant() {
 
 
 public function fetch_pageant_category($pagId) {
-    $query = $this->conn->prepare("SELECT * FROM pageant_category WHERE pc_pageant_id = ? ORDER BY pc_pageant_id DESC");
-    $query->bind_param("i", $pagId);
+    $status=1;
+    $query = $this->conn->prepare("SELECT * FROM pageant_category WHERE pc_pageant_id = ? AND pc_status = ? ORDER BY pc_id DESC");
+    $query->bind_param("ii", $pagId,$status);
 
     if ($query->execute()) {
         $result = $query->get_result();
@@ -864,6 +865,20 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
             $query = "UPDATE `dogs` 
                     SET `dog_registered_status` = 2
                     WHERE `dog_id` = $dog_id";
+
+                // Execute the query
+                if ($this->conn->query($query)) {
+                    return 'success';
+                } else {
+                    return 'Error: ' . $this->conn->error;
+                }
+        }
+
+
+        public function removeShow($pc_id) {
+            $query = "UPDATE `pageant_category` 
+                    SET `pc_status` = 0
+                    WHERE `pc_id` = $pc_id";
 
                 // Execute the query
                 if ($this->conn->query($query)) {
