@@ -30,17 +30,18 @@
   <div class="w-1/2 flex flex-col space-y-2 items-end md:items-start text-right md:text-left pl-2 md:pl-0">
     <a href="#" id="dog_facebook_link" class="flex items-center space-x-2" target="_blank" rel="noopener">
       <img src="static/assets/icons/facebook.png" alt="Facebook" class="w-4 h-4">
-      <span id="dog_facebook_name"></span>
+      <span id="dog_facebook_name" class="lowercase"></span>
     </a>
     <a href="#" id="dog_ig_link" class="flex items-center space-x-2" target="_blank" rel="noopener">
       <img src="static/assets/icons/instagram.png" alt="Instagram" class="w-4 h-4">
-      <span id="dog_ig_name"></span>
+      <span id="dog_ig_name" class="lowercase"></span>
     </a>
     <div class="flex items-center space-x-2">
       <img src="static/assets/icons/phone.png" alt="Phone" class="w-4 h-4">
-      <span id="dog_contact_number"></span>
+      <span id="dog_contact_number" ></span>
     </div>
   </div>
+
 
 </div>
 
