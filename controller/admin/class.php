@@ -13,10 +13,23 @@ class global_class extends db_connect
     }
 
 
-  
 
 
+    public function fetch_all_events() {
+        $query = $this->conn->prepare("SELECT * FROM events ORDER BY event_id  DESC");
 
+        if ($query->execute()) {
+            $result = $query->get_result();
+            $data = [];
+
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+
+            return $data;
+        }
+        return []; 
+    }
 
 
 
@@ -854,8 +867,41 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
 
 
 
+    public function removeEvents($event_id) {
+        // Step 1: Get the banner filename from the database
+        $selectQuery = "SELECT event_banner FROM events WHERE event_id = ?";
+        $stmt = $this->conn->prepare($selectQuery);
+        if (!$stmt) {
+            return 'Prepare failed (select): ' . $this->conn->error;
+        }
 
+        $stmt->bind_param("i", $event_id);
+        $stmt->execute();
+        $stmt->bind_result($bannerFile);
+        $stmt->fetch();
+        $stmt->close();
 
+        // Step 2: Delete the record from the database
+        $deleteQuery = "DELETE FROM events WHERE event_id = ?";
+        $stmt = $this->conn->prepare($deleteQuery);
+        if (!$stmt) {
+            return 'Prepare failed (delete): ' . $this->conn->error;
+        }
+
+        $stmt->bind_param("i", $event_id);
+        $result = $stmt->execute();
+        $stmt->close();
+
+        // Step 3: Delete the file from the filesystem
+        if ($result && $bannerFile) {
+            $filePath = __DIR__ . "../../../static/upload/" . $bannerFile;
+            if (file_exists($filePath)) {
+                unlink($filePath); // deletes the image file
+            }
+        }
+
+        return $result ? 'success' : 'Error deleting event';
+    }
 
 
 
@@ -889,6 +935,29 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
         }
 
 
+        public function AddEvent($event_name, $description, $event_date, $event_time, $dogBannerFileName) {
+            $query = "INSERT INTO `events` (`event_name`, `event_description`, `event_banner`, `event_date`, `event_time`) 
+                    VALUES (?, ?, ?, ?, ?)";
+
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                die("Prepare failed: " . $this->conn->error);
+            }
+
+            $stmt->bind_param("sssss", $event_name, $description, $dogBannerFileName, $event_date, $event_time);
+
+            $result = $stmt->execute();
+
+            if (!$result) {
+                $stmt->close();
+                return false;
+            }
+
+            $inserted_id = $this->conn->insert_id; 
+            $stmt->close();
+
+            return $inserted_id; 
+        }
 
 
 

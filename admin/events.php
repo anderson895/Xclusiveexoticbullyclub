@@ -34,7 +34,7 @@ include "../src/components/admin/nav.php";
 
   <!-- Add Button -->
   <button
-    id="addPageantBtn"
+    id="addEventBtn"
     class="w-full sm:w-auto bg-[#FFD700] text-black font-semibold 
            text-sm sm:text-base px-3 py-1.5 sm:px-4 sm:py-2 rounded-md 
            hover:bg-yellow-500 transition"
@@ -52,8 +52,11 @@ include "../src/components/admin/nav.php";
         <tr>
 
           <th class="p-3">#</th>
-          <th class="p-3 text-center">Show Name</th>
+          <th class="p-3 text-center">Event Name</th>
           <th class="p-3 text-center">Description</th>
+          <th class="p-3 text-center">Date</th>
+          <th class="p-3 text-center">Time</th>
+          <th class="p-3 text-center">Banner</th>
           
           <th class="p-3 text-center">Action</th>
         </tr>
@@ -69,9 +72,61 @@ include "../src/components/admin/nav.php";
 
 
 <!-- Spinner Overlay -->
-    <div id="spinner" class="absolute inset-0 flex items-center justify-center z-50" style="display:none; background-color: rgba(255, 255, 255, 0.7);">
-        <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+<div id="spinner" class="absolute inset-0 flex items-center justify-center z-50" style="display:none; background-color: rgba(255, 255, 255, 0.7);">
+    <div class="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+</div>
+
+
+<!-- Modal -->
+<div id="addEventModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm" style="display:none;">
+  <div class="bg-[#1A1A1A]/90 backdrop-blur-md rounded-lg shadow-xl w-full max-w-xl mx-auto p-6 text-[#CCCCCC] relative">
+    <button id="closeAddPageantModal" class="absolute top-2 right-2 text-white hover:text-red-500 text-xl">&times;</button>
+
+    <div id="modalContent" class="space-y-4">
+      <h3 class="text-lg font-bold text-[#FFD700]">POST EVENTS</h3>
+      <form id="frmAddEvent" class="space-y-4">
+
+        <!-- Event Name -->
+        <div>
+          <label for="eventName" class="block text-sm font-medium text-[#FFD700]">Event Name</label>
+          <input type="text" id="eventName" name="event_name" class="mt-1 w-full px-3 py-2 bg-[#0D0D0D] border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label for="eventDescription" class="block text-sm font-medium text-[#FFD700]">Description</label>
+          <textarea id="eventDescription" name="description" rows="3" class="mt-1 w-full px-3 py-2 bg-[#0D0D0D] border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFD700]"></textarea>
+        </div>
+
+        <!-- Upload Banner -->
+        <div>
+          <label for="eventBanner" class="block text-sm font-medium text-[#FFD700]">Upload Banner</label>
+          <input type="file" id="eventBanner" name="banner" accept="image/*" class="mt-1 block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#FFD700] file:text-black hover:file:bg-yellow-400">
+        </div>
+
+        <!-- Event Date -->
+        <div>
+          <label for="eventDate" class="block text-sm font-medium text-[#FFD700]">Event Date</label>
+          <input type="date" id="eventDate" name="event_date" class="mt-1 w-full px-3 py-2 bg-[#0D0D0D] border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
+        </div>
+
+        <!-- Event Time -->
+        <div>
+          <label for="eventTime" class="block text-sm font-medium text-[#FFD700]">Event Time</label>
+          <input type="time" id="eventTime" name="event_time" class="mt-1 w-full px-3 py-2 bg-[#0D0D0D] border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-right">
+          <button type="submit" class="bg-[#FFD700] text-black font-semibold px-4 py-2 rounded hover:bg-yellow-400 transition">Submit</button>
+        </div>
+
+      </form>
     </div>
+  </div>
+</div>
+
+
 
 <?php include "../src/components/admin/footer.php"; ?>
 <script src="../static/js/admin/events.js"></script>

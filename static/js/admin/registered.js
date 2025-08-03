@@ -231,38 +231,40 @@ $(document).on("submit", "#updateDogForm", function (e) {
             confirmButtonText: 'Yes, remove it!',
             cancelButtonText: 'No, cancel!',
         }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: "../controller/admin/end-points/controller.php",
-                    type: 'POST',
-                    data: { dog_id: dog_id, requestType: 'removeDog' },
-                    dataType: 'json', 
-                    success: function(response) {
+           if (result.isConfirmed) {
+              $.ajax({
+                  url: "../controller/admin/end-points/controller.php",
+                  type: 'POST',
+                  data: { dog_id: dog_id, requestType: 'removeDog' },
+                  dataType: 'json', 
+                  success: function(response) {
                       console.log(response);
-                        if (response.status === 200) {
-                            Swal.fire(
-                                'Removed!',
-                                response.message, 
-                                'success'
-                            ).then(() => {
-                                location.reload(); 
-                            });
-                        } else {
-                            Swal.fire(
-                                'Error!',
-                                response.message, 
-                                'error'
-                            );
-                        }
-                    },
-                    error: function() {
-                        Swal.fire(
-                            'Error!',
-                            'There was a problem with the request.',
-                            'error'
-                        );
-                    }
-                });
-            }
+                      if (response.status === 200) {
+                          Swal.fire({
+                              title: 'Removed!',
+                              html: `
+                                  ${response.message}<br>
+                                  File deleted: <strong>${response.fileDeleted ? 'Yes' : 'No'}</strong><br>
+                                  <em>${response.extraMessage || ''}</em>
+                              `,
+                              icon: 'success'
+                          }).then(() => {
+                              location.reload(); 
+                          });
+                      } else {
+                          Swal.fire({
+                              title: 'Error!',
+                              html: `
+                                  ${response.message}<br>
+                                  File deleted: <strong>${response.fileDeleted ? 'Yes' : 'No'}</strong><br>
+                                  <em>${response.extraMessage || ''}</em>
+                              `,
+                              icon: 'error'
+                          });
+                      }
+                  }
+              });
+          }
+
         });
     });
