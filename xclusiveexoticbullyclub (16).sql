@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2025 at 10:39 AM
+-- Generation Time: Aug 03, 2025 at 06:52 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -52,6 +52,7 @@ CREATE TABLE `dogs` (
   `dog_code` varchar(255) NOT NULL,
   `dog_name` varchar(60) NOT NULL,
   `dog_date_registration` date DEFAULT NULL,
+  `dog_gender` enum('male','female','','') DEFAULT NULL,
   `dog_owner_name` varchar(60) DEFAULT NULL,
   `dog_breeder_name` varchar(60) DEFAULT NULL,
   `dog_image` varchar(255) NOT NULL,
@@ -73,8 +74,15 @@ CREATE TABLE `dogs` (
 -- Dumping data for table `dogs`
 --
 
-INSERT INTO `dogs` (`dog_id`, `dog_code`, `dog_name`, `dog_date_registration`, `dog_owner_name`, `dog_breeder_name`, `dog_image`, `dog_banner`, `dog_country`, `dog_color`, `dog_height`, `dog_date_of_birth`, `dog_contact_number`, `dog_facebook_name`, `dog_facebook_link`, `dog_ig_name`, `dog_ig_link`, `dog_type_status`, `dog_registered_status`) VALUES
-(41, '888000001', 'TBC MIAGI', NULL, 'JORGE SOTO', 'JORGE SOTO', 'dog_688dc85bb80d92.63592581.jpg', 'banner_688dc8888f9891.70421033.jpg', 'USA', 'blue', 'N/A', '2011-01-18', '09999', 'JORGE LUIS SOTO', 'https://www.facebook.com/jorge.luis.soto.59319?mibextid=wwXIfr&rdid=P1FmWcJE1YdwOeIj&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19KcYmyrS3%2F%3Fmibextid%3DwwXIfr#', 'thebullycampline', 'https://www.instagram.com/thebullycampline/', 'exclusive', 1);
+INSERT INTO `dogs` (`dog_id`, `dog_code`, `dog_name`, `dog_date_registration`, `dog_gender`, `dog_owner_name`, `dog_breeder_name`, `dog_image`, `dog_banner`, `dog_country`, `dog_color`, `dog_height`, `dog_date_of_birth`, `dog_contact_number`, `dog_facebook_name`, `dog_facebook_link`, `dog_ig_name`, `dog_ig_link`, `dog_type_status`, `dog_registered_status`) VALUES
+(41, '888000001', 'TBC MIAGI', '2025-08-03', 'male', 'JORGE SOTO', 'JORGE SOTO', 'dog_688dc85bb80d92.63592581.jpg', 'banner_688dc8888f9891.70421033.jpg', 'USA', 'blue', NULL, '2011-01-18', NULL, 'JORGE LUIS SOTO', 'https://www.facebook.com/jorge.luis.soto.59319?mibextid=wwXIfr&rdid=P1FmWcJE1YdwOeIj&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F19KcYmyrS3%2F%3Fmibextid%3DwwXIfr#', 'thebullycampline', 'https://www.instagram.com/thebullycampline/', 'exclusive', 1),
+(42, '888000002', 'MARCELLO', NULL, 'male', NULL, NULL, 'dog_688dd2abcb7f57.44365027.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(43, '888000003', 'LA...', NULL, 'male', NULL, NULL, 'dog_688dd2fada3ab0.66121932.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(44, '888000004', 'goliath ii cali', NULL, 'male', NULL, NULL, 'dog_688dd32d407ef5.33220834.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(45, '888000005', 'black cali', NULL, 'male', NULL, NULL, 'dog_688dd359e373a8.70783033.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(46, '888000006', 'goliath ii cali', NULL, 'male', NULL, NULL, 'dog_688dd37f891c26.53429986.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(47, '888000007', 'fuska', NULL, 'male', NULL, NULL, 'dog_688dd39c54dbf3.38282957.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(49, '888000008', 'TESLA', '2025-08-03', 'female', 'Lucy Ethan', '范宏林', 'dog_688ee227a60065.24187610.jpg', 'dog_banner_688ee227a60265.44875305.webp', 'Philippines', 'Brown', '4ft', '2025-08-03', '09270828243', 'Lucy Ethan', 'Ethan Glen P.Sala', 'Ethan Glen P.Sala', '', 'regular', 1);
 
 -- --------------------------------------------------------
 
@@ -106,7 +114,8 @@ CREATE TABLE `generation` (
 --
 
 INSERT INTO `generation` (`gen_id`, `gen_dog_id`, `father_dog_id`, `mother_dog_id`, `grandfather1_dog_id`, `grandmother1_dog_id`, `grandfather2_dog_id`, `grandmother2_dog_id`, `ggfather1_dog_id`, `ggmother1_dog_id`, `ggfather2_dog_id`, `ggmother2_dog_id`, `ggfather3_dog_id`, `ggmother3_dog_id`, `ggfather4_dog_id`, `ggmother4_dog_id`) VALUES
-(17, 41, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(17, 41, 42, 43, 44, 45, 46, 47, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 49, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -197,13 +206,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `dogs`
 --
 ALTER TABLE `dogs`
-  MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `generation`
 --
 ALTER TABLE `generation`
-  MODIFY `gen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `gen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `pageant`
