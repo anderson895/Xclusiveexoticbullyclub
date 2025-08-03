@@ -1,7 +1,26 @@
 <?php 
+include "auth.php";
 
 session_start();
-    
+$db = new auth_class();
+
+
+if (isset($_SESSION['id'])) {
+    $id = intval($_SESSION['id']);
+
+   
+    $On_Session = $db->check_account($id);
+
+   
+  
+    if (!empty($On_Session)) {
+
+    } else {
+       header('location: login');
+    }
+} else {
+   header('location: login');
+}
 ?>
 
 
