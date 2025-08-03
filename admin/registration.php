@@ -131,10 +131,23 @@ include "../src/components/admin/nav.php";
 
 
         <div>
-            <label for="registration" class="block text-sm font-semibold mb-2">REGISTRATION:</label>
+            <label for="registration" class="block text-sm font-semibold mb-2">REGISTRATION DATE:</label>
             <input type="date" id="registration" name="registration"
                 class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
         </div>
+
+
+        
+       <div>
+            <label for="gender" class="block text-sm font-semibold mb-2">Dog Gender:</label>
+            <select id="gender" name="gender"
+                class="w-full p-3 rounded-md bg-gray-800 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+
 
 
         <!-- Type (Dropdown) -->

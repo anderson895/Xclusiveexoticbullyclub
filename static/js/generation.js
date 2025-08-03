@@ -23,7 +23,18 @@ $(document).ready(function () {
 
 
 
-                    $('#result_dog_name').text(data.main_dog_name ?? 'N/A');
+                   $('#result_dog_name').html(`
+                    ${data.main_dog_name ?? 'N/A'}
+                    ${
+                        data.dog_gender === 'male'
+                        ? `<span class="material-icons text-blue-400 text-sm ml-1 align-middle">male</span>`
+                        : data.dog_gender === 'female'
+                        ? `<span class="material-icons text-pink-400 text-sm ml-1 align-middle">female</span>`
+                        : ''
+                    }
+                    `);
+
+
                     $('.dog_breeder_name').text(data.dog_breeder_name ?? 'N/A');
                     $('.dog_owner_name').text(data.dog_owner_name ?? 'N/A');
                     $('.dog_country').text(data.dog_country ?? 'N/A');
@@ -34,6 +45,10 @@ $(document).ready(function () {
                     $('.dog_color').text(data.dog_color ?? 'N/A');
                     $('.dog_height').text(data.dog_height ?? 'N/A');
                     $('#dog_ig_name').text(data.dog_ig_name ?? 'N/A');
+
+
+                 
+
 
 
 

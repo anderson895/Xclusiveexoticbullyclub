@@ -42,6 +42,7 @@ include "../src/components/admin/nav.php";
           <th class="p-3">Color</th>
           <th class="p-3">Type</th>
           <th class="p-3">Birthday</th>
+          <th class="p-3">Gender</th>
           <th class="p-3 text-center">Action</th>
         </tr>
       </thead>

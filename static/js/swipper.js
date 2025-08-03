@@ -11,7 +11,9 @@ $(document).ready(function () {
 
         response.data.forEach((dog, index) => {
           const card = `
+           
             <div class="swiper-slide bg-[#2B2B2B] p-6 rounded-xl border border-[#333] w-72 shadow-lg relative text-center">
+               <a href="generation.php?dog_id=${dog.dog_id}">
               <!-- Rank -->
               <div class="absolute top-3 right-3 bg-[#FFD700] text-black text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1 z-10 shadow">
                 <span class="material-icons text-sm text-black">emoji_events</span> Xclusive
@@ -25,7 +27,9 @@ $(document).ready(function () {
               <p class="text-[#CCCCCC] text-sm mb-1">Breeder: ${dog.dog_breeder_name}</p>
               <p class="text-[#CCCCCC] text-sm mb-1">Owner: ${dog.dog_owner_name}</p>
               <p class="text-[#CCCCCC] text-sm">XEBC No: ${dog.dog_code}</p>
+              </a>
             </div>
+            
           `;
           slider.append(card);
         });

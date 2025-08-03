@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $ig_link         = $_POST['ig_link'];
                 $type            = $_POST['type'];
                 $registration    = $_POST['registration'];
+                $gender    = $_POST['gender'];
 
                 // FILES
                 $dog_image = $_FILES['dog_image'];
@@ -80,7 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             $type,
                             $facebook_link,
                             $ig_link,
-                            $dogBannerFileName
+                            $dogBannerFileName,
+                            $gender,
+                            $registration
                         );
 
                         if ($result) {
@@ -128,6 +131,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $facebook_link = $_POST['dog_facebook_link'];
             $ig_link = $_POST['dog_ig_link'];
 
+            $date_registration = $_POST['dog_date_registration'];
+            $gender = $_POST['dog_gender'];
+
             // Profile Image
             $dog_image = $_FILES['dog_image'];
             $uniqueFileName = null;
@@ -165,7 +171,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $dog_type_status,
                 $facebook_link,
                 $ig_link,
-                $uniqueBannerFileName
+                $uniqueBannerFileName,
+                $gender,
+                $date_registration
             );
 
             if ($result) {

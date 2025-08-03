@@ -1,49 +1,46 @@
 <?php
     include "src/components/header.php";
 ?>
-<!-- Wrapper for both sections -->
-<div class="flex flex-row justify-between items-start p-4 bg-black border-b border-gray-700 flex-wrap w-full text-sm text-gray-300 markAsRegistered">
+<!-- Wrapper -->
+<div class="flex flex-row items-start justify-between md:justify-start p-4 bg-black border-b border-gray-700 w-full text-sm text-gray-300 markAsRegistered">
 
-  <!-- LINK SECTION (left) -->
-  <div class="flex flex-col space-y-2 w-1/2 pr-2">
+  <!-- DETAILS SECTION (Left on mobile, hidden on md and up) -->
+  <div class="w-1/2 flex flex-col space-y-2 items-start text-left pr-2 md:hidden">
+    <div class="space-y-1">
+      <p><span class="font-semibold text-gray-300">Owner:</span> <span class="capitalize dog_owner_name">Lucy Ethan</span></p>
+      <p><span class="font-semibold text-gray-300">Country:</span> <span class="capitalize dog_country">Philippines</span></p>
+      <p><span class="font-semibold text-gray-300">Breeder:</span> <span class="capitalize dog_breeder_name">Juan Dela Cruz</span></p>
+    </div>
+
+    <div class="flex justify-start gap-2 text-xs flex-wrap">
+      <span class="px-2 py-1 bg-yellow-500/10 border border-yellow-400 rounded-full">
+        Height: <span class="dog_height"></span>
+      </span>
+      <span class="px-2 py-1 bg-purple-500/10 border border-purple-400 rounded-full">
+        <span class="dog_color"></span>
+      </span>
+      <span class="px-2 py-1 bg-yellow-500/10 border border-purple-400 rounded-full">
+        <span class="material-icons text-yellow-400 text-sm">cake</span> 
+        <span class="dog_date_of_birth"></span>
+      </span>
+    </div>
+  </div>
+
+  <!-- LINK SECTION (Right on mobile, Left on desktop) -->
+  <div class="w-1/2 flex flex-col space-y-2 items-end md:items-start text-right md:text-left pl-2 md:pl-0">
     <a href="#" id="dog_facebook_link" class="flex items-center space-x-2" target="_blank" rel="noopener">
       <img src="static/assets/icons/facebook.png" alt="Facebook" class="w-4 h-4">
       <span id="dog_facebook_name"></span>
     </a>
-
     <a href="#" id="dog_ig_link" class="flex items-center space-x-2" target="_blank" rel="noopener">
       <img src="static/assets/icons/instagram.png" alt="Instagram" class="w-4 h-4">
       <span id="dog_ig_name"></span>
     </a>
-
     <div class="flex items-center space-x-2">
       <img src="static/assets/icons/phone.png" alt="Phone" class="w-4 h-4">
       <span id="dog_contact_number"></span>
     </div>
   </div>
-
- <!-- DETAILS SECTION (right, visible only on mobile) -->
-<div class="flex flex-col space-y-2 w-1/2 items-end text-right pl-2 sm:hidden">
-  <div class="space-y-1">
-    <p><span class="font-semibold text-gray-300">Owner:</span> <span class="capitalize dog_owner_name">Lucy Ethan</span></p>
-    <p><span class="font-semibold text-gray-300">Country:</span> <span class="capitalize dog_country">Philippines</span></p>
-    <p><span class="font-semibold text-gray-300">Breeder:</span> <span class="capitalize dog_breeder_name">Juan Dela Cruz</span></p>
-  </div>
-
-  <div class="flex justify-end gap-2 text-xs flex-wrap">
-    <span class="px-2 py-1 bg-yellow-500/10 border border-yellow-400 rounded-full">
-      Height: <span class="dog_height"></span>
-    </span>
-    <span class="px-2 py-1 bg-purple-500/10 border border-purple-400 rounded-full">
-      <span class="dog_color"></span>
-    </span>
-     <span class="px-2 py-1 bg-yellow-500/10 border border-purple-400 rounded-full">
-      <span class="material-icons text-yellow-400 text-sm">cake</span> 
-      <span class="dog_date_of_birth"></span>
-    </span>
-  </div>
-</div>
-
 
 </div>
 
@@ -66,8 +63,10 @@
         <!-- Dog Name and XEBC -->
         <div class="flex flex-col leading-tight">
           <h2 id="result_dog_name" class="text-xl font-bold text-yellow-300 uppercase tracking-wide flex items-center gap-1">
-            TESLA <span class="text-blue-400 text-lg">♂</span>
+            TESLA 
+            <span class="dog_gender">♂</span>
           </h2>
+
           <span class="text-sm text-gray-400">
             XEBC NO. <span id="dog_code" class="text-white font-medium"></span>
           </span>

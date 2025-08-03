@@ -21,6 +21,15 @@ $(document).ready(function () {
               <td class="p-3">${dog.dog_color}</td>
               <td class="p-3">${dog.dog_type_status}</td>
               <td class="p-3">${dog.dog_date_of_birth}</td>
+              <td class="p-3 flex items-center space-x-1">
+                ${dog.dog_gender === 'male' 
+                  ? `<span class="material-icons text-blue-400 text-sm">male</span> Male`
+                  : dog.dog_gender === 'female' 
+                    ? `<span class="material-icons text-red-400 text-sm">female</span> Female`
+                    : 'N/A'}
+              </td>
+
+
               <td class="p-3 text-center">
                <!-- Details Button (Yellow) -->
                 <button class="viewDetailsBtn bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
@@ -122,6 +131,24 @@ $(document).ready(function () {
           <label class="block text-sm mb-1">Instagram Link</label>
           <input name="dog_ig_link" value="${dog.dog_ig_link}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
         </div>
+
+        <div>
+          <label class="block text-sm mb-1">Registration Date</label>
+          <input name="dog_date_registration" value="${dog.dog_date_registration}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+        </div>
+
+
+        
+        <div>
+          <label class="block text-sm mb-1">Dog Gender</label>
+          <select name="dog_gender" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white">
+            <option value="male" ${dog.dog_gender === 'male' ? 'selected' : ''}>Male</option>
+            <option value="female" ${dog.dog_gender === 'female' ? 'selected' : ''}>Female</option>
+          </select>
+        </div>
+
+        
+
         <div>
           <label class="block text-sm mb-1">Dog Type</label>
           <select name="dog_type_status" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white">

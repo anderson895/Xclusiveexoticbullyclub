@@ -4,7 +4,7 @@
 
   <!-- Footer -->
   <footer class="bg-[#0D0D0D] text-center py-6 border-t border-[#222]">
-    <p class="text-[#999999] text-sm">© 2020. All Rights Reserved.</p>
+    <p class="text-[#999999] text-sm">XCLUSIVE EXOTIC BULLY CLUB est. MMXX</p>
   </footer>
 
 

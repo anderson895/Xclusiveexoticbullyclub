@@ -74,7 +74,7 @@ class global_class extends db_connect
     public function DogRegister(
     $dog_name, $owner_name, $breeder_name, $country, $color,
     $height, $dob, $contact_number, $facebook_name, $ig_name,
-    $dog_image, $type, $facebook_link, $ig_link, $dog_banner
+    $dog_image, $type, $facebook_link, $ig_link, $dog_banner,$gender,$registration
 ) {
     $dog_code = $this->generateDogCode();
 
@@ -82,8 +82,8 @@ class global_class extends db_connect
         dog_code, dog_name, dog_owner_name, dog_breeder_name, dog_image, dog_country,
         dog_color, dog_height, dog_date_of_birth, dog_contact_number,
         dog_facebook_name, dog_ig_name, dog_type_status, dog_registered_status,
-        dog_facebook_link, dog_ig_link, dog_banner
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?)";
+        dog_facebook_link, dog_ig_link, dog_banner,dog_gender,dog_date_registration
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, ?, ?,?,?)";
 
     $stmt = $this->conn->prepare($query);
     if (!$stmt) {
@@ -91,7 +91,7 @@ class global_class extends db_connect
     }
 
     $stmt->bind_param(
-        "ssssssssssssssss",
+        "ssssssssssssssssss",
         $dog_code,
         $dog_name,
         $owner_name,
@@ -107,7 +107,9 @@ class global_class extends db_connect
         $type,
         $facebook_link,
         $ig_link,
-        $dog_banner
+        $dog_banner,
+        $gender,
+        $registration
     );
 
     $result = $stmt->execute();
@@ -165,7 +167,7 @@ class global_class extends db_connect
     $dog_id, $dog_name, $owner_name, $breeder_name, $country, $color,
     $height, $dob, $contact_number, $facebook_name, $ig_name,
     $uniqueFileName = null, $dog_type_status,
-    $facebook_link = null, $ig_link = null, $bannerImage = null
+    $facebook_link = null, $ig_link = null, $bannerImage = null,$gender,$date_registration
 ) {
     // Remove old dog_image if new one is uploaded
     if ($uniqueFileName) {
@@ -217,7 +219,9 @@ class global_class extends db_connect
         "dog_ig_name = ?",
         "dog_type_status = ?",
         "dog_facebook_link = ?",
-        "dog_ig_link = ?"
+        "dog_ig_link = ?",
+        "dog_date_registration = ?",
+        "dog_gender = ?"
     ];
     $params = [
         $dog_name,
@@ -232,9 +236,11 @@ class global_class extends db_connect
         $ig_name,
         $dog_type_status,
         $facebook_link,
-        $ig_link
+        $ig_link,
+        $date_registration,
+        $gender
     ];
-    $types = "sssssssssssss";
+    $types = "sssssssssssssss";
 
     if ($uniqueFileName) {
         $fields[] = "dog_image = ?";
@@ -507,6 +513,7 @@ public function fetch_dogs_generation($dog_id) {
             d.dog_name AS main_dog_name,
             d.dog_image AS main_dog_image,
             d.dog_banner AS main_dog_banner,
+            d.dog_gender AS dog_gender,
             d.dog_registered_status, 
             d.dog_code, 
             d.dog_owner_name, 
