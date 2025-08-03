@@ -62,106 +62,103 @@ $(document).ready(function () {
 
   $("#modalContent").html(`
     <form id="updateDogForm" enctype="multipart/form-data">
-      <input type="hidden" name="dog_id" value="${dog.dog_id}">
+  <input type="hidden" name="dog_id" value="${dog.dog_id ?? ''}">
 
-      <!-- Image Uploads Side by Side -->
-      <div class="flex gap-6 mb-6">
-        <!-- Profile Picture -->
-        <div class="flex flex-col items-center text-center">
-          <div class="text-xs mb-1 text-white">📷 Profile Picture</div>
-          <img src="../static/upload/${dog.dog_image}" class="w-24 h-24 rounded-full object-cover border-2 border-yellow-500 shadow" />
-          <input type="file" name="dog_image" accept="image/*" class="mt-2 text-sm text-gray-300" />
-        </div>
+  <!-- Image Uploads Side by Side -->
+  <div class="flex gap-6 mb-6">
+    <!-- Profile Picture -->
+    <div class="flex flex-col items-center text-center">
+      <div class="text-xs mb-1 text-white">📷 Profile Picture</div>
+      <img src="../static/upload/${dog.dog_image ?? ''}" class="w-24 h-24 rounded-full object-cover border-2 border-yellow-500 shadow" />
+      <input type="file" name="dog_image" accept="image/*" class="mt-2 text-sm text-gray-300" />
+    </div>
 
-        <!-- Banner Image -->
-        <div class="flex flex-col items-center text-center">
-          <div class="text-xs mb-1 text-white">🖼️ Banner Image</div>
-          <img src="../static/upload/${dog.dog_banner}" class="w-40 h-24 object-cover rounded border border-gray-600 shadow" />
-          <input type="file" name="dog_banner" accept="image/*" class="mt-2 text-sm text-gray-300" />
-        </div>
-      </div>
+    <!-- Banner Image -->
+    <div class="flex flex-col items-center text-center">
+      <div class="text-xs mb-1 text-white">🖼️ Banner Image</div>
+      <img src="../static/upload/${dog.dog_banner ?? ''}" class="w-40 h-24 object-cover rounded border border-gray-600 shadow" />
+      <input type="file" name="dog_banner" accept="image/*" class="mt-2 text-sm text-gray-300" />
+    </div>
+  </div>
 
-      <!-- Form Fields -->
-      <div class="grid grid-cols-2 gap-4">
-        <div>
-          <label class="block text-sm mb-1">Name</label>
-          <input name="dog_name" value="${dog.dog_name}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
-        <div>
-          <label class="block text-sm mb-1">Owner</label>
-          <input name="dog_owner_name" value="${dog.dog_owner_name}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
-        <div>
-          <label class="block text-sm mb-1">Breeder</label>
-          <input name="dog_breeder_name" value="${dog.dog_breeder_name}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
-        <div>
-          <label class="block text-sm mb-1">Country</label>
-          <input name="dog_country" value="${dog.dog_country}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
-        <div>
-          <label class="block text-sm mb-1">Color</label>
-          <input name="dog_color" value="${dog.dog_color}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
-        <div>
-          <label class="block text-sm mb-1">Height</label>
-          <input name="dog_height" value="${dog.dog_height}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
-        <div>
-          <label class="block text-sm mb-1">Date of Birth</label>
-          <input type="date" name="dog_date_of_birth" value="${dog.dog_date_of_birth}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
-        <div>
-          <label class="block text-sm mb-1">Contact Number</label>
-          <input name="dog_contact_number" value="${dog.dog_contact_number}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
-        <div>
-          <label class="block text-sm mb-1">Facebook Name</label>
-          <input name="dog_facebook_name" value="${dog.dog_facebook_name}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
-        <div>
-          <label class="block text-sm mb-1">Instagram Name</label>
-          <input name="dog_ig_name" value="${dog.dog_ig_name}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
-        <div>
-          <label class="block text-sm mb-1">Facebook Link</label>
-          <input name="dog_facebook_link" value="${dog.dog_facebook_link}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
-        <div>
-          <label class="block text-sm mb-1">Instagram Link</label>
-          <input name="dog_ig_link" value="${dog.dog_ig_link}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
+  <!-- Form Fields -->
+  <div class="grid grid-cols-2 gap-4">
+    <div>
+      <label class="block text-sm mb-1">Name</label>
+      <input name="dog_name" value="${dog.dog_name ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
+    <div>
+      <label class="block text-sm mb-1">Owner</label>
+      <input name="dog_owner_name" value="${dog.dog_owner_name ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
+    <div>
+      <label class="block text-sm mb-1">Breeder</label>
+      <input name="dog_breeder_name" value="${dog.dog_breeder_name ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
+    <div>
+      <label class="block text-sm mb-1">Country</label>
+      <input name="dog_country" value="${dog.dog_country ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
+    <div>
+      <label class="block text-sm mb-1">Color</label>
+      <input name="dog_color" value="${dog.dog_color ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
+    <div>
+      <label class="block text-sm mb-1">Height</label>
+      <input name="dog_height" value="${dog.dog_height ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
+    <div>
+      <label class="block text-sm mb-1">Date of Birth</label>
+      <input type="date" name="dog_date_of_birth" value="${dog.dog_date_of_birth ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
+    <div>
+      <label class="block text-sm mb-1">Contact Number</label>
+      <input name="dog_contact_number" value="${dog.dog_contact_number ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
+    <div>
+      <label class="block text-sm mb-1">Facebook Name</label>
+      <input name="dog_facebook_name" value="${dog.dog_facebook_name ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
+    <div>
+      <label class="block text-sm mb-1">Instagram Name</label>
+      <input name="dog_ig_name" value="${dog.dog_ig_name ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
+    <div>
+      <label class="block text-sm mb-1">Facebook Link</label>
+      <input name="dog_facebook_link" value="${dog.dog_facebook_link ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
+    <div>
+      <label class="block text-sm mb-1">Instagram Link</label>
+      <input name="dog_ig_link" value="${dog.dog_ig_link ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
 
-        <div>
-          <label class="block text-sm mb-1">Registration Date</label>
-          <input name="dog_date_registration" value="${dog.dog_date_registration}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
-        </div>
+    <div>
+      <label class="block text-sm mb-1">Registration Date</label>
+      <input name="dog_date_registration" value="${dog.dog_date_registration ?? ''}" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white"/>
+    </div>
 
+    <div>
+      <label class="block text-sm mb-1">Dog Gender</label>
+      <select name="dog_gender" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white">
+        <option value="male" ${dog.dog_gender === 'male' ? 'selected' : ''}>Male</option>
+        <option value="female" ${dog.dog_gender === 'female' ? 'selected' : ''}>Female</option>
+      </select>
+    </div>
 
-        
-        <div>
-          <label class="block text-sm mb-1">Dog Gender</label>
-          <select name="dog_gender" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white">
-            <option value="male" ${dog.dog_gender === 'male' ? 'selected' : ''}>Male</option>
-            <option value="female" ${dog.dog_gender === 'female' ? 'selected' : ''}>Female</option>
-          </select>
-        </div>
+    <div>
+      <label class="block text-sm mb-1">Dog Type</label>
+      <select name="dog_type_status" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white">
+        <option value="regular" ${dog.dog_type_status === 'regular' ? 'selected' : ''}>Regular</option>
+        <option value="exclusive" ${dog.dog_type_status === 'exclusive' ? 'selected' : ''}>Exclusive</option>
+      </select>
+    </div>
+  </div>
 
-        
+  <div class="mt-6 text-right">
+    <button type="submit" class="bg-[#FFD700] text-black px-4 py-2 rounded hover:bg-yellow-500 font-semibold">Update</button>
+  </div>
+</form>
 
-        <div>
-          <label class="block text-sm mb-1">Dog Type</label>
-          <select name="dog_type_status" class="w-full px-3 py-2 rounded bg-[#0D0D0D] border border-gray-600 text-white">
-            <option value="regular" ${dog.dog_type_status === 'regular' ? 'selected' : ''}>Regular</option>
-            <option value="exclusive" ${dog.dog_type_status === 'exclusive' ? 'selected' : ''}>Exclusive</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="mt-6 text-right">
-        <button type="submit" class="bg-[#FFD700] text-black px-4 py-2 rounded hover:bg-yellow-500 font-semibold">Update</button>
-      </div>
-    </form>
   `);
 
   $("#dogModal").removeClass("hidden").addClass("flex");
