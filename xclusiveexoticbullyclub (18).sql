@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2025 at 06:52 AM
+-- Generation Time: Aug 03, 2025 at 09:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -87,6 +87,22 @@ INSERT INTO `dogs` (`dog_id`, `dog_code`, `dog_name`, `dog_date_registration`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `event_id` int(11) NOT NULL,
+  `event_name` varchar(60) NOT NULL,
+  `event_description` text DEFAULT NULL,
+  `event_banner` varchar(255) DEFAULT NULL,
+  `event_date` date NOT NULL,
+  `event_time` time NOT NULL,
+  `event_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `generation`
 --
 
@@ -130,6 +146,13 @@ CREATE TABLE `pageant` (
   `pag_date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `pageant`
+--
+
+INSERT INTO `pageant` (`pag_id`, `pag_name`, `pag_description`, `pag_date_added`) VALUES
+(6, 'dog show 2025', '', '2025-08-03 05:13:38');
+
 -- --------------------------------------------------------
 
 --
@@ -140,8 +163,22 @@ CREATE TABLE `pageant_category` (
   `pc_id` int(11) NOT NULL,
   `pc_pageant_id` int(11) NOT NULL,
   `pc_category_name` text NOT NULL,
-  `pc_contestant` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'list all the id of contestant here in array format'
+  `pc_contestant` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT 'list all the id of contestant here in array format',
+  `pc_status` int(11) NOT NULL DEFAULT 1 COMMENT '0=deleted,1=active',
+  `pc_date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pageant_category`
+--
+
+INSERT INTO `pageant_category` (`pc_id`, `pc_pageant_id`, `pc_category_name`, `pc_contestant`, `pc_status`, `pc_date_added`) VALUES
+(22, 6, 'Best in Color Category', '[{\"id\":\"49\",\"points\":\"5\"}]', 1, '2025-08-03 07:15:23'),
+(23, 6, 'best in costume', '[{\"id\":\"49\",\"points\":\"50\"},{\"id\":\"41\",\"points\":\"0\"}]', 1, '2025-08-03 07:15:23'),
+(24, 6, 'test', '[{\"id\":\"49\",\"points\":\"0\"}]', 0, '2025-08-03 07:18:15'),
+(25, 6, 'awdaw', '[{\"id\":\"41\",\"points\":\"0\"},{\"id\":\"49\",\"points\":\"0\"}]', 0, '2025-08-03 07:19:48'),
+(26, 6, 'dawdaw', '[{\"id\":\"41\",\"points\":\"0\"},{\"id\":\"49\",\"points\":\"0\"}]', 1, '2025-08-03 07:15:23'),
+(27, 6, 'joshua padilla', '[{\"id\":\"49\",\"points\":\"0\"}]', 1, '2025-08-03 07:20:04');
 
 --
 -- Indexes for dumped tables
@@ -158,6 +195,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `dogs`
   ADD PRIMARY KEY (`dog_id`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`event_id`);
 
 --
 -- Indexes for table `generation`
@@ -209,6 +252,12 @@ ALTER TABLE `dogs`
   MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `generation`
 --
 ALTER TABLE `generation`
@@ -218,13 +267,13 @@ ALTER TABLE `generation`
 -- AUTO_INCREMENT for table `pageant`
 --
 ALTER TABLE `pageant`
-  MODIFY `pag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `pag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pageant_category`
 --
 ALTER TABLE `pageant_category`
-  MODIFY `pc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `pc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- Constraints for dumped tables
