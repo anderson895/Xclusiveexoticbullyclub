@@ -78,6 +78,7 @@ include "../src/components/admin/nav.php";
 
 
 <!-- Modal -->
+
 <div id="addEventModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm" style="display:none;">
   <div class="bg-[#1A1A1A]/90 backdrop-blur-md rounded-lg shadow-xl w-full max-w-xl mx-auto p-6 text-[#CCCCCC] relative">
     <button id="closeAddPageantModal" class="absolute top-2 right-2 text-white hover:text-red-500 text-xl">&times;</button>
@@ -126,6 +127,62 @@ include "../src/components/admin/nav.php";
   </div>
 </div>
 
+
+
+
+
+
+
+
+<div id="eventDetailsModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm" style="display:none;">
+  <div class="bg-[#1A1A1A]/90 backdrop-blur-md rounded-lg shadow-xl w-full max-w-xl mx-auto p-6 text-[#CCCCCC] relative">
+    <button id="closeEventDetailsModal" class="absolute top-2 right-2 text-white hover:text-red-500 text-xl">&times;</button>
+
+    <div id="modalContent" class="space-y-4">
+      <h3 class="text-lg font-bold text-[#FFD700]">EVENT DETAILS</h3>
+      <form id="frmUpdateEvent" class="space-y-4">
+
+
+        <input type="hidden" id="eventId" name="eventId">
+        <!-- Event Name -->
+        <div>
+          <label for="eventName_update" class="block text-sm font-medium text-[#FFD700]">Event Name</label>
+          <input type="text" id="eventName_update" name="event_name" class="mt-1 w-full px-3 py-2 bg-[#0D0D0D] border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label for="eventDescription_update" class="block text-sm font-medium text-[#FFD700]">Description</label>
+          <textarea id="eventDescription_update" name="description" rows="3" class="mt-1 w-full px-3 py-2 bg-[#0D0D0D] border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFD700]"></textarea>
+        </div>
+
+        <!-- Upload Banner -->
+        <div>
+          <label for="eventBanner_update" class="block text-sm font-medium text-[#FFD700]">Upload Banner</label>
+          <input type="file" id="eventBanner_update" name="banner" accept="image/*" class="mt-1 block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-[#FFD700] file:text-black hover:file:bg-yellow-400">
+        </div>
+
+        <!-- Event Date -->
+        <div>
+          <label for="eventDate_update" class="block text-sm font-medium text-[#FFD700]">Event Date</label>
+          <input type="date" id="eventDate_update" name="event_date" class="mt-1 w-full px-3 py-2 bg-[#0D0D0D] border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
+        </div>
+
+        <!-- Event Time -->
+        <div>
+          <label for="eventTime_update" class="block text-sm font-medium text-[#FFD700]">Event Time</label>
+          <input type="time" id="eventTime_update" name="event_time" class="mt-1 w-full px-3 py-2 bg-[#0D0D0D] border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-[#FFD700]">
+        </div>
+
+        <!-- Submit Button -->
+        <div class="text-right">
+          <button type="submit" class="bg-[#FFD700] text-black font-semibold px-4 py-2 rounded hover:bg-yellow-400 transition">UPDATE</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
 
 
 <?php include "../src/components/admin/footer.php"; ?>

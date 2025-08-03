@@ -11,6 +11,43 @@
 
 
 
+
+
+
+
+
+
+
+$(document).on("click", ".viewDetailsBtn", function () {
+  const event_id = $(this).data("event_id");
+  const event_name = $(this).data("event_name");
+  const event_description = $(this).data("event_description");
+  const event_date = $(this).data("event_date");
+  const event_time = $(this).data("event_time");
+
+  console.log(event_name);
+
+  $("#eventId").val(event_id);
+  $("#eventName_update").val(event_name);
+  $("#eventDescription_update").val(event_description);
+  $("#eventDate_update").val(event_date);
+  $("#eventTime_update").val(event_time);
+
+ $('#eventDetailsModal').fadeIn();
+
+});
+
+// Close modal
+$(document).on("click", "#closeEventDetailsModal", function () {
+  $('#eventDetailsModal').fadeOut();
+});
+
+
+
+
+
+
+
 // ALL REQUEST
     $(document).on('click', '.removeBtn', function(e) {
         e.preventDefault();
@@ -61,6 +98,48 @@
             }
         });
     });
+
+
+
+
+
+
+$(document).on("submit", "#frmUpdateEvent", function (e) {
+  e.preventDefault();
+
+  const form = this;
+  const formData = new FormData(form);
+  formData.append("requestType", "UpdateEvent");
+
+  $.ajax({
+    url: "../controller/admin/end-points/controller.php",
+    method: "POST",
+    data: formData,
+    processData: false,
+    contentType: false,
+    dataType: "json",
+    success: function (response) {
+      if (response.status === 200) {
+        Swal.fire('Success!', response.message || 'Event info updated.', 'success').then(() => {
+            location.reload();
+        });
+      } else {
+        alertify.error(response.message || "Error updating dog info.");
+      }
+    },
+    error: function (xhr, status, error) {
+      console.error("Update error:", error);
+      alertify.error("Failed to update dog info. Please try again.");
+    }
+  });
+});
+
+
+
+
+
+
+
 
 
 
@@ -167,7 +246,13 @@
 
                             <td class="p-3 text-center">
                                 <button class="viewDetailsBtn bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
-                                data-event_id='${event.event_id}'>Details</button>
+                                data-event_id='${event.event_id}'
+                                data-event_name='${event.event_name}'
+                                data-event_description='${event.event_description}'
+                                data-event_date='${event.event_date}'
+                                data-event_time='${event.event_time}'
+                                
+                                >Details</button>
                                 <button class="removeBtn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition"
                                 data-event_id='${event.event_id}'
                                 data-event_name='${event.event_name}'>Remove</button>
@@ -200,6 +285,46 @@
   });
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

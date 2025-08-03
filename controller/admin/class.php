@@ -174,6 +174,8 @@ class global_class extends db_connect
 
 
 
+    
+
 
 
 public function UpdateDog(
@@ -973,6 +975,96 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
 
             return $inserted_id; 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public function UpdateEvent(
+    $eventId,
+    $eventName_update,
+    $eventDescription_update,
+    $eventDate_update,
+    $eventTime_update,
+    $bannerImage = null // assuming bannerImage is the new file name if uploaded
+) {
+    foreach ([
+        'event_name' => &$eventName_update,
+        'event_description' => &$eventDescription_update,
+        'event_date' => &$eventDate_update,
+        'event_time' => &$eventTime_update
+    ] as &$value) {
+        if (is_string($value) && trim($value) === '') {
+            $value = null;
+        }
+    }
+
+    // Remove old banner image if a new one is uploaded
+    if ($bannerImage) {
+        $selectQuery = "SELECT event_banner FROM events WHERE event_id = ?";
+        $selectStmt = $this->conn->prepare($selectQuery);
+        $selectStmt->bind_param("s", $eventId);
+        $selectStmt->execute();
+        $selectStmt->bind_result($oldBanner);
+        $selectStmt->fetch();
+        $selectStmt->close();
+
+        if (!empty($oldBanner)) {
+            $oldBannerPath = "../../../static/upload/" . $oldBanner;
+            if (file_exists($oldBannerPath)) {
+                unlink($oldBannerPath);
+            }
+        }
+    }
+
+    // Build the update query
+    $fields = [
+        "event_name = ?",
+        "event_description = ?",
+        "event_date = ?",
+        "event_time = ?"
+    ];
+    $params = [
+        $eventName_update,
+        $eventDescription_update,
+        $eventDate_update,
+        $eventTime_update
+    ];
+    $types = str_repeat("s", count($params));
+
+    if ($bannerImage) {
+        $fields[] = "event_banner = ?";
+        $params[] = $bannerImage;
+        $types .= "s";
+    }
+
+    $params[] = $eventId;
+    $types .= "s";
+
+    $query = "UPDATE events SET " . implode(", ", $fields) . " WHERE event_id = ?";
+    $stmt = $this->conn->prepare($query);
+
+    if (!$stmt) {
+        return ['status' => false, 'message' => 'Prepare failed: ' . $this->conn->error];
+    }
+
+    $stmt->bind_param($types, ...$params);
+    $stmt->execute();
+    $stmt->close();
+
+    return ['status' => true, 'message' => 'Event updated successfully.'];
+}
+
 
 
 

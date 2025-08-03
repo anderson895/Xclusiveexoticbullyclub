@@ -188,6 +188,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             exit;
 
+        }else if ($_POST['requestType'] == 'UpdateEvent') {
+
+           $eventId = $_POST['eventId'];
+            $eventName_update = $_POST['event_name'];
+            $eventDescription_update = $_POST['description'];
+            $eventDate_update = $_POST['event_date'];
+            $eventTime_update = $_POST['event_time'];
+
+            // Handle Banner Image Upload
+            $uniqueBannerFileName = null;
+            if (isset($_FILES['banner']) && $_FILES['banner']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = '../../../static/upload/';
+                $fileExtension = pathinfo($_FILES['banner']['name'], PATHINFO_EXTENSION);
+                $uniqueBannerFileName = uniqid('event_banner_', true) . '.' . $fileExtension;
+
+                move_uploaded_file($_FILES['banner']['tmp_name'], $uploadDir . $uniqueBannerFileName);
+            }
+
+            // Update
+            $result = $db->UpdateEvent(
+                $eventId,
+                $eventName_update,
+                $eventDescription_update,
+                $eventDate_update,
+                $eventTime_update,
+                $uniqueBannerFileName // pass banner image if uploaded
+            );
+
+            if ($result['status']) {
+                echo json_encode([
+                    'status' => 200,
+                    'message' => $result['message']
+                ]);
+            } else {
+                echo json_encode([
+                    'status' => 500,
+                    'message' => $result['message']
+                ]);
+            }
+
+            exit;
+
+
         }else if ($_POST['requestType'] == 'updateGenForm') {
 
             $dogRole=$_POST['dogRole'];
