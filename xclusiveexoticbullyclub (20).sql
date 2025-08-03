@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2025 at 04:35 PM
+-- Generation Time: Aug 03, 2025 at 04:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -100,6 +100,14 @@ CREATE TABLE `events` (
   `event_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `events`
+--
+
+INSERT INTO `events` (`event_id`, `event_name`, `event_description`, `event_banner`, `event_date`, `event_time`, `event_added`) VALUES
+(12, 'fsefse', 'wadawd', 'event_banner_688f73ef4a3d64.30870328.webp', '2000-12-23', '11:11:00', '2025-08-03 14:36:31'),
+(13, 'rdgdr', 'gyjgyj', 'event_banner_688f78f7911797.43980038.jpg', '0244-12-23', '14:43:00', '2025-08-03 14:57:59');
+
 -- --------------------------------------------------------
 
 --
@@ -143,15 +151,17 @@ CREATE TABLE `pageant` (
   `pag_id` int(11) NOT NULL,
   `pag_name` text NOT NULL,
   `pag_description` text DEFAULT NULL,
-  `pag_date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `pag_date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `pad_status` int(11) NOT NULL DEFAULT 1 COMMENT '0=deleted,1=active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `pageant`
 --
 
-INSERT INTO `pageant` (`pag_id`, `pag_name`, `pag_description`, `pag_date_added`) VALUES
-(6, 'dog show 2025', '', '2025-08-03 05:13:38');
+INSERT INTO `pageant` (`pag_id`, `pag_name`, `pag_description`, `pag_date_added`, `pad_status`) VALUES
+(6, 'dog show 2025', '', '2025-08-03 14:57:01', 0),
+(7, 'joshua padilla', 'awdawd', '2025-08-03 14:57:39', 1);
 
 -- --------------------------------------------------------
 
@@ -255,7 +265,7 @@ ALTER TABLE `dogs`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `generation`
@@ -267,7 +277,7 @@ ALTER TABLE `generation`
 -- AUTO_INCREMENT for table `pageant`
 --
 ALTER TABLE `pageant`
-  MODIFY `pag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `pag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `pageant_category`
