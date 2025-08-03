@@ -75,33 +75,48 @@ $('#frmCreatePageant').on('submit', function(e) {
 
 
 
-    $.ajax({
-        url: "../controller/admin/end-points/controller.php",
-        method: "GET",
-        data: { requestType: "fetch_all_pageant" },
-        dataType: "json",
-        success: function (res) {
-            if (res.status === 200) {
-            let count = 1; // ✅ Initialize the count
+   $.ajax({
+    url: "../controller/admin/end-points/controller.php",
+    method: "GET",
+    data: { requestType: "fetch_all_pageant" },
+    dataType: "json",
+    success: function (res) {
+        if (res.status === 200) {
+            let count = 1;
 
-            res.data.forEach(pageant => {
+            // Clear previous content (optional)
+            $('#pageantTableBody').empty();
+
+            // Check if there is data
+            if (res.data.length > 0) {
+                res.data.forEach(pageant => {
+                    $('#pageantTableBody').append(`
+                        <tr class="hover:bg-[#2B2B2B] transition-colors">
+                            <td class="p-3 text-center font-mono">${count++}</td>
+                            <td class="p-3 text-center font-mono">${pageant.pag_name}</td>
+                            <td class="p-3 text-center font-semibold">${pageant.pag_description}</td>
+                            <td class="p-3 text-center">
+                                <a href="tabulation?pag_id=${pageant.pag_id}" 
+                                   class="inline-block bg-[#FFD700] hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition">
+                                    Tabulation
+                                </a>
+                            </td>
+                        </tr>
+                    `);
+                });
+            } else {
                 $('#pageantTableBody').append(`
-                <tr class="hover:bg-[#2B2B2B] transition-colors">
-                    <td class="p-3 text-center font-mono">${count++}</td>
-                    <td class="p-3 text-center font-mono">${pageant.pag_name}</td>
-                    <td class="p-3 text-center font-semibold">${pageant.pag_description}</td>
-                    <td class="p-3 text-center">
-                    <a href="tabulation?pag_id=${pageant.pag_id}" 
-                        class="inline-block bg-[#FFD700] hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition">
-                        Tabulation
-                    </a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td colspan="4" class="p-4 text-center text-gray-400 italic">
+                            No record found
+                        </td>
+                    </tr>
                 `);
-            });
             }
         }
-        });
+    }
+});
+
 
 
   // Search filter

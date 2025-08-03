@@ -1,12 +1,15 @@
 $(document).ready(function () {
   // Fetch dog data
-  $.ajax({
-    url: "../controller/admin/end-points/controller.php",
-    method: "GET",
-    data: { requestType: "fetch_all_registered_dogs" },
-    dataType: "json",
-    success: function (res) {
-      if (res.status === 200) {
+ $.ajax({
+  url: "../controller/admin/end-points/controller.php",
+  method: "GET",
+  data: { requestType: "fetch_all_registered_dogs" },
+  dataType: "json",
+  success: function (res) {
+    if (res.status === 200) {
+      $('#dogTableBody').empty(); // Optional: clear existing content
+
+      if (res.data.length > 0) {
         res.data.forEach(dog => {
           $('#dogTableBody').append(`
             <tr class="hover:bg-[#2B2B2B] transition-colors">
@@ -28,34 +31,32 @@ $(document).ready(function () {
                     ? `<span class="material-icons text-red-400 text-sm">female</span> Female`
                     : 'N/A'}
               </td>
-
-
               <td class="p-3 text-center">
-               <!-- Details Button (Yellow) -->
                 <button class="viewDetailsBtn bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
                   data-dog='${JSON.stringify(dog)}'>Details</button>
-
-                <!-- Generation Link (Gray) -->
                 <a href="generation?dog_id=${dog.dog_id}" 
                   class="inline-block bg-yellow-400 hover:bg-gray-400 text-black px-3 py-1 rounded text-xs font-semibold transition">
                   Generation
                 </a>
-
-                <!-- Remove Button (Red) -->
                 <button class="removeBtn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition"
                   data-dog='${JSON.stringify(dog)}'
                   data-dog_id='${dog.dog_id}'
-                  data-dog_name='${dog.dog_name}'
-                  >Remove</button>
-
-
+                  data-dog_name='${dog.dog_name}'>Remove</button>
               </td>
             </tr>
           `);
         });
+      } else {
+        $('#dogTableBody').append(`
+          <tr>
+            <td colspan="11" class="p-4 text-center text-gray-400 italic">No record found</td>
+          </tr>
+        `);
       }
     }
-  });
+  }
+});
+
 
  $(document).on("click", ".viewDetailsBtn", function () {
   const dog = $(this).data("dog");
