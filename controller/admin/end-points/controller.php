@@ -259,7 +259,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         'message' => 'No changes made or error updating data.'
                     ]);
             }
-
         }else if ($_POST['requestType'] == 'removeDog') {
 
             $dog_id=$_POST['dog_id'];
@@ -330,6 +329,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ]);
             }
 
+        }else if ($_POST['requestType'] == 'removePageant') {
+
+            $pag_id=$_POST['pag_id'];
+            $result = $db->removePageant($pag_id);
+            if ($result) {
+                    echo json_encode([
+                        'status' => 200,
+                        'message' => 'Remove successfully.'
+                    ]);
+            } else {
+                    echo json_encode([
+                        'status' => 500,
+                        'message' => 'No changes made or error updating data.'
+                    ]);
+            }
         }else if ($_POST['requestType'] == 'AddEvent') {
 
                 $event_name      = $_POST['event_name'];

@@ -397,7 +397,7 @@ public function UpdateDog(
 
 
 public function fetch_all_pageant() {
-    $query = $this->conn->prepare("SELECT * FROM pageant ORDER BY pag_id DESC");
+    $query = $this->conn->prepare("SELECT * FROM pageant where pad_status='1' ORDER BY pag_id DESC");
 
     if ($query->execute()) {
         $result = $query->get_result();
@@ -902,6 +902,21 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
 
         return $result ? 'success' : 'Error deleting event';
     }
+
+
+
+     public function removePageant($pag_id) {
+            $query = "UPDATE `pageant` 
+                    SET `pad_status` = 0
+                    WHERE `pag_id` = $pag_id";
+
+                // Execute the query
+                if ($this->conn->query($query)) {
+                    return 'success';
+                } else {
+                    return 'Error: ' . $this->conn->error;
+                }
+        }
 
 
 

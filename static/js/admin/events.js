@@ -12,8 +12,6 @@
 
 
 // ALL REQUEST
-
-
     $(document).on('click', '.removeBtn', function(e) {
         e.preventDefault();
         var event_id = $(this).data('event_id');

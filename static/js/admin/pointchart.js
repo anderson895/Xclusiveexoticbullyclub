@@ -13,7 +13,58 @@
 
 
 
+// ALL REQUEST
 
+
+$(document).on('click', '.removeBtn', function(e) {
+        e.preventDefault();
+        var pag_id = $(this).data('pag_id');
+        var pag_name = $(this).data('pag_name');
+        console.log(pag_id);
+    
+        Swal.fire({
+            title: `Are you sure to Remove <span style="color:red;">${pag_name}</span> ?`,
+            text: 'You won\'t be able to revert this!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, remove it!',
+            cancelButtonText: 'No, cancel!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "../controller/admin/end-points/controller.php",
+                    type: 'POST',
+                    data: { pag_id: pag_id, requestType: 'removePageant' },
+                    dataType: 'json', 
+                    success: function(response) {
+                      console.log(response);
+                        if (response.status === 200) {
+                            Swal.fire(
+                                'Removed!',
+                                response.message, 
+                                'success'
+                            ).then(() => {
+                                location.reload(); 
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                response.message, 
+                                'error'
+                            );
+                        }
+                    },
+                    error: function() {
+                        Swal.fire(
+                            'Error!',
+                            'There was a problem with the request.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    });
 
 
     
@@ -100,6 +151,9 @@ $('#frmCreatePageant').on('submit', function(e) {
                                    class="inline-block bg-[#FFD700] hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition">
                                     Tabulation
                                 </a>
+                                  <button class="removeBtn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition"
+                                data-pag_id='${pageant.pag_id}'
+                                data-pag_name='${pageant.pag_name}'>Remove</button>
                             </td>
                         </tr>
                     `);
