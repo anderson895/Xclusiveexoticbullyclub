@@ -19,7 +19,7 @@ include "../src/components/admin/nav.php";
 
 
 <!-- Table Card -->
-<div class="bg-[#1A1A1A] rounded-lg shadow-lg p-6 text-[#CCCCCC]">
+<div class="bg-[#0D0D0D] rounded-lg shadow-lg p-6 text-[#CCCCCC]">
 
   <!-- Search Input -->
  <div class="mb-4 flex justify-between items-center">
@@ -36,7 +36,12 @@ include "../src/components/admin/nav.php";
 
 
 <!-- Container where the result will be shown -->
-<div id="outputBody" class="mt-6 rounded-lg p-6 text-[#CCCCCC]"></div>
+<div 
+  id="outputBody" 
+  class="mt-6 p-4 sm:p-6 rounded-lg text-[#CCCCCC] bg-[#0D0D0D] w-full overflow-x-auto"
+>
+</div>
+
 
 
 <!-- Modal -->

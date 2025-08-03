@@ -536,6 +536,9 @@
   .min-w-\[76px\] {
     min-width: 76px;
   }
+  .min-w-full {
+    min-width: 100%;
+  }
   .flex-1 {
     flex: 1;
   }
@@ -1812,6 +1815,11 @@
   .sm\:justify-end {
     @media (width >= 40rem) {
       justify-content: flex-end;
+    }
+  }
+  .sm\:p-6 {
+    @media (width >= 40rem) {
+      padding: calc(var(--spacing) * 6);
     }
   }
   .sm\:px-4 {

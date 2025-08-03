@@ -227,52 +227,58 @@ $.ajax({
         const contestants = categoryData.contestants;
 
         let resultHTML = `
-          <div class="bg-[#1A1A1A] rounded-lg p-4 shadow-md mb-6">
-            <h2 class="text-xl font-bold text-[#FFD700] mb-4">Category: ${categoryName}</h2>
-            <table class="w-full text-left border-collapse border border-[#444]">
-              <thead>
-                <tr class="bg-[#333] text-[#FFD700]">
-                  <th class="p-2 border border-[#444]">#</th>
-                  <th class="p-2 border border-[#444]">Dog Name</th>
-                  <th class="p-2 border border-[#444]">Points</th>
-                  <th class="p-2 border border-[#444]">XEBC No</th>
-                  <th class="p-2 border border-[#444]">Country</th>
-                </tr>
-              </thead>
-              <tbody>
-        `;
 
-        contestants.forEach((dog, index) => {
+        
 
+  <div class="bg-[#1A1A1A] rounded-lg p-4 shadow-md mb-6">
+    <h2 class="text-xl font-bold text-[#FFD700] mb-4">Category: ${categoryName}</h2>
+    
+    <div class="overflow-x-auto">
+      <table class="min-w-full text-left border-collapse border border-[#444]">
+        <thead>
+          <tr class="bg-[#333] text-[#FFD700]">
+            <th class="p-2 border border-[#444]">#</th>
+            <th class="p-2 border border-[#444]">Dog Name</th>
+            <th class="p-2 border border-[#444]">Points</th>
+            <th class="p-2 border border-[#444]">XEBC No</th>
+            <th class="p-2 border border-[#444]">Country</th>
+          </tr>
+        </thead>
+        <tbody>
+`;
 
-          resultHTML += `
-            <tr class="hover:bg-[#2a2a2a]">
-              <td class="p-2 border border-[#444]">${index + 1}</td>
-              <td class="p-2 border border-[#444] contestant-name">${dog.dog_name}</td>
-              <td class="p-2 border border-[#444] text-[#FFD700] font-bold ">${dog.points}</td>
-              <td class="p-2 border border-[#444] text-[#FFD700] font-bold ">${dog.dog_code}</td>
-              <td class="p-2 border border-[#444] text-[#FFD700] font-bold ">${dog.dog_country}</td>
-            </tr>
-          `;
-        });
-        resultHTML += `
-              </tbody>
-            </table>
-           <div class="flex flex-col sm:flex-row justify-end gap-2 mt-4">
-            <button 
-              class="updateContestant bg-green-500 hover:bg-green-600 text-black font-semibold px-4 py-2 rounded" 
-              data-pc_id="${categoryData.pc_id}">
-              Update Grades
-            </button>
-           <button 
-              class="removeShow bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded" 
-              data-pc_id="${categoryData.pc_id}" data-category_name="${categoryName}">
-              Remove Show
-            </button>
+contestants.forEach((dog, index) => {
+  resultHTML += `
+    <tr class="hover:bg-[#2a2a2a]">
+      <td class="p-2 border border-[#444]">${index + 1}</td>
+      <td class="p-2 border border-[#444] contestant-name">${dog.dog_name}</td>
+      <td class="p-2 border border-[#444] text-[#FFD700] font-bold ">${dog.points}</td>
+      <td class="p-2 border border-[#444] text-[#FFD700] font-bold ">${dog.dog_code}</td>
+      <td class="p-2 border border-[#444] text-[#FFD700] font-bold ">${dog.dog_country}</td>
+    </tr>
+  `;
+});
 
-          </div>
+resultHTML += `
+        </tbody>
+      </table>
+    </div>
 
-        `;
+    <div class="flex flex-col sm:flex-row justify-end gap-2 mt-4">
+      <button 
+        class="updateContestant bg-green-500 hover:bg-green-600 text-black font-semibold px-4 py-2 rounded w-full sm:w-auto" 
+        data-pc_id="${categoryData.pc_id}">
+        Update Grades
+      </button>
+      <button 
+        class="removeShow bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded w-full sm:w-auto" 
+        data-pc_id="${categoryData.pc_id}" data-category_name="${categoryName}">
+        Remove Show
+      </button>
+    </div>
+  </div>
+`;
+
 
         $('#outputBody').append(resultHTML);
       });
