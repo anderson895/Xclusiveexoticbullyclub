@@ -163,12 +163,35 @@ class global_class extends db_connect
 
 
 
-      public function UpdateDog(
+public function UpdateDog(
     $dog_id, $dog_name, $owner_name, $breeder_name, $country, $color,
     $height, $dob, $contact_number, $facebook_name, $ig_name,
     $uniqueFileName = null, $dog_type_status,
-    $facebook_link = null, $ig_link = null, $bannerImage = null,$gender,$date_registration
+    $facebook_link = null, $ig_link = null, $bannerImage = null, $gender, $date_registration
 ) {
+    // Convert empty strings to null (except image fields)
+    foreach ([
+        'dog_name' => &$dog_name,
+        'owner_name' => &$owner_name,
+        'breeder_name' => &$breeder_name,
+        'country' => &$country,
+        'color' => &$color,
+        'height' => &$height,
+        'dob' => &$dob,
+        'contact_number' => &$contact_number,
+        'facebook_name' => &$facebook_name,
+        'ig_name' => &$ig_name,
+        'dog_type_status' => &$dog_type_status,
+        'facebook_link' => &$facebook_link,
+        'ig_link' => &$ig_link,
+        'date_registration' => &$date_registration,
+        'gender' => &$gender
+    ] as &$value) {
+        if (is_string($value) && trim($value) === '') {
+            $value = null;
+        }
+    }
+
     // Remove old dog_image if new one is uploaded
     if ($uniqueFileName) {
         $selectQuery = "SELECT dog_image FROM dogs WHERE dog_id = ?";
@@ -240,7 +263,7 @@ class global_class extends db_connect
         $date_registration,
         $gender
     ];
-    $types = "sssssssssssssss";
+    $types = str_repeat("s", count($params));
 
     if ($uniqueFileName) {
         $fields[] = "dog_image = ?";
@@ -270,6 +293,7 @@ class global_class extends db_connect
 
     return true;
 }
+
 
 
 
