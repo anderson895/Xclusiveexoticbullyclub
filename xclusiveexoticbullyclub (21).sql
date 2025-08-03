@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2025 at 04:58 PM
+-- Generation Time: Aug 03, 2025 at 05:44 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -105,7 +105,6 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`event_id`, `event_name`, `event_description`, `event_banner`, `event_date`, `event_time`, `event_added`) VALUES
-(12, 'fsefse', 'wadawd', 'event_banner_688f73ef4a3d64.30870328.webp', '2000-12-23', '11:11:00', '2025-08-03 14:36:31'),
 (13, 'rdgdr', 'gyjgyj', 'event_banner_688f78f7911797.43980038.jpg', '0244-12-23', '14:43:00', '2025-08-03 14:57:59');
 
 -- --------------------------------------------------------
