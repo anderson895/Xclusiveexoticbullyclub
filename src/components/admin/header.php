@@ -16,10 +16,10 @@ if (isset($_SESSION['id'])) {
     if (!empty($On_Session)) {
 
     } else {
-       header('location: login');
+       header('location: ../admin/');
     }
 } else {
-   header('location: login');
+   header('location: ../admin/');
 }
 ?>
 
