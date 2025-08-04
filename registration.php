@@ -48,7 +48,7 @@
   </div>
 
   <p class="text-center mt-8 text-xs text-[#999999]">
-    Please send clear pictures for current registrations. Processing time: 3–4 weeks.
+    Processing time: 2–3 weeks.
   </p>
 </section>
 
