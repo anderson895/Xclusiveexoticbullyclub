@@ -11,9 +11,9 @@
   </p>
 </section>
 
-<!-- Services / Price List -->
+<!-- Service -->
 <section class="bg-[#1A1A1A] py-16 px-6">
-  <h2 class="text-3xl font-semibold text-center text-[#FFD700] uppercase">Services / Price List</h2>
+  <h2 class="text-3xl font-semibold text-center text-[#FFD700] uppercase">Services</h2>
   <p class="text-center text-base max-w-2xl mx-auto mt-3 text-[#CCCCCC] leading-relaxed">
     Please allow 3–4 weeks for processing. Click the icon, fill out the form, and then click the payment button below.
     Both parents must be BRC registered. We do not register dogs that have current paperwork with other registries.
@@ -27,9 +27,7 @@
       <p class="text-[#CCCCCC] mt-1">$35</p>
       <p class="text-sm mt-2 text-[#CCCCCC]">Click the icon, fill out the form, then go below to pay.</p>
       <p class="mt-3 text-xs text-[#AAAAAA] leading-relaxed">
-        American Bully • XL Bully • Exotic Bully • American Pitbull • Micro Bully • French Bulldog •
-        English Bulldog • Olde English • American Bulldog • Bull Terrier • Bullmastiff • Presa Canario •
-        Cane Corso • Fluffy Frenchie
+        Exotic Bully / French Bulldog
       </p>
     </div>
 
