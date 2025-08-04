@@ -65,7 +65,7 @@
         <div class="flex flex-col leading-tight">
           <h2 id="result_dog_name" class="text-xl font-bold text-yellow-300 uppercase tracking-wide flex items-center gap-1">
             TESLA 
-            <span class="dog_gender">♂</span>
+            <span class="dog_gender markAsRegistered">♂</span>
           </h2>
 
           <span class="text-sm text-gray-400 markAsRegistered">
