@@ -26,7 +26,7 @@
     <div class="text-center max-w-sm bg-[#2B2B2B] p-6 rounded-xl border border-[#333]">
       <img src="static/logo.jpg" alt="Single Dog" class="w-36 mx-auto mb-4">
       <h3 class="text-xl font-semibold text-[#FFD700] uppercase">Single Dog Registration</h3>
-      <p class="text-[#CCCCCC] mt-1">$25</p>
+      <p class="text-[#CCCCCC] mt-1">$35</p>
       <p class="text-sm mt-2 text-[#CCCCCC]">Click the icon, fill out the form, then go below to pay.</p>
       <p class="mt-3 text-xs text-[#AAAAAA] leading-relaxed">
         American Bully • XL Bully • Exotic Bully • American Pitbull • Micro Bully • French Bulldog •
