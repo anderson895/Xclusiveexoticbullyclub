@@ -58,13 +58,13 @@
   <div class="mt-8 flex flex-col md:flex-row justify-center gap-6">
     <!-- Single Dog Form -->
     <div class="bg-[#2B2B2B] p-4 rounded-xl border border-[#333]">
-      <p class="mb-2 font-medium text-[#CCCCCC]">XEBC SINGLE REGISTRATION – 2023 Update (PDF)</p>
+      <p class="mb-2 font-medium text-[#CCCCCC]">XEBC SINGLE REGISTRATION – 2025 Update (PDF)</p>
       <a href="#" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition">Download</a>
     </div>
 
     <!-- Show Entry Form -->
     <div class="bg-[#2B2B2B] p-4 rounded-xl border border-[#333]">
-      <p class="mb-2 font-medium text-[#CCCCCC]">Show Entry Form – 2023 Update (PDF)</p>
+      <p class="mb-2 font-medium text-[#CCCCCC]">Show Entry Form – 2025 Update (PDF)</p>
       <a href="#" class="bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition">Download</a>
     </div>
   </div>
@@ -73,7 +73,7 @@
 <!-- Global Registration -->
 <section class="bg-[#1A1A1A] py-16 px-6 text-center">
   <img src="static/logo.jpg" alt="BRC Global" class="w-40 mx-auto mb-6">
-  <h2 class="text-xl font-bold uppercase text-[#FFD700]">BRC Global Single Registration</h2>
+  <h2 class="text-xl font-bold uppercase text-[#FFD700]">XEBC Single Registration</h2>
   <p class="text-lg text-red-500 mt-2 font-semibold">$35.00</p>
   <a href="#" class="mt-4 inline-block bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition">Buy Now</a>
   <p class="text-sm max-w-md mx-auto mt-6 text-[#CCCCCC] leading-relaxed">
