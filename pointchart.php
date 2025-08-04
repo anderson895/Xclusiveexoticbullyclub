@@ -6,7 +6,7 @@
 <section class="bg-[#0D0D0D] text-[#CCCCCC] py-16 px-6">
   <div class="max-w-6xl mx-auto">
     
-    <h2 class="text-3xl text-[#FFD700] font-bold text-center uppercase mb-12">2025 BRC Global Breed Standings</h2>
+    <h2 class="text-3xl text-[#FFD700] font-bold text-center uppercase mb-12">XEBC Points chart</h2>
     <p class="text-center text-[#AAAAAA] text-sm italic mb-10">
       Breed points are calculated by how many dogs were beaten when winning Best of Breed.
     </p>
