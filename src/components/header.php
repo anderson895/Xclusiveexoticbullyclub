@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Xclusive Exotic Bully Clubsss</title>
+  <title>Xclusive Exotic Bully Clubs</title>
   <link rel="icon" type="image/x-icon" href="static/favicon.ico">
   <link href="./src/output.css" rel="stylesheet" />
 
@@ -43,7 +43,7 @@
       <a href="index" class="text-[#CCCCCC] hover:text-white">Home</a>
       <a href="registration" class="text-[#CCCCCC] hover:text-white">Registration</a>
       <a href="standard" class="text-[#CCCCCC] hover:text-white">Standard</a>
-      <a href="events" class="text-[#CCCCCC] hover:text-white">Events</a>
+      <!-- <a href="events" class="text-[#CCCCCC] hover:text-white">Events</a> -->
       <!-- <a href="gettable" class="text-[#CCCCCC] hover:text-white">Gettable</a>
       <a href="pointchart" class="text-[#CCCCCC] hover:text-white">Points Chart</a> -->
     </nav>
