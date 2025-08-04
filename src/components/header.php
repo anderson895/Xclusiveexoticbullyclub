@@ -53,7 +53,7 @@
   <nav id="mobileMenu" class="md:hidden px-6 pb-4 space-y-2 hidden bg-[#1A1A1A]">
     <a href="index" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Home</a>
     <a href="registration" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Registration</a>
-    <a href="standard" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Standard</a>
+    <a href="standard" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Standards</a>
     <!-- <a href="events" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Events</a> -->
     <!-- <a href="gettable" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Gettable</a>
     <a href="pointchart" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Points Chart</a> -->
