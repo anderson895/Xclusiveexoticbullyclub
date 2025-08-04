@@ -389,21 +389,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }else if ($_POST['requestType'] == 'AddEvent') {
 
-                $event_name      = $_POST['event_name'];
-                $description     = $_POST['description'];
-                $event_date      = $_POST['event_date'];
-                $event_time      = $_POST['event_time'];
-              
+                $event_name  = $_POST['event_name'];
+                $description = $_POST['description'];
+                $event_date  = $_POST['event_date'];
+                $event_time  = $_POST['event_time'];
 
                 // FILES
                 $banner = $_FILES['banner'];
 
                 $uploadDir = '../../../static/upload/';
-                $dogImageFileName = '';
-                $dogBannerFileName = '';
+                $dogBannerFileName = ''; // default to empty if no banner
 
-                if ($banner['error'] === UPLOAD_ERR_OK) {
-
+                // Check if a file was uploaded
+                if (isset($banner) && $banner['error'] === UPLOAD_ERR_OK) {
                     // Upload Banner Image
                     $bannerExtension = pathinfo($banner['name'], PATHINFO_EXTENSION);
                     $dogBannerFileName = uniqid('event_banner_', true) . '.' . $bannerExtension;
@@ -411,38 +409,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     $bannerUploaded = move_uploaded_file($banner['tmp_name'], $bannerPath);
 
-                    if ($bannerUploaded) {
-                        $result = $db->AddEvent(
-                            $event_name,
-                            $description,
-                            $event_date,
-                            $event_time,
-                            $dogBannerFileName
-                        );
-
-                        if ($result) {
-                            echo json_encode([
-                                'status' => 200,
-                                'message' => 'Posted Successfully.'
-                            ]);
-                        } else {
-                            echo json_encode([
-                                'status' => 500,
-                                'message' => 'Error saving data.'
-                            ]);
-                        }
-                    } else {
+                    if (!$bannerUploaded) {
                         echo json_encode([
                             'status' => 500,
-                            'message' => 'Error uploading one or both images.'
+                            'message' => 'Error uploading banner image.'
                         ]);
+                        exit;
                     }
-                } else {
+                } elseif ($banner['error'] !== UPLOAD_ERR_NO_FILE && $banner['error'] !== 0) {
                     echo json_encode([
                         'status' => 400,
-                        'message' => 'Missing or invalid image upload.'
+                        'message' => 'Invalid image upload.'
+                    ]);
+                    exit;
+                }
+
+                // Save to DB regardless if banner is uploaded or not
+                $result = $db->AddEvent(
+                    $event_name,
+                    $description,
+                    $event_date,
+                    $event_time,
+                    $dogBannerFileName // will be empty string if no image
+                );
+
+                if ($result) {
+                    echo json_encode([
+                        'status' => 200,
+                        'message' => 'Posted Successfully.'
+                    ]);
+                } else {
+                    echo json_encode([
+                        'status' => 500,
+                        'message' => 'Error saving data.'
                     ]);
                 }
+
 
         }else {
             echo '404';

@@ -158,11 +158,7 @@ $(document).on("submit", "#frmUpdateEvent", function (e) {
             return;
         }
 
-        var banner = $('#eventBanner').val();
-        if (!banner) {
-            alertify.error("Please upload an image banner.");
-            return;
-        }
+      
 
         var eventDate = $('#eventDate').val();
         if (!eventDate) {
@@ -238,11 +234,15 @@ $(document).on("submit", "#frmUpdateEvent", function (e) {
                             <td class="p-3 text-center font-semibold">${formattedTime}</td>
 
                             <!-- Banner Image Column -->
-                            <td class="p-3">
+                           <td class="p-3">
                                 <div class="flex justify-center items-center">
-                                    <img src="../static/upload/${event.event_banner}" alt="Banner" class="w-20 h-12 object-cover rounded" />
+                                    ${event.event_banner ? 
+                                        `<img src="../static/upload/${event.event_banner}" alt="Banner" class="w-20 h-12 object-cover rounded" />` 
+                                        : 
+                                        '<span class="text-white-500 p-3 text-center font-semibold">N/A</span>'}
                                 </div>
                             </td>
+
 
                             <td class="p-3 text-center">
                                 <button class="viewDetailsBtn bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
