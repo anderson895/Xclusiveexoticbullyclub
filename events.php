@@ -1,16 +1,14 @@
 <?php
     include "src/components/header.php";
 ?>
- 
+<!--  
 
 <section class="bg-[#0D0D0D] text-[#CCCCCC] py-16 px-6">
   <div class="max-w-6xl mx-auto">
 
-    <!-- Rules Section -->
     <h2 class="text-3xl text-[#FFD700] font-bold text-center uppercase mb-8">BRC Global Sanctioned Events</h2>
 
 
-    <!-- Registration Notice -->
     <div class="bg-[#2B2B2B] border border-[#333] rounded-xl p-6 mt-10 text-center">
       <p class="text-lg font-medium text-[#FFD700] mb-2">Your dog must be registered with BRC Global in order to compete.</p>
       <p class="text-[#CCCCCC] leading-relaxed">
@@ -20,9 +18,7 @@
       <p class="text-xs text-[#888888] mt-4 italic">BRC Global is not responsible for anything lost or stolen at an event.</p>
     </div>
 
-    <!-- Events List -->
     <div class="mt-14 space-y-10">
-      <!-- Event Block -->
       <div class="bg-[#1A1A1A] p-6 rounded-xl border border-[#333]">
         <p class="text-yellow-400 font-bold uppercase">07/12/2025</p>
         <h3 class="text-2xl text-white font-semibold mt-1">BRC Global Summer BullyFest 2025</h3>
@@ -70,8 +66,22 @@
     </div>
 
   </div>
-</section>
+</section> -->
 
-<?php
-    include "src/components/footer.php";
-?>
+
+
+
+
+
+
+  <div class="events_list max-w-6xl mx-auto py-10 px-6 space-y-10">
+
+   
+
+  </div>
+
+
+
+<?php include "src/components/footer.php";  ?>
+
+<script src="static/js/events.js"></script>
