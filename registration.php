@@ -7,9 +7,7 @@
 <section class="text-center py-16 px-6 bg-[#0D0D0D]">
   <h1 class="text-4xl font-bold text-[#FFD700] uppercase">Register Here Today!!</h1>
   <p class="mt-4 max-w-3xl mx-auto text-base text-[#CCCCCC] leading-relaxed">
-    To register, click below and fill out the form. Your name should match the dog's name from the certificate.
-    Please allow 3–4 weeks for processing. Make sure to include clear pictures, the registration form, and payment.
-    For litters, both parents must be BRC registered.
+    To register, click below and fill out the form. Please Allowe 2-3 weeks for processing..
   </p>
 </section>
 
