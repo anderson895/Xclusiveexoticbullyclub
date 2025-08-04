@@ -75,7 +75,7 @@
 
     <!-- Image and Introduction -->
     <div class="md:order-2 flex justify-center pb-6">
-  <img src="static/assets/bullies/exotic_bullies.webp" alt="Exotic Bully" class="w-full max-w-md rounded-lg shadow-lg" />
+  <img src="static/assets/bullies/whitey.jpg" alt="Exotic Bully" class="w-full max-w-md rounded-lg shadow-lg" />
 </div>
 
     <!-- Breed Overview -->
