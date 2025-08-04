@@ -68,7 +68,7 @@
             <span class="dog_gender">♂</span>
           </h2>
 
-          <span class="text-sm text-gray-400">
+          <span class="text-sm text-gray-400 markAsRegistered">
             XEBC NO. <span id="dog_code" class="text-white font-medium"></span>
           </span>
         </div>
