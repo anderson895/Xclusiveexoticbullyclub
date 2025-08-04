@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2025 at 02:36 AM
+-- Generation Time: Aug 04, 2025 at 02:42 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -106,7 +106,9 @@ CREATE TABLE `events` (
 
 INSERT INTO `events` (`event_id`, `event_name`, `event_description`, `event_banner`, `event_date`, `event_time`, `event_added`) VALUES
 (13, 'Carolina Bully Classic 7', 'Southeastern Agricultural Center 1027 US-74 ALT, Lumberton, NC, United States\n\nJudges: Lou Manipon, Jamie Villagomez, TBA, TBA American Bully French Bulldog English Bulldog', 'event_banner_688fff49846c12.37337442.jpg', '2025-10-04', '13:00:00', '2025-08-04 00:31:33'),
-(14, 'Crown of the City', 'Mystery Creek Pavilion Mystery Creek Rd, Hamilton, Waikato, New Zealand\r\n\r\nJudge: John Certeza American Bully - Standard, Pocket, XL, Classic Jr Handler', '', '2025-09-06', '13:00:00', '2025-08-04 00:36:06');
+(14, 'Crown of the City', 'Mystery Creek Pavilion Mystery Creek Rd, Hamilton, Waikato, New Zealand\r\n\r\nJudge: John Certeza American Bully - Standard, Pocket, XL, Classic Jr Handler', '', '2025-09-06', '13:00:00', '2025-08-04 00:36:06'),
+(15, 'El Evento Mas Galactico Del Ano', 'Mercado De Mangomarca San Juan de Lurigancho, Lima, Peru\r\n\r\nJudges: TBA, TBA, TBA American Bully French Bulldog English Bulldog', 'event_banner_68900184342b63.42103060.jpg', '2025-08-03', '15:00:00', '2025-08-04 00:40:36'),
+(16, 'Ourland Fest', 'Coco Rubi Rancagua, Chile\r\n\r\nJudges: Mauricio Campas, Alexander Acevedo, TBA American Bully APBT French Bulldog', 'event_banner_689001d82bc577.92917885.jpeg', '2025-10-18', '14:00:00', '2025-08-04 00:42:00');
 
 -- --------------------------------------------------------
 
@@ -267,7 +269,7 @@ ALTER TABLE `dogs`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `generation`

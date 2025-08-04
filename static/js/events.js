@@ -9,6 +9,9 @@ $(document).ready(function () {
                 const container = $(".max-w-6xl"); // target wrapper
 
                 if (res.data.length > 0) {
+                    // ✅ SORT by date ascending
+                    res.data.sort((a, b) => new Date(a.event_date) - new Date(b.event_date));
+
                     res.data.forEach(event => {
                         const time24 = event.event_time;
                         const formattedTime = formatTo12Hour(time24);
@@ -22,8 +25,8 @@ $(document).ready(function () {
                         // Convert date to day and month
                         const dateObj = new Date(event_date);
                         const day = dateObj.getDate();
-                        const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase(); // e.g., "SAT"
-                        const fullDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }); // e.g., "November 11"
+                        const dayName = dateObj.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase();
+                        const fullDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
 
                         const bannerHTML = event_banner 
                             ? `<img src="static/upload/${event_banner}" alt="${event_name} Poster" class="w-full rounded shadow-lg" />`
