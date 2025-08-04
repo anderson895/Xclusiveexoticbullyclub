@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 03, 2025 at 05:44 PM
+-- Generation Time: Aug 04, 2025 at 02:34 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -105,7 +105,8 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`event_id`, `event_name`, `event_description`, `event_banner`, `event_date`, `event_time`, `event_added`) VALUES
-(13, 'rdgdr', 'gyjgyj', 'event_banner_688f78f7911797.43980038.jpg', '0244-12-23', '14:43:00', '2025-08-03 14:57:59');
+(13, 'Carolina Bully Classic 7', 'Southeastern Agricultural Center 1027 US-74 ALT, Lumberton, NC, United States\n\nJudges: Lou Manipon, Jamie Villagomez, TBA, TBA American Bully French Bulldog English Bulldog', 'event_banner_688fff49846c12.37337442.jpg', '2025-10-04', '13:00:00', '2025-08-04 00:31:33'),
+(14, 'dwadaw', 'sssssss', '', '2025-11-11', '11:11:00', '2025-08-04 00:04:58');
 
 -- --------------------------------------------------------
 
@@ -160,7 +161,9 @@ CREATE TABLE `pageant` (
 
 INSERT INTO `pageant` (`pag_id`, `pag_name`, `pag_description`, `pag_date_added`, `pad_status`) VALUES
 (6, 'dog show 2025', '', '2025-08-03 14:57:01', 0),
-(7, 'joshua padilla', 'awdawd', '2025-08-03 14:57:39', 1);
+(7, 'joshua padilla', 'awdawd', '2025-08-03 14:57:39', 1),
+(8, 'fesf', 'sefse', '2025-08-03 16:27:27', 1),
+(9, 'ss', 'dd', '2025-08-03 16:27:55', 1);
 
 -- --------------------------------------------------------
 
@@ -264,7 +267,7 @@ ALTER TABLE `dogs`
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `generation`
@@ -276,7 +279,7 @@ ALTER TABLE `generation`
 -- AUTO_INCREMENT for table `pageant`
 --
 ALTER TABLE `pageant`
-  MODIFY `pag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `pag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `pageant_category`
