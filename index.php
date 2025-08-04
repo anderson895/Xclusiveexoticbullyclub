@@ -12,7 +12,7 @@
     </h1>
 
     <p class="text-lg text-[#CCCCCC] mb-12 px-4">
-      China Bully Registry – your trusted source for pedigree certification and international breed standards.
+    XCLUSIVE EXOTIC BULLY CLUB - home registry of the exotic bully
     </p>
 
     <!-- Search Form -->
