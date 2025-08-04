@@ -72,13 +72,9 @@
 
 
 
-
-
-  <div class="events_list max-w-6xl mx-auto py-10 px-6 space-y-10">
-
-   
-
-  </div>
+<div class="events_list w-full max-w-6xl mx-auto py-10 px-4 sm:px-6 space-y-10">
+  <!-- Your dynamic content goes here -->
+</div>
 
 
 

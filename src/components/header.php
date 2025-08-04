@@ -29,7 +29,16 @@
       <span class="text-[#FFD700] text-xl font-bold">XEBC</span>
     </div>
 
-    <!-- Centered Nav -->
+    <!-- Hamburger Button -->
+    <button id="menuToggle" class="md:hidden z-10 text-[#FFD700] focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2"
+        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+
+    <!-- Desktop Nav -->
     <nav class="absolute left-1/2 transform -translate-x-1/2 space-x-6 hidden md:flex">
       <a href="index" class="text-[#CCCCCC] hover:text-white">Home</a>
       <a href="registration" class="text-[#CCCCCC] hover:text-white">Registration</a>
@@ -39,7 +48,26 @@
       <a href="pointchart" class="text-[#CCCCCC] hover:text-white">Points Chart</a>
     </nav>
   </div>
+
+  <!-- Mobile Nav -->
+  <nav id="mobileMenu" class="md:hidden px-6 pb-4 space-y-2 hidden bg-[#1A1A1A]">
+    <a href="index" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Home</a>
+    <a href="registration" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Registration</a>
+    <a href="standard" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Standard</a>
+    <a href="events" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Events</a>
+    <a href="gettable" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Gettable</a>
+    <a href="pointchart" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Points Chart</a>
+  </nav>
+
 </header>
+
+<script>
+  document.getElementById('menuToggle').addEventListener('click', function () {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('hidden');
+  });
+</script>
+
 
 
 <?php include "plugins/PageSpinner.php"; ?>

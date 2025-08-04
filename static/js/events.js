@@ -6,7 +6,7 @@ $(document).ready(function () {
         dataType: "json",
         success: function (res) {
             if (res.status === 200) {
-                const container = $(".max-w-6xl"); // target wrapper
+                const container = $(".events_list"); 
 
                 if (res.data.length > 0) {
                     // ✅ SORT by date ascending
@@ -33,22 +33,25 @@ $(document).ready(function () {
                             : ``;
 
                         const html = `
-                            <div class="flex gap-6">
-                                <div class="w-20 text-center">
+                            <div class="flex flex-col md:flex-row gap-6 bg-[#1A1A1A] p-4 rounded-lg shadow-md">
+                               <div class="flex flex-row md:flex-col items-center text-center w-full md:w-20 gap-2">
                                     <div class="text-sm font-bold text-white uppercase">${dayName}</div>
-                                    <div class="text-3xl font-extrabold text-white">${day}</div>
-                                    <div class="text-xs text-gray-400 mt-1 event_time">${formattedTime}</div>
+                                    <div class="text-sm md:text-3xl font-extrabold text-white">${day}</div>
+
+                                    <div class="text-xs text-gray-400 event_time">${formattedTime}</div>
                                 </div>
+
                                 <div class="flex-1">
                                     <div class="text-gray-400 font-semibold uppercase">${fullDate}</div>
-                                    <h2 class="text-2xl font-bold mt-1 event_name">${event_name}</h2>
+                                    <h2 class="text-2xl font-bold mt-1 event_name text-white">${event_name}</h2>
                                     <p class="text-sm mt-2 event_description text-gray-300 whitespace-pre-line">${event_description}</p>
                                 </div>
-                                <div class="md:w-1/3 mt-6 md:mt-0">
+                                <div class="mt-4 md:mt-0 md:w-1/3">
                                     ${bannerHTML}
                                 </div>
                             </div>
                         `;
+
 
                         container.append(html);
                     });
