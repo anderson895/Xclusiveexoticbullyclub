@@ -15,7 +15,7 @@
 <section class="bg-[#1A1A1A] py-16 px-6">
   <h2 class="text-3xl font-semibold text-center text-[#FFD700] uppercase">Services</h2>
   <p class="text-center text-base max-w-2xl mx-auto mt-3 text-[#CCCCCC] leading-relaxed">
-    Please allow 3–4 weeks for processing. Click the icon, fill out the form, and then click the payment button below.
+    Please allow 2-3 weeks for processing. Click the icon, fill out the form, and then click the payment button below.
     Both parents must be BRC registered. We do not register dogs that have current paperwork with other registries.
   </p>
 
