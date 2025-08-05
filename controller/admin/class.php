@@ -1,7 +1,7 @@
 <?php
 
 
-include ('../../../controller/config.php');
+include ('../../config.php');
 
 date_default_timezone_set('Asia/Manila');
 
@@ -413,6 +413,99 @@ public function fetch_all_pageant() {
     }
     return []; 
 }
+
+
+
+public function fetch_all_pageant_and_category() {
+    $pc_status = 1;
+    $pad_status = 1;
+
+    $query = $this->conn->prepare("
+       SELECT 
+            pageant_category.*, 
+            pageant.pag_id AS pageant_id,
+            pageant.pag_name AS pageant_name,
+            pageant.pag_description AS pageant_description,
+            pageant.pag_date_added AS pageant_date_added
+        FROM pageant_category
+        LEFT JOIN pageant ON pageant.pag_id = pageant_category.pc_pageant_id
+        WHERE pc_status = ? AND pad_status = ?
+        ORDER BY pc_id DESC
+
+    ");
+
+    if (!$query) {
+        die("Prepare failed: " . $this->conn->error);
+    }
+
+    $query->bind_param("ii", $pc_status,$pad_status);
+
+    if ($query->execute()) {
+        $result = $query->get_result();
+        $pageants = [];
+
+        while ($row = $result->fetch_assoc()) {
+            // Decode contestant JSON
+            $contestants = json_decode($row['pc_contestant'], true); 
+            $fullContestants = [];
+
+            if (is_array($contestants)) {
+                foreach ($contestants as $contestant) {
+                    if (!isset($contestant['id'])) continue;
+
+                    $dog_id = $contestant['id'];
+                    $dogQuery = $this->conn->prepare("
+                        SELECT dog_country, dog_id, dog_code, dog_name 
+                        FROM dogs 
+                        WHERE dog_id = ?
+                    ");
+
+                    if (!$dogQuery) continue;
+
+                    $dogQuery->bind_param("i", $dog_id);
+                    $dogQuery->execute();
+                    $dogResult = $dogQuery->get_result();
+
+                    if ($dogRow = $dogResult->fetch_assoc()) {
+                        $fullContestants[] = array_merge($contestant, $dogRow);
+                    } else {
+                        $fullContestants[] = $contestant;
+                    }
+
+                    $dogQuery->close();
+                }
+            }
+
+            // Replace and clean up
+            unset($row['pc_contestant']);
+            $row['contestants'] = $fullContestants;
+
+            // Add nested pageant info
+            $row['pageant'] = [
+                'id' => $row['pageant_id'],
+                'name' => $row['pageant_name'],
+                'description' => $row['pageant_description'],
+                'date_added' => $row['pageant_date_added']
+            ];
+
+            // Remove flat pageant fields
+            unset(
+                $row['pageant_id'], 
+                $row['pageant_name'], 
+                $row['pageant_description'], 
+                $row['pageant_date_added']
+            );
+
+            $pageants[] = $row;
+        }
+
+        $query->close();
+        return $pageants;
+    }
+
+    return [];
+}
+
 
 
 public function fetch_pageant_category($pagId) {

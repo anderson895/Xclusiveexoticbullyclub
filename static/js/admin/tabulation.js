@@ -273,7 +273,7 @@ resultHTML += `
       <button 
         class="removeShow bg-red-500 hover:bg-red-600 text-white font-semibold px-4 py-2 rounded w-full sm:w-auto" 
         data-pc_id="${categoryData.pc_id}" data-category_name="${categoryName}">
-        Remove Show
+        Remove
       </button>
     </div>
   </div>
