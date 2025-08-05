@@ -30,7 +30,7 @@ $(document).ready(function () {
             } else {
                 grid.html(`
                     
-                     <div class="text-center text-gray-400 mt-20">
+                     <div class="text-gray-400 mt-20">
                             <h2 class="text-2xl font-bold mb-2">No data available at the Moment</h2>
                             <p class="italic">Please check back later for updates.</p>
                         </div>
