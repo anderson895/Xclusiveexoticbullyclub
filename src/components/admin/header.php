@@ -11,6 +11,10 @@ if (isset($_SESSION['id'])) {
    
     $On_Session = $db->check_account($id);
 
+   //  echo "<pre>";
+   //  print_r($On_Session);
+   //  echo "</pre>";
+
    
   
     if (!empty($On_Session)) {

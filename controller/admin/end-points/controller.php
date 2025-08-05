@@ -24,6 +24,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
             }
 
+        }else if ($_POST['requestType'] == 'UpdateSettings') {
+
+            $admin_id = $_POST['admin_id'];
+            $fullname = $_POST['fullname'];
+            $email = $_POST['email'];
+            $old_password = $_POST['old_password'];
+            $new_password = $_POST['new_password'];
+
+            $result = $db->UpdateSettings(
+                $admin_id,
+                $fullname,
+                $email,
+                $old_password,
+                $new_password
+            );
+
+            header('Content-Type: application/json');
+
+            if ($result === true) {
+                echo json_encode([
+                    'status' => 200,
+                    'message' => 'Settings updated successfully.'
+                ]);
+            } elseif (is_null($result)) {
+                echo json_encode([
+                    'status' => 204,
+                    'message' => 'No changes detected.'
+                ]);
+            } else {
+                echo json_encode([
+                    'status' => 500,
+                    'message' => $result 
+                ]);
+            }
+
+
         }else if ($_POST['requestType'] == 'DogRegister') {
 
                 $dog_name        = $_POST['dog_name'];
