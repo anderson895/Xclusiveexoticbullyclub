@@ -19,10 +19,8 @@ $(document).ready(function () {
                 } else {
                     $('.markAsRegistered').show();
                     $('#noGenerationNotice').addClass('hidden'); // Hide notice
-                }
 
-
-
+                    
                    $('#result_dog_name').html(`
                     ${data.main_dog_name ?? 'N/A'}
                     ${
@@ -33,6 +31,11 @@ $(document).ready(function () {
                         : ''
                     }
                     `);
+
+                }
+
+
+
 
 
                     $('.dog_breeder_name').text(data.dog_breeder_name ?? 'N/A');
