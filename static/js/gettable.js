@@ -6,9 +6,12 @@ $(document).ready(function () {
         dataType: "json",
         success: function (res) {
             const grid = $('#gettableGrid');
+            const header = $('#gettableHeader');
             grid.empty(); // Clear previous data
 
             if (res.status === 200 && res.data.length > 0) {
+                header.show(); // Show the heading if there's data
+
                 res.data.forEach((gettable, i) => {
                     const card = $(`
                         <div class="bg-[#1A1A1A] border border-[#333] rounded-xl p-4 shadow-sm transform scale-95 opacity-0 transition-all duration-500 hover:shadow-2xl hover:scale-100 cursor-pointer">
@@ -24,11 +27,10 @@ $(document).ready(function () {
                     `);
 
                     grid.append(card);
-
-                    // Animate fade-in for each card
                     setTimeout(() => card.removeClass('opacity-0 scale-95'), i * 100);
                 });
             } else {
+                header.hide(); // Hide the heading if no data
                 grid.html(`
                     <div class="text-gray-400 text-center col-span-full mt-20">
                         <h2 class="text-2xl font-bold mb-2">No data available at the moment</h2>
