@@ -6,7 +6,7 @@ $(document).ready(function () {
         dataType: "json",
         success: function (res) {
             const grid = $('#gettableGrid');
-            grid.empty();
+            grid.empty(); // Clear previous data
 
             if (res.status === 200 && res.data.length > 0) {
                 res.data.forEach((gettable, i) => {
@@ -23,26 +23,30 @@ $(document).ready(function () {
                         </div>
                     `);
 
-                    // Append and trigger fade-in animation
                     grid.append(card);
+
+                    // Animate fade-in for each card
                     setTimeout(() => card.removeClass('opacity-0 scale-95'), i * 100);
                 });
             } else {
                 grid.html(`
-                    
-                     <div class="text-gray-400 mt-20">
-                            <h2 class="text-2xl font-bold mb-2">No data available at the Moment</h2>
-                            <p class="italic">Please check back later for updates.</p>
-                        </div>
-                    `);
+                    <div class="text-gray-400 text-center col-span-full mt-20">
+                        <h2 class="text-2xl font-bold mb-2">No data available at the moment</h2>
+                        <p class="italic">Please check back later for updates.</p>
+                    </div>
+                `);
             }
         },
         error: function () {
-            $('#gettableGrid').html(`<p class="text-center text-red-500 col-span-full">Failed to load data.</p>`);
+            $('#gettableGrid').html(`
+                <p class="text-center text-red-500 col-span-full mt-10">
+                    Failed to load data.
+                </p>
+            `);
         }
     });
 
-    // On click, open the link in a new tab
+    // Handle link clicks
     $(document).on('click', '.view-btn', function () {
         const link = $(this).data('link');
         if (link) {
