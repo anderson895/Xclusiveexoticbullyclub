@@ -16,6 +16,13 @@ $(document).ready(function () {
                 if (data.dog_registered_status === 0) {
                     $('.markAsRegistered').hide();
                     $('#noGenerationNotice').removeClass('hidden'); // Show notice
+
+
+                    $('#result_dog_name').html(`
+                        ${data.main_dog_name ?? 'N/A'}
+                    `);
+
+
                 } else {
                     $('.markAsRegistered').show();
                     $('#noGenerationNotice').addClass('hidden'); // Hide notice
