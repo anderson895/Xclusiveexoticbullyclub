@@ -203,62 +203,60 @@ include "../src/components/admin/nav.php";
 
 </div>
 
+<link rel="stylesheet" href="../src/selectto.css">
 
-
-
+<!-- Modal -->
 <!-- Modal -->
 <div id="dogModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/30 backdrop-blur-sm transition duration-300 ease-in-out">
 
-  <div class="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md space-y-6">
-   <h2 class="text-2xl font-extrabold text-gray-800 text-center" id="modalTitle">Update Details</h2>
-    <p class="text-center text-sm text-gray-600 font-medium" id="generation">: </p>
+  <div class="bg-[#1A1A1A] rounded-2xl shadow-2xl p-8 w-full max-w-md space-y-6 text-white">
+    <h2 class="text-2xl font-extrabold text-[#FFD700] text-center" id="modalTitle">Update Details</h2>
+    <p class="text-center text-sm text-gray-300 font-medium" id="generation">: </p>
 
     <form id="updateGenForm" class="space-y-5">
       <input type="hidden" id="dogRole" name="dogRole">
       <input type="hidden" id="gen_dog_id" name="main_dog_id">
-
-      <input type="hidden" id="dog_id" name="dog_id" value="<?php $_GET['dog_id'];?>">
-
+      <input type="hidden" id="dog_id" name="dog_id" value="<?php echo $_GET['dog_id']; ?>">
 
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Dog Type</label>
-        <select id="dogType" name="dogType" class="text-black w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
+        <label class="block text-sm font-medium text-gray-300 mb-1">Dog Type</label>
+        <select id="dogType" name="dogType" class="bg-[#2C2C2C] text-white w-full px-3 py-2 border border-gray-500 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
           <option value="registered">Registered</option>
           <option value="not_registered">Not Registered</option>
         </select>
       </div>
 
       <!-- Registered Section -->
-        <div id="registeredSection">
-            <label for="registeredDog" class="block text-sm font-medium text-gray-700 mb-1">
-                Select Registered Dog
-            </label>
-            <select id="registeredDog" name="dog_id" class="text-black w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
-                <option value="">-- Select Dog --</option>
-            </select>
-        </div>
-
+      <div id="registeredSection">
+        <label for="registeredDog" class="block text-sm font-medium text-gray-300 mb-1">
+          Select Registered Dog
+        </label>
+        <select id="registeredDog" name="dog_id" class="select2-tailwind w-full bg-[#2C2C2C] text-white border border-gray-500 rounded-lg">
+          <option value="">-- Select Dog --</option>
+        </select>
+      </div>
 
       <!-- Not Registered Section -->
       <div id="notRegisteredSection" class="hidden space-y-4">
         <div>
-          <label for="dogName" class="block text-sm font-medium text-gray-700 mb-1">Dog Name</label>
-          <input type="text" id="dogName" name="dogName" class="text-black w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
+          <label for="dogName" class="block text-sm font-medium text-gray-300 mb-1">Dog Name</label>
+          <input type="text" id="dogName" name="dogName" class="bg-[#2C2C2C] text-white w-full px-3 py-2 border border-gray-500 rounded-lg shadow-sm focus:ring-yellow-400 focus:border-yellow-400">
         </div>
         <div>
-          <label for="dogImage" class="block text-sm font-medium text-gray-700 mb-1">Dog Image</label>
-          <input type="file" id="dogImage" name="dog_image" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-lg file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100">
+          <label for="dogImage" class="block text-sm font-medium text-gray-300 mb-1">Dog Image</label>
+          <input type="file" id="dogImage" name="dog_image" class="w-full text-sm file:mr-4 file:py-2 file:px-4 file:border file:border-gray-500 file:rounded-lg file:bg-yellow-100 file:text-yellow-700 hover:file:bg-yellow-200 bg-[#2C2C2C] text-white">
         </div>
       </div>
 
       <!-- Buttons -->
       <div class="flex justify-end space-x-3 pt-2">
-        <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition">Cancel</button>
-        <button type="submit" class="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition">Save</button>
+        <button type="button" onclick="closeModal()" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition">Cancel</button>
+        <button type="submit" class="bg-green-500 hover:bg-green-600 text-black font-semibold px-4 py-2 rounded-lg transition">Save</button>
       </div>
     </form>
   </div>
 </div>
+
 
 
 
