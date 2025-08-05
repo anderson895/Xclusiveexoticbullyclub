@@ -59,11 +59,13 @@ include "../src/components/admin/nav.php";
 
 <!-- Modal -->
 <div id="dogModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/30 backdrop-blur-sm">
-  <div class="bg-[#1A1A1A]/90 backdrop-blur-md rounded-lg shadow-xl w-full max-w-xl mx-auto p-6 text-[#CCCCCC] relative">
+  <div class="bg-[#1A1A1A]/90 backdrop-blur-md rounded-lg shadow-xl w-full max-w-xl mx-auto p-6 text-[#CCCCCC] relative overflow-hidden">
     <button id="closeModal" class="absolute top-2 right-2 text-white hover:text-red-500 text-xl">&times;</button>
 
-    <h2 class="text-2xl font-bold text-[#FFD700] mb-4">Dog Details</h2>
-     <div class="bg-[#1a1a1a] w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded p-6" id="modalContent">
+    <h2 class="hidden sm:block text-2xl font-bold text-[#FFD700] mb-4">Dog Details</h2>
+
+    
+    <div class="bg-[#1a1a1a] w-full max-w-full max-h-[90vh] overflow-y-auto overflow-x-hidden rounded p-6" id="modalContent">
       <!-- Filled by JS -->
     </div>
   </div>
