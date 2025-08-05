@@ -1968,6 +1968,11 @@
       padding-block: calc(var(--spacing) * 2);
     }
   }
+  .sm\:text-right {
+    @media (width >= 40rem) {
+      text-align: right;
+    }
+  }
   .sm\:text-base {
     @media (width >= 40rem) {
       font-size: var(--text-base);
