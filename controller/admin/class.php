@@ -13,10 +13,26 @@ class global_class extends db_connect
     }
 
 
+    public function fetch_all_gettable() {
+        $query = $this->conn->prepare("SELECT * FROM gettable where gt_status='1' ORDER BY gt_id DESC");
+
+        if ($query->execute()) {
+            $result = $query->get_result();
+            $data = [];
+
+            while ($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+
+            return $data;
+        }
+        return []; 
+    }
+
 
 
     public function fetch_all_events() {
-        $query = $this->conn->prepare("SELECT * FROM events ORDER BY event_id  DESC");
+        $query = $this->conn->prepare("SELECT * FROM events ORDER BY event_id DESC");
 
         if ($query->execute()) {
             $result = $query->get_result();
@@ -962,7 +978,10 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
 
 
 
-    public function removeEvents($event_id) {
+
+
+
+     public function removeEvents($event_id) {
         // Step 1: Get the banner filename from the database
         $selectQuery = "SELECT event_banner FROM events WHERE event_id = ?";
         $stmt = $this->conn->prepare($selectQuery);
@@ -984,6 +1003,45 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
         }
 
         $stmt->bind_param("i", $event_id);
+        $result = $stmt->execute();
+        $stmt->close();
+
+        // Step 3: Delete the file from the filesystem
+        if ($result && $bannerFile) {
+            $filePath = __DIR__ . "../../../static/upload/" . $bannerFile;
+            if (file_exists($filePath)) {
+                unlink($filePath); // deletes the image file
+            }
+        }
+
+        return $result ? 'success' : 'Error deleting event';
+    }
+
+
+
+
+    public function removeGettable($gt_id) {
+        // Step 1: Get the banner filename from the database
+        $selectQuery = "SELECT gt_image FROM gettable WHERE gt_id = ?";
+        $stmt = $this->conn->prepare($selectQuery);
+        if (!$stmt) {
+            return 'Prepare failed (select): ' . $this->conn->error;
+        }
+
+        $stmt->bind_param("i", $gt_id);
+        $stmt->execute();
+        $stmt->bind_result($bannerFile);
+        $stmt->fetch();
+        $stmt->close();
+
+        // Step 2: Delete the record from the database
+        $deleteQuery = "DELETE FROM gettable WHERE gt_id = ?";
+        $stmt = $this->conn->prepare($deleteQuery);
+        if (!$stmt) {
+            return 'Prepare failed (delete): ' . $this->conn->error;
+        }
+
+        $stmt->bind_param("i", $gt_id);
         $result = $stmt->execute();
         $stmt->close();
 
@@ -1073,70 +1131,75 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
 
 
 
+          public function AddGettable($gettableName,$gettableDescription,$gettableLink,$dogBannerFileName) {
+            $query = "INSERT INTO `gettable` (`gt_name`, `gt_description`, `gt_image`, `gt_link`) 
+                    VALUES (?,?,?,?)";
 
+            $stmt = $this->conn->prepare($query);
+            if (!$stmt) {
+                die("Prepare failed: " . $this->conn->error);
+            }
 
+            $stmt->bind_param("ssss", $gettableName,$gettableDescription,$dogBannerFileName,$gettableLink);
 
+            $result = $stmt->execute();
 
+            if (!$result) {
+                $stmt->close();
+                return false;
+            }
 
+            $inserted_id = $this->conn->insert_id; 
+            $stmt->close();
 
-
-
-
-
-public function UpdateEvent(
-    $eventId,
-    $eventName_update,
-    $eventDescription_update,
-    $eventDate_update,
-    $eventTime_update,
-    $bannerImage = null // assuming bannerImage is the new file name if uploaded
-) {
-    foreach ([
-        'event_name' => &$eventName_update,
-        'event_description' => &$eventDescription_update,
-        'event_date' => &$eventDate_update,
-        'event_time' => &$eventTime_update
-    ] as &$value) {
-        if (is_string($value) && trim($value) === '') {
-            $value = null;
+            return $inserted_id; 
         }
+
+
+
+
+
+
+
+
+
+
+
+public function updateEvent(
+    $eventId,
+    $eventName,
+    $eventDescription,
+    $eventDate,
+    $eventTime,
+    $bannerImage = null
+) {
+    // Convert empty strings to null
+    foreach ([$eventName, $eventDescription, $eventDate, $eventTime] as &$val) {
+        $val = (is_string($val) && trim($val) === '') ? null : $val;
     }
 
-    // Remove old banner image if a new one is uploaded
+    // If new banner image, remove the old one
     if ($bannerImage) {
-        $selectQuery = "SELECT event_banner FROM events WHERE event_id = ?";
-        $selectStmt = $this->conn->prepare($selectQuery);
-        $selectStmt->bind_param("s", $eventId);
-        $selectStmt->execute();
-        $selectStmt->bind_result($oldBanner);
-        $selectStmt->fetch();
-        $selectStmt->close();
+        $stmt = $this->conn->prepare("SELECT event_banner FROM events WHERE event_id = ?");
+        $stmt->bind_param("s", $eventId);
+        $stmt->execute();
+        $stmt->bind_result($oldBanner);
+        $stmt->fetch();
+        $stmt->close();
 
         if (!empty($oldBanner)) {
-            $oldBannerPath = "../../../static/upload/" . $oldBanner;
-            if (file_exists($oldBannerPath)) {
-                unlink($oldBannerPath);
-            }
+            $oldPath = "../../../static/upload/" . $oldBanner;
+            if (file_exists($oldPath)) unlink($oldPath);
         }
     }
 
-    // Build the update query
-    $fields = [
-        "event_name = ?",
-        "event_description = ?",
-        "event_date = ?",
-        "event_time = ?"
-    ];
-    $params = [
-        $eventName_update,
-        $eventDescription_update,
-        $eventDate_update,
-        $eventTime_update
-    ];
-    $types = str_repeat("s", count($params));
+    // Build query and parameter list
+    $fields = "event_name = ?, event_description = ?, event_date = ?, event_time = ?";
+    $params = [$eventName, $eventDescription, $eventDate, $eventTime];
+    $types = "ssss";
 
     if ($bannerImage) {
-        $fields[] = "event_banner = ?";
+        $fields .= ", event_banner = ?";
         $params[] = $bannerImage;
         $types .= "s";
     }
@@ -1144,7 +1207,7 @@ public function UpdateEvent(
     $params[] = $eventId;
     $types .= "s";
 
-    $query = "UPDATE events SET " . implode(", ", $fields) . " WHERE event_id = ?";
+    $query = "UPDATE events SET $fields WHERE event_id = ?";
     $stmt = $this->conn->prepare($query);
 
     if (!$stmt) {
@@ -1157,6 +1220,66 @@ public function UpdateEvent(
 
     return ['status' => true, 'message' => 'Event updated successfully.'];
 }
+
+
+
+
+
+
+
+
+
+
+
+public function updateGettable($gt_id, $gt_name, $gt_description, $gt_link, $image) {
+    // Set empty strings to null
+    foreach ([$gt_name, $gt_description, $gt_link] as &$val) {
+        $val = (is_string($val) && trim($val) === '') ? null : $val;
+    }
+
+    // If new image, delete the old one
+    if ($image) {
+        $stmt = $this->conn->prepare("SELECT gettable FROM gt_image WHERE gt_id = ?");
+        $stmt->bind_param("s", $gt_id);
+        $stmt->execute();
+        $stmt->bind_result($oldBanner);
+        $stmt->fetch();
+        $stmt->close();
+
+        if (!empty($oldBanner)) {
+            $oldPath = "../../../static/upload/" . $oldBanner;
+            if (file_exists($oldPath)) unlink($oldPath);
+        }
+    }
+
+    // Prepare update fields and values
+    $fields = "gt_name = ?, gt_description = ?, gt_link = ?";
+    $params = [$gt_name, $gt_description, $gt_link];
+    $types = "sss";
+
+    if ($image) {
+        $fields .= ", gt_image = ?";
+        $params[] = $image;
+        $types .= "s";
+    }
+
+    $params[] = $gt_id;
+    $types .= "s";
+
+    $query = "UPDATE gettable SET $fields WHERE gt_id = ?";
+    $stmt = $this->conn->prepare($query);
+
+    if (!$stmt) {
+        return ['status' => false, 'message' => 'Prepare failed: ' . $this->conn->error];
+    }
+
+    $stmt->bind_param($types, ...$params);
+    $stmt->execute();
+    $stmt->close();
+
+    return ['status' => true, 'message' => 'Event updated successfully.'];
+}
+
 
 
 
