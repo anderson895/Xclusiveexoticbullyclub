@@ -474,6 +474,9 @@
   .h-full {
     height: 100%;
   }
+  .max-h-\[90vh\] {
+    max-height: 90vh;
+  }
   .max-h-screen {
     max-height: 100vh;
   }

@@ -14,3 +14,4 @@ include "../src/components/admin/nav.php";
 <?php
 include "../src/components/admin/footer.php";
 ?>
+<script src="../static/js/admin/dashboard.js"></script>
