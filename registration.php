@@ -74,8 +74,7 @@
   <a href="#" class="mt-4 inline-block bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition">Buy Now</a>
   <p class="text-sm max-w-md mx-auto mt-6 text-[#CCCCCC] leading-relaxed">
     To register your dog using the single registration form above, click the button to pay. Accepted breeds include:
-    American Bully • XL Bully • Micro Bully • Exotic Bully • American Pitbull • Olde English Bulldogge •
-    English Bulldog • French Bulldog • Bull Terrier • Bullmastiff • Presa Canario • Cane Corso • American Bulldog
+    Exotic Bully / French Bulldog
   </p>
 </section>
 
