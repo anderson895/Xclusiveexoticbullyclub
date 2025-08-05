@@ -43,9 +43,9 @@
       <a href="index" class="text-[#CCCCCC] hover:text-white">Home</a>
       <a href="registration" class="text-[#CCCCCC] hover:text-white">Registration</a>
       <a href="standard" class="text-[#CCCCCC] hover:text-white">Standard</a>
-      <!-- <a href="events" class="text-[#CCCCCC] hover:text-white">Events</a> -->
-      <!-- <a href="gettable" class="text-[#CCCCCC] hover:text-white">Gettable</a>
-      <a href="pointchart" class="text-[#CCCCCC] hover:text-white">Points Chart</a> -->
+      <a href="events" class="text-[#CCCCCC] hover:text-white">Events</a>
+      <a href="gettable" class="text-[#CCCCCC] hover:text-white">Gettable</a>
+      <a href="pointchart" class="text-[#CCCCCC] hover:text-white">Points Chart</a>
     </nav>
   </div>
 
@@ -54,9 +54,9 @@
     <a href="index" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Home</a>
     <a href="registration" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Registration</a>
     <a href="standard" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Standards</a>
-    <!-- <a href="events" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Events</a> -->
-    <!-- <a href="gettable" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Gettable</a>
-    <a href="pointchart" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Points Chart</a> -->
+    <a href="events" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Events</a>
+    <a href="gettable" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Gettable</a>
+    <a href="pointchart" class="block text-[#CCCCCC] hover:text-yellow-400 active:text-yellow-400 focus:text-yellow-400 transition-colors duration-200">Points Chart</a> 
   </nav>
 
 </header>

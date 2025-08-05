@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 04, 2025 at 02:42 AM
+-- Generation Time: Aug 05, 2025 at 03:00 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -100,16 +100,6 @@ CREATE TABLE `events` (
   `event_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `events`
---
-
-INSERT INTO `events` (`event_id`, `event_name`, `event_description`, `event_banner`, `event_date`, `event_time`, `event_added`) VALUES
-(13, 'Carolina Bully Classic 7', 'Southeastern Agricultural Center 1027 US-74 ALT, Lumberton, NC, United States\n\nJudges: Lou Manipon, Jamie Villagomez, TBA, TBA American Bully French Bulldog English Bulldog', 'event_banner_688fff49846c12.37337442.jpg', '2025-10-04', '13:00:00', '2025-08-04 00:31:33'),
-(14, 'Crown of the City', 'Mystery Creek Pavilion Mystery Creek Rd, Hamilton, Waikato, New Zealand\r\n\r\nJudge: John Certeza American Bully - Standard, Pocket, XL, Classic Jr Handler', '', '2025-09-06', '13:00:00', '2025-08-04 00:36:06'),
-(15, 'El Evento Mas Galactico Del Ano', 'Mercado De Mangomarca San Juan de Lurigancho, Lima, Peru\r\n\r\nJudges: TBA, TBA, TBA American Bully French Bulldog English Bulldog', 'event_banner_68900184342b63.42103060.jpg', '2025-08-03', '15:00:00', '2025-08-04 00:40:36'),
-(16, 'Ourland Fest', 'Coco Rubi Rancagua, Chile\r\n\r\nJudges: Mauricio Campas, Alexander Acevedo, TBA American Bully APBT French Bulldog', 'event_banner_689001d82bc577.92917885.jpeg', '2025-10-18', '14:00:00', '2025-08-04 00:42:00');
-
 -- --------------------------------------------------------
 
 --
@@ -146,6 +136,20 @@ INSERT INTO `generation` (`gen_id`, `gen_dog_id`, `father_dog_id`, `mother_dog_i
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gettable`
+--
+
+CREATE TABLE `gettable` (
+  `gt_id` int(11) NOT NULL,
+  `gt_name` varchar(60) NOT NULL,
+  `gt_description` varchar(60) NOT NULL,
+  `gt_image` varchar(255) NOT NULL,
+  `gt_status` int(11) NOT NULL DEFAULT 1 COMMENT '0=deleted,1=active'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pageant`
 --
 
@@ -162,10 +166,8 @@ CREATE TABLE `pageant` (
 --
 
 INSERT INTO `pageant` (`pag_id`, `pag_name`, `pag_description`, `pag_date_added`, `pad_status`) VALUES
-(6, 'dog show 2025', '', '2025-08-03 14:57:01', 0),
-(7, 'joshua padilla', 'awdawd', '2025-08-03 14:57:39', 1),
-(8, 'fesf', 'sefse', '2025-08-03 16:27:27', 1),
-(9, 'ss', 'dd', '2025-08-03 16:27:55', 1);
+(6, 'XEBC Points chart', 'Breed points are calculated by how many dogs were beaten when winning Best of Breed.', '2025-08-04 23:59:05', 1),
+(10, 'new show', 'sfesf', '2025-08-05 00:43:02', 0);
 
 -- --------------------------------------------------------
 
@@ -181,18 +183,6 @@ CREATE TABLE `pageant_category` (
   `pc_status` int(11) NOT NULL DEFAULT 1 COMMENT '0=deleted,1=active',
   `pc_date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `pageant_category`
---
-
-INSERT INTO `pageant_category` (`pc_id`, `pc_pageant_id`, `pc_category_name`, `pc_contestant`, `pc_status`, `pc_date_added`) VALUES
-(22, 6, 'Best in Color Category', '[{\"id\":\"49\",\"points\":\"5\"}]', 1, '2025-08-03 07:15:23'),
-(23, 6, 'best in costume', '[{\"id\":\"49\",\"points\":\"50\"},{\"id\":\"41\",\"points\":\"0\"}]', 1, '2025-08-03 07:15:23'),
-(24, 6, 'test', '[{\"id\":\"49\",\"points\":\"0\"}]', 0, '2025-08-03 07:18:15'),
-(25, 6, 'awdaw', '[{\"id\":\"41\",\"points\":\"0\"},{\"id\":\"49\",\"points\":\"0\"}]', 0, '2025-08-03 07:19:48'),
-(26, 6, 'dawdaw', '[{\"id\":\"41\",\"points\":\"0\"},{\"id\":\"49\",\"points\":\"0\"}]', 1, '2025-08-03 07:15:23'),
-(27, 6, 'joshua padilla', '[{\"id\":\"49\",\"points\":\"0\"}]', 1, '2025-08-03 07:20:04');
 
 --
 -- Indexes for dumped tables
@@ -238,6 +228,12 @@ ALTER TABLE `generation`
   ADD KEY `father_dog_id` (`father_dog_id`);
 
 --
+-- Indexes for table `gettable`
+--
+ALTER TABLE `gettable`
+  ADD PRIMARY KEY (`gt_id`);
+
+--
 -- Indexes for table `pageant`
 --
 ALTER TABLE `pageant`
@@ -247,7 +243,8 @@ ALTER TABLE `pageant`
 -- Indexes for table `pageant_category`
 --
 ALTER TABLE `pageant_category`
-  ADD PRIMARY KEY (`pc_id`);
+  ADD PRIMARY KEY (`pc_id`),
+  ADD KEY `pc_pageant_id` (`pc_pageant_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -278,16 +275,22 @@ ALTER TABLE `generation`
   MODIFY `gen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
+-- AUTO_INCREMENT for table `gettable`
+--
+ALTER TABLE `gettable`
+  MODIFY `gt_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `pageant`
 --
 ALTER TABLE `pageant`
-  MODIFY `pag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `pag_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `pageant_category`
 --
 ALTER TABLE `pageant_category`
-  MODIFY `pc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `pc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Constraints for dumped tables
@@ -312,6 +315,12 @@ ALTER TABLE `generation`
   ADD CONSTRAINT `generation_ibfk_7` FOREIGN KEY (`ggmother2_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `generation_ibfk_8` FOREIGN KEY (`ggmother3_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `generation_ibfk_9` FOREIGN KEY (`ggmother4_dog_id`) REFERENCES `dogs` (`dog_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `pageant_category`
+--
+ALTER TABLE `pageant_category`
+  ADD CONSTRAINT `pageant_category_ibfk_1` FOREIGN KEY (`pc_pageant_id`) REFERENCES `pageant` (`pag_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

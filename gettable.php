@@ -10,40 +10,9 @@
       Browse our top quality American Bully, XL Bully, and Exotic Bully listings.
     </p>
 
+    <!-- Container where AJAX content will be injected -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-      <!-- Product Card -->
-      <div class="bg-[#1A1A1A] border border-[#333] rounded-xl p-4 hover:shadow-xl transition">
-        <img src="static/assets/bullies/x_bullies.webp" alt="Heir to the Throne" class="w-full h-48 object-cover rounded-lg mb-4">
-        <h3 class="text-lg font-semibold text-white">NW M-GRCH Heir to the Throne</h3>
-        <p class="text-sm text-[#AAAAAA] mb-2">American Bully • Champion Line</p>
-        <div class="flex justify-between items-center">
-          <button class="bg-[#FFD700] text-black px-4 py-1 rounded hover:bg-yellow-400 text-sm font-semibold">View</button>
-        </div>
-      </div>
-
-      <!-- Product Card -->
-      <div class="bg-[#1A1A1A] border border-[#333] rounded-xl p-4 hover:shadow-xl transition">
-        <img src="static/assets/bullies/exotic_bullies.webp" alt="GRCH Mack" class="w-full h-48 object-cover rounded-lg mb-4">
-        <h3 class="text-lg font-semibold text-white">GRCH BRB's Mack</h3>
-        <p class="text-sm text-[#AAAAAA] mb-2">American Bully • Muscle Build</p>
-        <div class="flex justify-between items-center">
-          <button class="bg-[#FFD700] text-black px-4 py-1 rounded hover:bg-yellow-400 text-sm font-semibold">View</button>
-        </div>
-      </div>
-
-      <!-- Product Card -->
-      <div class="bg-[#1A1A1A] border border-[#333] rounded-xl p-4 hover:shadow-xl transition">
-        <img src="static/assets/bullies/shorty.webp" alt="CH Valley" class="w-full h-48 object-cover rounded-lg mb-4">
-        <h3 class="text-lg font-semibold text-white">CH BPP's Valley</h3>
-        <p class="text-sm text-[#AAAAAA] mb-2">XL Bully • Excellent Structure</p>
-        <div class="flex justify-between items-center">
-          <button class="bg-[#FFD700] text-black px-4 py-1 rounded hover:bg-yellow-400 text-sm font-semibold">View</button>
-        </div>
-      </div>
-
-      <!-- More cards... -->
-      
+      <!-- Dynamic product cards will be injected here by gettable.js -->
     </div>
 
   </div>
@@ -52,3 +21,25 @@
 <?php
     include "src/components/footer.php";
 ?>
+<div id="gettableModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
+  <div class="bg-[#1A1A1A] rounded-xl max-w-3xl w-full p-6 relative">
+    <button id="closeModal" class="absolute top-2 right-2 text-white text-2xl">&times;</button>
+
+      <!-- NEW (link instead of iframe) -->
+      <a id="modalLink" href="#" target="_blank" rel="noopener noreferrer"
+        class="inline-block mt-4 text-blue-400 underline hover:text-blue-200">
+        Visit Social Media Profile
+      </a>
+
+
+    <!-- Image -->
+    <img id="modalImage" src="" class="w-full h-48 object-cover rounded-lg mb-4" alt="">
+
+    <!-- Info -->
+    <h2 id="modalName" class="text-xl text-white font-bold mb-2"></h2>
+    <p id="modalDescription" class="text-[#AAAAAA] text-sm"></p>
+  </div>
+</div>
+
+
+<script src="static/js/gettable.js"></script>

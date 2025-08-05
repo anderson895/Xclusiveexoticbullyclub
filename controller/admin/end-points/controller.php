@@ -231,6 +231,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
 
 
+        }else if ($_POST['requestType'] == 'UpdateGettable') {
+
+            $gt_id = $_POST['gt_id'];
+            $gt_name = $_POST['gt_name'];
+            $gt_description = $_POST['gt_description'];
+            $gt_link = $_POST['gt_link'];
+
+            // Handle Banner Image Upload
+            $uniqueBannerFileName = null;
+            if (isset($_FILES['gt_image']) && $_FILES['gt_image']['error'] === UPLOAD_ERR_OK) {
+                $uploadDir = '../../../static/upload/';
+                $fileExtension = pathinfo($_FILES['gt_image']['name'], PATHINFO_EXTENSION);
+                $uniqueBannerFileName = uniqid('gettable_', true) . '.' . $fileExtension;
+
+                move_uploaded_file($_FILES['gt_image']['tmp_name'], $uploadDir . $uniqueBannerFileName);
+            }
+
+            // Update
+            $result = $db->UpdateGettable(
+                $gt_id,
+                $gt_name,
+                $gt_description,
+                $gt_link,
+                $uniqueBannerFileName 
+            );
+
+            if ($result['status']) {
+                echo json_encode([
+                    'status' => 200,
+                    'message' => $result['message']
+                ]);
+            } else {
+                echo json_encode([
+                    'status' => 500,
+                    'message' => $result['message']
+                ]);
+            }
+
+            exit;
+
+
         }else if ($_POST['requestType'] == 'updateGenForm') {
 
             $dogRole=$_POST['dogRole'];
@@ -291,6 +332,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $event_id=$_POST['event_id'];
             $result = $db->removeEvents($event_id);
+            if ($result) {
+                    echo json_encode([
+                        'status' => 200,
+                        'message' => 'Remove successfully.'
+                    ]);
+            } else {
+                    echo json_encode([
+                        'status' => 500,
+                        'message' => 'No changes made or error updating data.'
+                    ]);
+            }
+        }else if ($_POST['requestType'] == 'removeGettable') {
+
+            $gt_id=$_POST['gt_id'];
+            $result = $db->removeGettable($gt_id);
             if ($result) {
                     echo json_encode([
                         'status' => 200,
@@ -446,6 +502,63 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
 
 
+        }else if ($_POST['requestType'] == 'AddGettable') {
+
+                $gettableName  = $_POST['gettableName'];
+                $gettableDescription = $_POST['gettableDescription'];
+                $gettableLink  = $_POST['gettableLink'];
+
+                // FILES
+                $banner = $_FILES['gettableImage'];
+
+                $uploadDir = '../../../static/upload/';
+                $dogBannerFileName = ''; // default to empty if no banner
+
+                // Check if a file was uploaded
+                if (isset($banner) && $banner['error'] === UPLOAD_ERR_OK) {
+                    // Upload Banner Image
+                    $bannerExtension = pathinfo($banner['name'], PATHINFO_EXTENSION);
+                    $dogBannerFileName = uniqid('gettable_', true) . '.' . $bannerExtension;
+                    $bannerPath = $uploadDir . $dogBannerFileName;
+
+                    $bannerUploaded = move_uploaded_file($banner['tmp_name'], $bannerPath);
+
+                    if (!$bannerUploaded) {
+                        echo json_encode([
+                            'status' => 500,
+                            'message' => 'Error uploading banner image.'
+                        ]);
+                        exit;
+                    }
+                } elseif ($banner['error'] !== UPLOAD_ERR_NO_FILE && $banner['error'] !== 0) {
+                    echo json_encode([
+                        'status' => 400,
+                        'message' => 'Invalid image upload.'
+                    ]);
+                    exit;
+                }
+
+                // Save to DB regardless if banner is uploaded or not
+                $result = $db->AddGettable(
+                    $gettableName,
+                    $gettableDescription,
+                    $gettableLink,
+                    $dogBannerFileName 
+                );
+
+                if ($result) {
+                    echo json_encode([
+                        'status' => 200,
+                        'message' => 'Posted Successfully.'
+                    ]);
+                } else {
+                    echo json_encode([
+                        'status' => 500,
+                        'message' => 'Error saving data.'
+                    ]);
+                }
+
+
         }else {
             echo '404';
         }
@@ -457,6 +570,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
    if (isset($_GET['requestType'])) {
         if ($_GET['requestType'] == 'fetch_all_registered_dogs') {
             $result = $db->fetch_all_registered_dogs();
+            echo json_encode([
+                'status' => 200,
+                'data' => $result
+            ]);
+        }else if ($_GET['requestType'] == 'fetch_all_gettable') {
+            $result = $db->fetch_all_gettable();
             echo json_encode([
                 'status' => 200,
                 'data' => $result
@@ -518,6 +637,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $pc_id=$_GET['pc_id'];
             $result = $db->fetch_category_contestants($pc_id);
+            echo json_encode([
+                'status' => 200,
+                'data' => $result
+            ]);
+        }else if ($_GET['requestType'] == 'fetch_all_pageant_and_category') {
+
+            $result = $db->fetch_all_pageant_and_category();
             echo json_encode([
                 'status' => 200,
                 'data' => $result

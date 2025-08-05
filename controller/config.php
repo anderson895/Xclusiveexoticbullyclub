@@ -1,13 +1,13 @@
 <?php
-// define("db_host", "localhost");
-// define("db_user", "root");
-// define("db_pass", "");
-// define("db_name", "xclusiveexoticbullyclub");
-
 define("db_host", "localhost");
-define("db_user", "u919948980_xclusiveexotic");
-define("db_pass", "Xclusiveexotic2025@");
-define("db_name", "u919948980_xclusiveexotic");
+define("db_user", "root");
+define("db_pass", "");
+define("db_name", "xclusiveexoticbullyclub");
+
+// define("db_host", "localhost");
+// define("db_user", "u919948980_xclusiveexotic");
+// define("db_pass", "Xclusiveexotic2025@");
+// define("db_name", "u919948980_xclusiveexotic");
 
 
 class db_connect
