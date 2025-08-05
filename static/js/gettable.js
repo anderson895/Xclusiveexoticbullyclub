@@ -5,64 +5,44 @@ $(document).ready(function () {
         data: { requestType: "fetch_all_gettable" },
         dataType: "json",
         success: function (res) {
-            if (res.status === 200 && res.data.length > 0) {
-                let html = '';
+            const grid = $('#gettableGrid');
+            grid.empty();
 
-                res.data.forEach(gettable => {
-                    html += `
-                        <div class="bg-[#1A1A1A] border border-[#333] rounded-xl p-4 hover:shadow-xl transition">
+            if (res.status === 200 && res.data.length > 0) {
+                res.data.forEach((gettable, i) => {
+                    const card = $(`
+                        <div class="bg-[#1A1A1A] border border-[#333] rounded-xl p-4 shadow-sm transform scale-95 opacity-0 transition-all duration-500 hover:shadow-2xl hover:scale-100 cursor-pointer">
                             <img src="static/upload/${gettable.gt_image}" alt="${gettable.gt_name}" class="w-full h-48 object-cover rounded-lg mb-4">
                             <h3 class="text-lg font-semibold text-white">${gettable.gt_name}</h3>
-                            <p class="text-sm text-[#AAAAAA] mb-2">${gettable.gt_description}</p>
-                            <div class="flex justify-between items-center">
-                                <button 
-                                    class="bg-[#FFD700] text-black px-4 py-1 rounded hover:bg-yellow-400 text-sm font-semibold view-btn"
-                                    data-name="${gettable.gt_name}"
-                                    data-description="${gettable.gt_description}"
-                                    data-image="static/upload/${gettable.gt_image}"
-                                    data-link="${gettable.gt_link}"
-                                >
-                                    View
-                                </button>
-                            </div>
+                            <p class="text-sm text-[#AAAAAA] mb-3">${gettable.gt_description}</p>
+                            <button
+                                class="bg-[#FFD700] text-black px-4 py-2 rounded hover:bg-yellow-400 text-sm font-semibold view-btn transition"
+                                data-link="${gettable.gt_link}">
+                                Visit Link
+                            </button>
                         </div>
-                    `;
-                });
+                    `);
 
-                $('.grid').html(html);
+                    // Append and trigger fade-in animation
+                    grid.append(card);
+                    setTimeout(() => card.removeClass('opacity-0 scale-95'), i * 100);
+                });
             } else {
-                $('.grid').html(`<p class="text-center text-[#AAAAAA] col-span-full">No data available.</p>`);
+                grid.html(`<p class="text-center text-[#AAAAAA] col-span-full">No data available.</p>`);
             }
         },
-        error: function (xhr, status, error) {
-            console.error("AJAX error:", error);
-            $('.grid').html(`<p class="text-center text-red-500 col-span-full">Failed to load data.</p>`);
+        error: function () {
+            $('#gettableGrid').html(`<p class="text-center text-red-500 col-span-full">Failed to load data.</p>`);
         }
     });
 
-    // Open modal
-    $(document).on("click", ".view-btn", function () {
-        const name = $(this).data("name");
-        const desc = $(this).data("description");
-        const image = $(this).data("image");
-        const link = $(this).data("link");
-
-        $("#modalName").text(name);
-        $("#modalDescription").text(desc);
-        $("#modalImage").attr("src", image).attr("alt", name);
-
+    // On click, open the link in a new tab
+    $(document).on('click', '.view-btn', function () {
+        const link = $(this).data('link');
         if (link) {
-            $("#modalLink").attr("href", link).show();
+            window.open(link, '_blank');
         } else {
-            $("#modalLink").hide();
+            alert("No link available.");
         }
-
-        $("#gettableModal").removeClass("hidden").addClass("flex");
-    });
-
-    // Close modal
-    $(document).on("click", "#closeModal", function () {
-        $("#gettableModal").addClass("hidden").removeClass("flex");
-        $("#modalLink").attr("href", "#").hide();
     });
 });
