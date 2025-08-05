@@ -6,28 +6,37 @@ $(document).ready(function () {
 
 
     // TO FETCH DROPDOWN BULLIES
-    $.ajax({
-        url: "../controller/admin/end-points/controller.php",
-        type: "GET",
-        data: {
-            requestType: "fetch_all_registered_dogs_once",
-            dogId: dogId,
-        },
-        dataType: "json",
-        success: function(response) {
-          
+        $.ajax({
+            url: "../controller/admin/end-points/controller.php",
+            type: "GET",
+            data: {
+                requestType: "fetch_all_registered_dogs_once",
+                dogId: dogId,
+            },
+            dataType: "json",
+            success: function(response) {
                 const dogSelect = $("#registeredDog");
+                dogSelect.empty(); // clear previous options
+                dogSelect.append('<option value="">-- Select Dog --</option>');
+
                 response.data.forEach(function(dog) {
-                        const option = $("<option>")
-                            .val(dog.dog_id)
-                            .text(dog.dog_name);
-                        dogSelect.append(option);
+                    const option = $("<option>")
+                        .val(dog.dog_id)
+                        .text(dog.dog_name);
+                    dogSelect.append(option);
                 });
-        },
-        error: function(xhr, status, error) {
-            console.error("AJAX Error:", error);
-        }
-    });
+
+                // Initialize Select2 after options are loaded
+                dogSelect.select2({
+                    placeholder: "-- Select Dog --",
+                    width: '100%',
+                    allowClear: true
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("AJAX Error:", error);
+            }
+        });
 
 
 
