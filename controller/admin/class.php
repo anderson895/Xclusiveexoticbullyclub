@@ -12,6 +12,34 @@ class global_class extends db_connect
         $this->connect();
     }
 
+      
+    public function getDataAnalytics()
+    {
+        // Query to get user count, orders count, and total sales for delivered orders
+        $query = " 
+            SELECT 
+                (SELECT COUNT(*) FROM `dogs` where dog_type_status='exclusive') AS totalExclusive,
+                (SELECT COUNT(*) FROM `dogs` WHERE `dog_type_status` = 'regular') AS totalRegular,
+                (SELECT COUNT(*) FROM `dogs` WHERE `dog_registered_status` = '1') AS totalRegistered,
+                (SELECT COUNT(*) FROM `dogs` WHERE `dog_registered_status` = '0') AS totalNotRegistered,
+                (SELECT COUNT(*) FROM `gettable` WHERE `gt_status` = '1') AS totalGettable,
+                (SELECT COUNT(*) FROM `events`) AS totalEvents
+        ";
+    
+        // Execute the query
+        $result = $this->conn->query($query);
+        
+        if ($result) {
+            // Fetch the result and return as JSON
+            $row = $result->fetch_assoc();
+            echo json_encode($row);
+        } else {
+            // Error handling if query fails
+            echo json_encode(['error' => 'Failed to retrieve counts']);
+        }
+    }
+
+
 
     public function fetch_all_gettable() {
         $query = $this->conn->prepare("SELECT * FROM gettable where gt_status='1' ORDER BY gt_id DESC");
