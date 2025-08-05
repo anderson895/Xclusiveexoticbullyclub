@@ -981,6 +981,83 @@ public function updateGenForm_registered($dogRole, $parent_dog_id, $main_dog_id)
 
 
 
+   public function UpdateSettings($admin_id, $fullname, $email, $old_password, $new_password) {
+    // Step 1: Fetch existing data
+    $query = "SELECT admin_password, admin_fullname, admin_email FROM admin WHERE admin_id = ?";
+    $stmt = $this->conn->prepare($query);
+    if (!$stmt) {
+        return "Database error: Failed to prepare SELECT statement.";
+    }
+
+    $stmt->bind_param("i", $admin_id);
+    $stmt->execute();
+    $stmt->bind_result($hashed_password, $current_fullname, $current_email);
+    if (!$stmt->fetch()) {
+        $stmt->close();
+        return "Admin not found.";
+    }
+    $stmt->close();
+
+    // Step 2: Determine what needs to be updated
+    $password_changed = !empty($new_password);
+    $fullname_changed = $fullname !== $current_fullname;
+    $email_changed = $email !== $current_email;
+
+    if (!$fullname_changed && !$email_changed && !$password_changed) {
+        return null; // No changes, not an error
+    }
+
+
+    // Step 3: If password is to be changed, verify old password first
+    if ($password_changed) {
+        if (empty($old_password)) {
+            return "Old password is required to set a new password.";
+        }
+
+        if (!password_verify($old_password, $hashed_password)) {
+            return "Old password is incorrect.";
+        }
+    }
+
+    // Step 4: Prepare the update query
+    if ($password_changed) {
+        $new_hashed_password = password_hash($new_password, PASSWORD_BCRYPT);
+        $update_query = "UPDATE admin SET admin_fullname = ?, admin_email = ?, admin_password = ? WHERE admin_id = ?";
+        $update_stmt = $this->conn->prepare($update_query);
+        if (!$update_stmt) {
+            return "Database error: Failed to prepare UPDATE statement with password.";
+        }
+        $update_stmt->bind_param("sssi", $fullname, $email, $new_hashed_password, $admin_id);
+    } else {
+        $update_query = "UPDATE admin SET admin_fullname = ?, admin_email = ? WHERE admin_id = ?";
+        $update_stmt = $this->conn->prepare($update_query);
+        if (!$update_stmt) {
+            return "Database error: Failed to prepare UPDATE statement.";
+        }
+        $update_stmt->bind_param("ssi", $fullname, $email, $admin_id);
+    }
+
+    // Step 5: Execute the update
+    if ($update_stmt->execute()) {
+        $update_stmt->close();
+        return true; // Success
+    } else {
+        $message = "Database error: Failed to update settings. " . $update_stmt->error;
+        $update_stmt->close();
+        return $message;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
      public function removeEvents($event_id) {
         // Step 1: Get the banner filename from the database
         $selectQuery = "SELECT event_banner FROM events WHERE event_id = ?";
