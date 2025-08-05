@@ -28,7 +28,13 @@ $(document).ready(function () {
                     setTimeout(() => card.removeClass('opacity-0 scale-95'), i * 100);
                 });
             } else {
-                grid.html(`<p class="text-center text-[#AAAAAA] col-span-full">No data available.</p>`);
+                grid.html(`
+                    
+                     <div class="text-center text-gray-400 mt-20">
+                            <h2 class="text-2xl font-bold mb-2">No data available at the Moment</h2>
+                            <p class="italic">Please check back later for updates.</p>
+                        </div>
+                    `);
             }
         },
         error: function () {
