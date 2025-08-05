@@ -63,24 +63,28 @@ $(document).ready(function () {
 
 
                     function limitName(name) {
-                        if (!name) return ''; 
+                        if (!name) return ''; // avoid null/undefined errors
                         return name.length > 6 ? name.slice(0, 6) + '...' : name;
                     }
-                    
-                    updateDog('father', limitName(data.father_name), data.father_image, data.gen_dog_id);
-                    updateDog('mother', limitName(data.mother_name), data.mother_image, data.gen_dog_id);
-                    updateDog('grandfather1', limitName(data.grandfather1_name), data.grandfather1_image, data.gen_dog_id);
-                    updateDog('grandmother1', limitName(data.grandmother1_name), data.grandmother1_image, data.gen_dog_id);
-                    updateDog('grandfather2', limitName(data.grandfather2_name), data.grandfather2_image, data.gen_dog_id);
-                    updateDog('grandmother2', limitName(data.grandmother2_name), data.grandmother2_image, data.gen_dog_id);
-                    updateDog('ggfather1', limitName(data.ggfather1_name), data.ggfather1_image, data.gen_dog_id);
-                    updateDog('ggmother1', limitName(data.ggmother1_name), data.ggmother1_image, data.gen_dog_id);
-                    updateDog('ggfather2', limitName(data.ggfather2_name), data.ggfather2_image, data.gen_dog_id);
-                    updateDog('ggmother2', limitName(data.ggmother2_name), data.ggmother2_image, data.gen_dog_id);
-                    updateDog('ggfather3', limitName(data.ggfather3_name), data.ggfather3_image, data.gen_dog_id);
-                    updateDog('ggmother3', limitName(data.ggmother3_name), data.ggmother3_image, data.gen_dog_id);
-                    updateDog('ggfather4', limitName(data.ggfather4_name), data.ggfather4_image, data.gen_dog_id);
-                    updateDog('ggmother4', limitName(data.ggmother4_name), data.ggmother4_image, data.gen_dog_id);
+
+                    // Apply name limiting here
+                    updateDog('father', limitName(data.father_name), data.father_image, data.father_dog_id);
+                    updateDog('mother', limitName(data.mother_name), data.mother_image, data.mother_dog_id);
+
+                    updateDog('grandfather1', limitName(data.grandfather1_name), data.grandfather1_image, data.grandfather1_dog_id);
+                    updateDog('grandmother1', limitName(data.grandmother1_name), data.grandmother1_image, data.grandmother1_dog_id);
+                    updateDog('grandfather2', limitName(data.grandfather2_name), data.grandfather2_image, data.grandfather2_dog_id);
+                    updateDog('grandmother2', limitName(data.grandmother2_name), data.grandmother2_image, data.grandmother2_dog_id);
+
+                    updateDog('ggfather1', limitName(data.ggfather1_name), data.ggfather1_image, data.ggfather1_dog_id);
+                    updateDog('ggmother1', limitName(data.ggmother1_name), data.ggmother1_image, data.ggmother1_dog_id);
+                    updateDog('ggfather2', limitName(data.ggfather2_name), data.ggfather2_image, data.ggfather2_dog_id);
+                    updateDog('ggmother2', limitName(data.ggmother2_name), data.ggmother2_image, data.ggmother2_dog_id);
+                    updateDog('ggfather3', limitName(data.ggfather3_name), data.ggfather3_image, data.ggfather3_dog_id);
+                    updateDog('ggmother3', limitName(data.ggmother3_name), data.ggmother3_image, data.ggmother3_dog_id);
+                    updateDog('ggfather4', limitName(data.ggfather4_name), data.ggfather4_image, data.ggfather4_dog_id);
+                    updateDog('ggmother4', limitName(data.ggmother4_name), data.ggmother4_image, data.ggmother4_dog_id);
+
 
                 }
             },
