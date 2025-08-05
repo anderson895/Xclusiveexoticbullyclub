@@ -684,6 +684,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'status' => 200,
                 'data' => $result
             ]);
+        }else if ($_GET['requestType'] == 'getDataAnalytics') {
+
+            $result = $db->getDataAnalytics();
+            echo json_encode([
+                'status' => 200,
+                'data' => $result
+            ]);
         }else{
             echo "404";
         }
