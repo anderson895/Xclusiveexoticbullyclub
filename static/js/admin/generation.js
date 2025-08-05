@@ -55,6 +55,9 @@ $(document).ready(function () {
                    
 
                     $('#result_dog_name').text(data.main_dog_name ?? '');
+
+                    $('.dog_code').text(data.dog_code ?? 'N/A');
+
                     updateImageOrIcon('#result_dog_image', data.main_dog_image);
                     updateImageOrIcon('#result_dog_banner', data.main_dog_banner);
                     updateDog('father', data.father_name, data.father_image,data.gen_dog_id);
