@@ -57,9 +57,11 @@ $(document).ready(function () {
                     });
                 } else {
                     container.append(`
-                        <div class="text-center text-gray-400 italic">
-                            No events found.
+                         <div class="text-center text-gray-400 mt-20">
+                            <h2 class="text-2xl font-bold mb-2">No Events Posted at the Moment</h2>
+                            <p class="italic">Please check back later for updates.</p>
                         </div>
+
                     `);
                 }
             }
