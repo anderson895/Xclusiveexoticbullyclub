@@ -1279,6 +1279,9 @@
   .text-blue-500 {
     color: var(--color-blue-500);
   }
+  .text-blue-600 {
+    color: var(--color-blue-600);
+  }
   .text-gray-300 {
     color: var(--color-gray-300);
   }
@@ -1300,11 +1303,17 @@
   .text-green-400 {
     color: var(--color-green-400);
   }
+  .text-green-600 {
+    color: var(--color-green-600);
+  }
   .text-pink-400 {
     color: var(--color-pink-400);
   }
   .text-purple-300 {
     color: var(--color-purple-300);
+  }
+  .text-purple-600 {
+    color: var(--color-purple-600);
   }
   .text-red-400 {
     color: var(--color-red-400);
@@ -2159,6 +2168,11 @@
   .lg\:grid-cols-3 {
     @media (width >= 64rem) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .lg\:grid-cols-4 {
+    @media (width >= 64rem) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
   .lg\:flex-row {
