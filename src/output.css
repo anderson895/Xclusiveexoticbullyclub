@@ -915,6 +915,9 @@
   .bg-\[\#1A1A1A\]\/90 {
     background-color: color-mix(in oklab, #1A1A1A 90%, transparent);
   }
+  .bg-\[\#1a1a1a\] {
+    background-color: #1a1a1a;
+  }
   .bg-\[\#2B2B2B\] {
     background-color: #2B2B2B;
   }
