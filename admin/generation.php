@@ -36,7 +36,7 @@ include "../src/components/admin/nav.php";
             TESLA <span class="text-blue-400 text-lg">♂</span>
           </h2>
           <span class="text-sm text-gray-400">
-            XEBC NO. <span id="dog_code" class="text-white font-medium">990000011578227</span>
+            XEBC NO. <span class="" class="text-white font-medium">990000011578227</span>
           </span>
         </div>
       </div>

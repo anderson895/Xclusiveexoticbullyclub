@@ -41,7 +41,7 @@ $(document).ready(function () {
                     $('#dog_facebook_name').text(data.dog_facebook_name ?? 'N/A');
                     $('.dog_date_of_birth').text(data.dog_date_of_birth ?? 'N/A');
                     $('#dog_contact_number').text(data.dog_contact_number ?? 'N/A');
-                    $('#dog_code').text(data.dog_code ?? 'N/A');
+                    $('.dog_code').text(data.dog_code ?? 'N/A');
                     $('.dog_color').text(data.dog_color ?? 'N/A');
                     $('.dog_height').text(data.dog_height ?? 'N/A');
                     $('#dog_ig_name').text(data.dog_ig_name ?? 'N/A');
