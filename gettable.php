@@ -11,9 +11,7 @@
     </p>
 
     <!-- Container where AJAX content will be injected -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Dynamic product cards will be injected here by gettable.js -->
-    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 px-4 py-6" id="gettableGrid"></div>
 
   </div>
 </section>
@@ -21,25 +19,9 @@
 <?php
     include "src/components/footer.php";
 ?>
-<div id="gettableModal" class="fixed inset-0 bg-black bg-opacity-70 hidden items-center justify-center z-50">
-  <div class="bg-[#1A1A1A] rounded-xl max-w-3xl w-full p-6 relative">
-    <button id="closeModal" class="absolute top-2 right-2 text-white text-2xl">&times;</button>
-
-      <!-- NEW (link instead of iframe) -->
-      <a id="modalLink" href="#" target="_blank" rel="noopener noreferrer"
-        class="inline-block mt-4 text-blue-400 underline hover:text-blue-200">
-        Visit Social Media Profile
-      </a>
 
 
-    <!-- Image -->
-    <img id="modalImage" src="" class="w-full h-48 object-cover rounded-lg mb-4" alt="">
 
-    <!-- Info -->
-    <h2 id="modalName" class="text-xl text-white font-bold mb-2"></h2>
-    <p id="modalDescription" class="text-[#AAAAAA] text-sm"></p>
-  </div>
-</div>
 
 
 <script src="static/js/gettable.js"></script>
