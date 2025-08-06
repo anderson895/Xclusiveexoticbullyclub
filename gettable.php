@@ -5,7 +5,7 @@
     <div id="gettableHeader" style="display: none;">
       <h2 class="text-3xl text-[#FFD700] font-bold text-center uppercase mb-4">GETTABLE</h2>
       <p class="text-center text-[#AAAAAA] text-sm italic mb-6">
-        Browse our top quality American Bully, XL Bully, and Exotic Bully listings.
+        Browse our top quality Exotic Bully and Frenchbulldog.
       </p>
     </div>
 
