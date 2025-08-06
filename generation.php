@@ -50,7 +50,14 @@
 
 
   <!-- Blurred Background Layer -->
-  <div class="absolute inset-0 bg-[url('../static/logo.jpg')] bg-cover bg-no-repeat bg-fixed filter blur-md scale-110 z-0 bg-[center_30%]"></div>
+  <div class="absolute inset-0 
+            bg-[url('../static/logo.jpg')] 
+            bg-cover bg-no-repeat bg-fixed 
+            filter blur-sm sm:blur-md 
+            scale-110 z-0 
+            bg-[center_30%] sm:bg-[center_60%]">
+  </div>
+
 
 
    <!-- Content Layer -->
