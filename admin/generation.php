@@ -17,7 +17,16 @@ include "../src/components/admin/nav.php";
 
 
 
-<div class="w-full mx-auto mt-6 bg-gradient-to-br from-zinc-900 to-black text-white rounded-2xl overflow-hidden shadow-2xl">
+<div class="relative w-full mx-auto mt-6 rounded-2xl overflow-hidden shadow-2xl">
+
+
+  <!-- Blurred Background Layer -->
+  <div class="absolute inset-0 bg-[url('../static/logo.jpg')] bg-cover bg-no-repeat bg-fixed filter blur-md scale-110 z-0 bg-[center_30%]"></div>
+
+
+   <!-- Content Layer -->
+  <div class="relative z-10 bg-[#0D0D0D]/80 backdrop-blur-sm rounded-2xl">
+
   <!-- Header: Avatar, Name, CBR No. -->
   <div class="px-5 py-5 bg-[#0D0D0D] border-b border-gray-700 rounded-t-2xl ">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
@@ -32,10 +41,11 @@ include "../src/components/admin/nav.php";
 
         <!-- Dog Name and XEBC -->
         <div class="flex flex-col leading-tight">
-          <h2 id="result_dog_name" class="text-xl font-bold text-yellow-300 uppercase tracking-wide flex items-center gap-1">
-            TESLA <span class="text-blue-400 text-lg">♂</span>
+            <h2 id="result_dog_name" class="text-xl font-bold text-yellow-300 uppercase tracking-wide flex items-center gap-1">
+            TESLA 
           </h2>
-          <span class="text-sm text-gray-400">
+
+          <span class="text-sm text-gray-400 markAsRegistered">
             XEBC NO. <span class="dog_code" class="text-white font-medium"></span>
           </span>
         </div>
@@ -49,44 +59,48 @@ include "../src/components/admin/nav.php";
   <!-- Image Section -->
   <div class="w-full sm:w-1/2 aspect-[4/3] sm:aspect-auto">
     <img
+      id="result_dog_banner"
       src="#"
       alt="Dog Banner"
       class="w-full h-full object-cover"
-      id="result_dog_banner"
+
     />
   </div>
 
-  <!-- Details Section -->
-<div class="w-full sm:w-1/2 px-5 py-6 space-y-6 text-sm flex flex-col items-center text-center mt-2 ">
-
+<!-- Details Section (visible only on sm and up) -->
+<div class="hidden sm:flex w-full px-5 py-8 text-lg flex-col items-center justify-center text-center mt-4 space-y-6 max-w-xl mx-auto">
 
   <!-- Dog Info -->
   <div class="space-y-2">
-    <p><span class="font-semibold text-gray-300">Owner:</span> <span class="capitalize text-white" id="dog_owner_name">Lucy Ethan</span></p>
-    <p><span class="font-semibold text-gray-300">Country:</span> <span class="capitalize text-white" id="dog_country">Philippines</span></p>
-    <p><span class="font-semibold text-gray-300">Breeder:</span> <span class="capitalize text-white" id="dog_breeder_name">Juan Dela Cruz</span></p>
+    <p><span class="font-semibold text-gray-300">Owner:</span> <span class="capitalize text-white dog_owner_name">Lucy Ethan</span></p>
+    <p><span class="font-semibold text-gray-300">Country:</span> <span class="capitalize text-white dog_country">Philippines</span></p>
+    <p><span class="font-semibold text-gray-300">Breeder:</span> <span class="capitalize text-white dog_breeder_name">Juan Dela Cruz</span></p>
   </div>
 
   <!-- Tags -->
-  <div class="flex flex-wrap justify-center gap-3">
-    <span class="px-3 py-1 border border-yellow-400 rounded-full bg-yellow-500/10 flex items-center gap-1 hover:bg-yellow-400/20 transition">
-      Height: <span id="dog_height">34cm</span>
+  <div class="flex flex-wrap justify-center gap-4 text-base">
+    <span class="px-4 py-2 border border-yellow-400 rounded-full bg-yellow-500/10 flex items-center gap-2 hover:bg-yellow-400/20 transition">
+      Height: <span class="dog_height">34cm</span>
     </span>
 
-    <span class="px-3 py-1 border border-purple-400 rounded-full bg-purple-500/10 flex items-center gap-1 hover:bg-purple-400/20 transition">
-      <span class="material-icons text-purple-300 text-sm">palette</span>
-      <span id="dog_color">Lilac</span>
+    <span class="px-4 py-2 border border-purple-400 rounded-full bg-purple-500/10 flex items-center gap-2 hover:bg-purple-400/20 transition">
+      <span class="material-icons text-purple-300 text-base">palette</span>
+      <span class="dog_color">Lilac</span>
     </span>
 
-    <span class="px-3 py-1 border border-yellow-500 rounded-full bg-yellow-500/10 flex items-center gap-1 hover:bg-yellow-400/20 transition">
-      <span class="material-icons text-yellow-400 text-sm">cake</span>
-      <span id="dog_date_of_birth">2023/04/01</span>
+    <span class="px-4 py-2 border border-yellow-500 rounded-full bg-yellow-500/10 flex items-center gap-2 hover:bg-yellow-400/20 transition">
+      <span class="material-icons text-yellow-400 text-base">cake</span>
+      <span class="dog_date_of_birth">2023/04/01</span>
     </span>
   </div>
+
 </div>
 
 
+
+
 </div>
+
 
 
 
