@@ -12,7 +12,7 @@ include "../src/components/admin/nav.php";
 </div>
 
 <!-- Dashboard Summary Cards -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-6">
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-6">
   <div class="bg-[#1A1A1A] p-4 rounded-lg shadow text-center border border-[#333]">
     <p class="text-[#CCCCCC] text-sm">Total Exclusive</p>
     <h2 class="text-3xl font-bold text-[#FFD700]" id="totalExclusive">0</h2>
@@ -25,10 +25,7 @@ include "../src/components/admin/nav.php";
     <p class="text-[#CCCCCC] text-sm">Total Registered</p>
     <h2 class="text-3xl font-bold text-[#FFD700]" id="totalRegistered">0</h2>
   </div>
-  <!-- <div class="bg-[#1A1A1A] p-4 rounded-lg shadow text-center border border-[#333]">
-    <p class="text-[#CCCCCC] text-sm">Total Not Registered</p>
-    <h2 class="text-3xl font-bold text-[#FFD700]" id="totalNotRegistered">0</h2>
-  </div> -->
+
   <div class="bg-[#1A1A1A] p-4 rounded-lg shadow text-center border border-[#333]">
     <p class="text-[#CCCCCC] text-sm">Total Gettable</p>
     <h2 class="text-3xl font-bold text-[#FFD700]" id="totalGettable">0</h2>
