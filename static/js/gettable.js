@@ -7,22 +7,24 @@ $(document).ready(function () {
         success: function (res) {
             const grid = $('#gettableGrid');
             const header = $('#gettableHeader');
-            grid.empty(); // Clear previous data
+            grid.empty();
 
             if (res.status === 200 && res.data.length > 0) {
-                header.show(); // Show the heading if there's data
+                header.show();
 
                 res.data.forEach((gettable, i) => {
-                    const fullDesc = gettable.gt_description;
-                    const shortDesc = fullDesc.length > 60 ? fullDesc.substring(0, 60) + '...' : fullDesc;
-                    const showViewMore = fullDesc.length > 60;
+                    const fullDescription = gettable.gt_description;
+                    const isLong = fullDescription.length > 60;
+                    const shortDescription = isLong ? fullDescription.substring(0, 60) + "..." : fullDescription;
 
                     const card = $(`
                         <div class="bg-[#1A1A1A] border border-[#333] rounded-xl p-4 shadow-sm transform scale-95 opacity-0 transition-all duration-500 hover:shadow-2xl hover:scale-100 cursor-pointer">
                             <img src="static/upload/${gettable.gt_image}" alt="${gettable.gt_name}" class="w-full h-48 object-cover rounded-lg mb-4">
                             <h3 class="text-lg font-semibold text-white">${gettable.gt_name}</h3>
-                            <p class="text-sm text-[#AAAAAA] mb-2 description">${shortDesc}</p>
-                            ${showViewMore ? `<button class="text-yellow-400 text-xs underline view-more-btn mb-3" data-full="${fullDesc.replace(/"/g, '&quot;')}">View More</button>` : ''}
+                            <p class="text-sm text-[#AAAAAA] mb-3 description" data-full="${fullDescription}">
+                                ${shortDescription}
+                                ${isLong ? '<span class="toggle-view text-blue-400 cursor-pointer underline ml-1">View More</span>' : ''}
+                            </p>
                             <button
                                 class="bg-[#FFD700] text-black px-4 py-2 rounded hover:bg-yellow-400 text-sm font-semibold view-btn transition"
                                 data-link="${gettable.gt_link}">
@@ -35,7 +37,7 @@ $(document).ready(function () {
                     setTimeout(() => card.removeClass('opacity-0 scale-95'), i * 100);
                 });
             } else {
-                header.hide(); // Hide the heading if no data
+                header.hide();
                 grid.html(`
                     <div class="text-gray-400 text-center col-span-full mt-20">
                         <h2 class="text-2xl font-bold mb-2">No data available at the moment</h2>
@@ -53,7 +55,7 @@ $(document).ready(function () {
         }
     });
 
-    // Handle link clicks
+    // Handle external link
     $(document).on('click', '.view-btn', function () {
         const link = $(this).data('link');
         if (link) {
@@ -63,12 +65,17 @@ $(document).ready(function () {
         }
     });
 
-    // Handle 'View More' click to show full description
-    $(document).on('click', '.view-more-btn', function () {
-        const fullText = $(this).data('full');
-        const descPara = $(this).siblings('.description');
+    // Toggle full description
+    $(document).on('click', '.toggle-view', function () {
+        const desc = $(this).closest('.description');
+        const fullText = desc.data('full');
+        const isExpanded = $(this).text() === 'View Less';
 
-        descPara.text(fullText);
-        $(this).remove(); // remove 'View More' button after expanding
+        if (isExpanded) {
+            const short = fullText.substring(0, 60) + '...';
+            desc.html(`${short} <span class="toggle-view text-blue-400 cursor-pointer underline ml-1">View More</span>`);
+        } else {
+            desc.html(`${fullText} <span class="toggle-view text-blue-400 cursor-pointer underline ml-1">View Less</span>`);
+        }
     });
 });
