@@ -60,16 +60,16 @@ include "../src/components/admin/nav.php";
 <!-- Container Section -->
 <div class="flex flex-col sm:flex-row bg-[#0D0D0D] overflow-hidden border border-gray-700 text-white markAsRegistered">
 
-  <!-- Image Section -->
-  <div class="w-full sm:w-1/2 aspect-[4/3] sm:aspect-auto">
-    <img
-      id="result_dog_banner"
-      src="#"
-      alt="Dog Banner"
-      class="w-full h-full object-cover"
+<!-- Image Section -->
+<div class="w-full sm:w-1/2 aspect-[4/3]">
+  <img
+    id="result_dog_banner"
+    src="#"
+    alt="Dog Banner"
+    class="w-full h-full object-cover"
+  />
+</div>
 
-    />
-  </div>
 
 <!-- Details Section (visible only on sm and up) -->
 <div class="hidden sm:flex w-full px-5 py-8 text-lg flex-col items-center justify-center text-center mt-4 space-y-6 max-w-xl mx-auto">
