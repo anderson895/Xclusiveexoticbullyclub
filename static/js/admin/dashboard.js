@@ -57,7 +57,6 @@ $(document).ready(function () {
               stats.totalExclusive,
               stats.totalRegular,
               stats.totalRegistered,
-              stats.totalNotRegistered,
               stats.totalGettable,
               stats.totalEvents
             ]
@@ -67,7 +66,6 @@ $(document).ready(function () {
               'Exclusive',
               'Regular',
               'Registered',
-              'Not Registered',
               'Gettable',
               'Events'
             ],
