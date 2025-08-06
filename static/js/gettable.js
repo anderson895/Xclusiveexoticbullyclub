@@ -21,10 +21,10 @@ $(document).ready(function () {
                         <div class="bg-[#1A1A1A] border border-[#333] rounded-xl p-4 shadow-sm transform scale-95 opacity-0 transition-all duration-500 hover:shadow-2xl hover:scale-100 cursor-pointer">
                             <img src="static/upload/${gettable.gt_image}" alt="${gettable.gt_name}" class="w-full h-48 object-cover rounded-lg mb-4">
                             <h3 class="text-lg font-semibold text-white">${gettable.gt_name}</h3>
-                            <p class="text-sm text-[#AAAAAA] mb-3 description" data-full="${fullDescription}">
+                            <p class="text-sm text-[#AAAAAA] mb-1 description" data-full="${fullDescription}">
                                 ${shortDescription}
-                                ${isLong ? '<span class="toggle-view text-blue-400 cursor-pointer underline ml-1">View More</span>' : ''}
                             </p>
+                            ${isLong ? '<span class="toggle-view text-blue-400 text-sm cursor-pointer underline block mb-3">See More</span>' : '<div class="mb-3"></div>'}
                             <button
                                 class="bg-[#FFD700] text-black px-4 py-2 rounded hover:bg-yellow-400 text-sm font-semibold view-btn transition"
                                 data-link="${gettable.gt_link}">
@@ -67,15 +67,17 @@ $(document).ready(function () {
 
     // Toggle full description
     $(document).on('click', '.toggle-view', function () {
-        const desc = $(this).closest('.description');
+        const desc = $(this).prev('.description');
         const fullText = desc.data('full');
-        const isExpanded = $(this).text() === 'View Less';
+        const isExpanded = $(this).text() === 'Less';
 
         if (isExpanded) {
             const short = fullText.substring(0, 60) + '...';
-            desc.html(`${short} <span class="toggle-view text-blue-400 cursor-pointer underline ml-1">View More</span>`);
+            desc.html(short);
+            $(this).text('See More');
         } else {
-            desc.html(`${fullText} <span class="toggle-view text-blue-400 cursor-pointer underline ml-1">View Less</span>`);
+            desc.html(fullText);
+            $(this).text('Less');
         }
     });
 });
