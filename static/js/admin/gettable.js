@@ -116,7 +116,10 @@
                         <tr class="hover:bg-[#2B2B2B] transition-colors">
                             <td class="p-3 text-center font-mono">${count++}</td>
                             <td class="p-3 text-center font-mono">${gettable.gt_name}</td>
-                            <td class="p-3 text-center font-semibold">${gettable.gt_description}</td>
+                            <td class="p-3 text-center font-semibold">
+                            ${gettable.gt_description.length > 60 ? gettable.gt_description.substring(0, 60) + '...' : gettable.gt_description}
+                            </td>
+
                             <td class="p-3 text-center font-semibold">${gettable.gt_link}</td>
 
                             <!-- Banner Image Column -->

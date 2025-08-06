@@ -13,11 +13,16 @@ $(document).ready(function () {
                 header.show(); // Show the heading if there's data
 
                 res.data.forEach((gettable, i) => {
+                    const fullDesc = gettable.gt_description;
+                    const shortDesc = fullDesc.length > 60 ? fullDesc.substring(0, 60) + '...' : fullDesc;
+                    const showViewMore = fullDesc.length > 60;
+
                     const card = $(`
                         <div class="bg-[#1A1A1A] border border-[#333] rounded-xl p-4 shadow-sm transform scale-95 opacity-0 transition-all duration-500 hover:shadow-2xl hover:scale-100 cursor-pointer">
                             <img src="static/upload/${gettable.gt_image}" alt="${gettable.gt_name}" class="w-full h-48 object-cover rounded-lg mb-4">
                             <h3 class="text-lg font-semibold text-white">${gettable.gt_name}</h3>
-                            <p class="text-sm text-[#AAAAAA] mb-3">${gettable.gt_description}</p>
+                            <p class="text-sm text-[#AAAAAA] mb-2 description">${shortDesc}</p>
+                            ${showViewMore ? `<button class="text-yellow-400 text-xs underline view-more-btn mb-3" data-full="${fullDesc.replace(/"/g, '&quot;')}">View More</button>` : ''}
                             <button
                                 class="bg-[#FFD700] text-black px-4 py-2 rounded hover:bg-yellow-400 text-sm font-semibold view-btn transition"
                                 data-link="${gettable.gt_link}">
@@ -56,5 +61,14 @@ $(document).ready(function () {
         } else {
             alert("No link available.");
         }
+    });
+
+    // Handle 'View More' click to show full description
+    $(document).on('click', '.view-more-btn', function () {
+        const fullText = $(this).data('full');
+        const descPara = $(this).siblings('.description');
+
+        descPara.text(fullText);
+        $(this).remove(); // remove 'View More' button after expanding
     });
 });
