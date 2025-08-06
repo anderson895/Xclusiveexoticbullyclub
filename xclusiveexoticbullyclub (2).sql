@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 05, 2025 at 03:00 AM
+-- Generation Time: Aug 06, 2025 at 06:07 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,7 +39,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `admin_fullname`, `admin_email`, `admin_password`) VALUES
-(1, 'Xclusiveexoticbullyclub', 'andersonandy046@gmail.com', '$2a$12$yN0Q7Y3V3ACPIjLgVFNRnus/Kp58LjvbLo98IVZ/23YjQ.bXgW1UW');
+(1, 'Xclusiveexoticbullycluba', 'admin@gmail.com', '$2y$10$SvNa4CqhogtDHqFep2WJauXS8gfjO4gAfLO6COUlfmDg70R8BhToO');
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,9 @@ INSERT INTO `dogs` (`dog_id`, `dog_code`, `dog_name`, `dog_date_registration`, `
 (45, '888000005', 'black cali', NULL, 'male', NULL, NULL, 'dog_688dd359e373a8.70783033.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (46, '888000006', 'goliath ii cali', NULL, 'male', NULL, NULL, 'dog_688dd37f891c26.53429986.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
 (47, '888000007', 'fuska', NULL, 'male', NULL, NULL, 'dog_688dd39c54dbf3.38282957.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
-(49, '888000008', 'TESLA', '2025-08-03', 'female', 'Lucy Ethan', '范宏林', 'dog_688ee227a60065.24187610.jpg', 'dog_banner_688ee227a60265.44875305.webp', 'Philippines', 'Brown', '4ft', '2025-08-03', '09270828243', 'Lucy Ethan', 'Ethan Glen P.Sala', 'Ethan Glen P.Sala', '', 'regular', 1);
+(49, '888000008', 'TESLA', '2025-08-03', 'female', 'Lucy Ethan', '范宏林', 'dog_688ee227a60065.24187610.jpg', 'dog_banner_688ee227a60265.44875305.webp', 'Philippines', 'Brown', '4ft', '2025-08-03', '09270828243', 'Lucy Ethan', 'Ethan Glen P.Sala', 'Ethan Glen P.Sala', 'bjjj', 'regular', 1),
+(50, '888000009', 'sungit', NULL, NULL, NULL, NULL, 'dog_6891c2f7a38302.12879359.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0),
+(51, '888000010', 'sungittttttttttttttttttttttttttttttttttttttttttttttttttsssss', NULL, NULL, NULL, NULL, 'dog_6891c30f395533.60308568.jpg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -130,8 +132,8 @@ CREATE TABLE `generation` (
 --
 
 INSERT INTO `generation` (`gen_id`, `gen_dog_id`, `father_dog_id`, `mother_dog_id`, `grandfather1_dog_id`, `grandmother1_dog_id`, `grandfather2_dog_id`, `grandmother2_dog_id`, `ggfather1_dog_id`, `ggmother1_dog_id`, `ggfather2_dog_id`, `ggmother2_dog_id`, `ggfather3_dog_id`, `ggmother3_dog_id`, `ggfather4_dog_id`, `ggmother4_dog_id`) VALUES
-(17, 41, 42, 43, 44, 45, 46, 47, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 49, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(17, 41, 42, 43, 44, 45, 46, 47, NULL, NULL, 49, NULL, NULL, 49, 49, NULL),
+(19, 49, 41, 51, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -142,10 +144,18 @@ INSERT INTO `generation` (`gen_id`, `gen_dog_id`, `father_dog_id`, `mother_dog_i
 CREATE TABLE `gettable` (
   `gt_id` int(11) NOT NULL,
   `gt_name` varchar(60) NOT NULL,
-  `gt_description` varchar(60) NOT NULL,
+  `gt_description` text NOT NULL,
   `gt_image` varchar(255) NOT NULL,
+  `gt_link` varchar(255) NOT NULL,
   `gt_status` int(11) NOT NULL DEFAULT 1 COMMENT '0=deleted,1=active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `gettable`
+--
+
+INSERT INTO `gettable` (`gt_id`, `gt_name`, `gt_description`, `gt_image`, `gt_link`, `gt_status`) VALUES
+(3, 'name ng dog', 'description niya', 'gettable_68916794284203.33676171.jpg', 'https://www.facebook.com/ethanpascualstevenson', 1);
 
 -- --------------------------------------------------------
 
@@ -183,6 +193,13 @@ CREATE TABLE `pageant_category` (
   `pc_status` int(11) NOT NULL DEFAULT 1 COMMENT '0=deleted,1=active',
   `pc_date_added` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pageant_category`
+--
+
+INSERT INTO `pageant_category` (`pc_id`, `pc_pageant_id`, `pc_category_name`, `pc_contestant`, `pc_status`, `pc_date_added`) VALUES
+(29, 6, 'sef', '[{\"id\":\"49\",\"points\":\"1\"}]', 0, '2025-08-05 03:43:19');
 
 --
 -- Indexes for dumped tables
@@ -260,13 +277,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `dogs`
 --
 ALTER TABLE `dogs`
-  MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `dog_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `event_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `generation`
@@ -278,7 +295,7 @@ ALTER TABLE `generation`
 -- AUTO_INCREMENT for table `gettable`
 --
 ALTER TABLE `gettable`
-  MODIFY `gt_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `gt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pageant`
@@ -290,7 +307,7 @@ ALTER TABLE `pageant`
 -- AUTO_INCREMENT for table `pageant_category`
 --
 ALTER TABLE `pageant_category`
-  MODIFY `pc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `pc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Constraints for dumped tables
