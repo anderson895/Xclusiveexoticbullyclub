@@ -61,12 +61,12 @@ include "../src/components/admin/nav.php";
 <div class="flex flex-col sm:flex-row bg-[#0D0D0D] overflow-hidden border border-gray-700 text-white markAsRegistered">
 
 <!-- Image Section -->
-<div class="w-full sm:w-1/2">
+<div class="w-full max-h-60 sm:max-h-72 overflow-hidden">
   <img
     id="result_dog_banner"
     src="#"
     alt="Dog Banner"
-    class="w-full h-auto object-cover aspect-[4/3] sm:aspect-auto"
+    class="w-full h-full object-cover"
   />
 </div>
 
