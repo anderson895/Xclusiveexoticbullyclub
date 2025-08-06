@@ -46,8 +46,15 @@
 </div>
 
 
-<div class="w-full mx-auto mt-6 bg-gradient-to-br from-zinc-900 to-black text-white rounded-2xl overflow-hidden shadow-2xl">
+<div class="relative w-full mx-auto mt-6 rounded-2xl overflow-hidden shadow-2xl">
 
+
+  <!-- Blurred Background Layer -->
+  <div class="absolute inset-0 bg-[url('../static/logo.jpg')] bg-cover bg-no-repeat bg-fixed filter blur-md scale-110 z-0 bg-[center_30%]"></div>
+
+
+   <!-- Content Layer -->
+  <div class="relative z-10 bg-[#0D0D0D]/80 backdrop-blur-sm rounded-2xl">
 
   <!-- Header: Avatar, Name, CBR No. -->
   <div class="px-5 py-5 bg-[#0D0D0D] border-b border-gray-700 rounded-t-2xl ">
@@ -127,7 +134,7 @@
 
 
 <!--generation tree section -->
-<div class="max-w-screen-xl mx-auto space-y-8 pb-20 px-2 mt-8 markAsRegistered" >
+  <div class="max-w-screen-xl mx-auto space-y-8 pb-20 px-2 mt-8 markAsRegistered" >
 
 
       <!-- Generation 1: 1 Couple -->
