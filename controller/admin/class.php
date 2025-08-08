@@ -379,6 +379,89 @@ public function UpdateDog(
 
 
 
+  public function fetch_all_registered_dogs_page_limit($limit, $offset) {
+    $query = $this->conn->prepare("
+        SELECT * 
+        FROM dogs 
+        WHERE dog_registered_status = '1' 
+        ORDER BY dog_id DESC 
+        LIMIT ? OFFSET ?
+    ");
+    $query->bind_param("ii", $limit, $offset);
+
+    if ($query->execute()) {
+        $result = $query->get_result();
+        $dogs = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $dogs[] = $row;
+        }
+
+        return $dogs;
+    }
+    return []; 
+}
+
+public function count_all_registered_dogs() {
+    $result = $this->conn->query("
+        SELECT COUNT(*) as total 
+        FROM dogs 
+        WHERE dog_registered_status = '1'
+    ");
+    $row = $result->fetch_assoc();
+    return (int)$row['total'];
+}
+
+
+
+
+
+
+
+
+
+
+
+//START FOR GETTABLE
+public function fetch_all_gettable_page_limit($limit, $offset) {
+    $query = $this->conn->prepare("
+        SELECT * FROM gettable where gt_status='1' ORDER BY gt_id DESC
+        LIMIT ? OFFSET ?
+    ");
+    $query->bind_param("ii", $limit, $offset);
+
+    if ($query->execute()) {
+        $result = $query->get_result();
+        $dogs = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $dogs[] = $row;
+        }
+
+        return $dogs;
+    }
+    return []; 
+}
+
+public function count_all_gettable() {
+    $result = $this->conn->query("
+        SELECT COUNT(*) as total 
+        FROM gettable where gt_status='1'
+    ");
+    $row = $result->fetch_assoc();
+    return (int)$row['total'];
+} 
+// END FOR GATTABLE
+
+
+
+
+
+
+
+
+
+
 
 
 

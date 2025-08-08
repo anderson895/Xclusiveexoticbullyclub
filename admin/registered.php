@@ -15,6 +15,8 @@ include "../src/components/admin/nav.php";
   </div>
 </div>
 
+
+
 <!-- Table Card -->
 <div class="bg-[#1A1A1A] rounded-lg shadow-lg p-6 text-[#CCCCCC]">
 
@@ -29,29 +31,31 @@ include "../src/components/admin/nav.php";
   </div>
 
   <!-- Table Container -->
-  <div class="overflow-x-auto rounded-md">
-    <table class="w-full text-sm text-left text-[#CCCCCC]">
-      <thead class="bg-[#0D0D0D] text-[#FFD700] uppercase text-xs">
-        <tr>
-          <th class="p-3">Code</th>
-          <th class="p-3">Image</th>
-          <th class="p-3">Name</th>
-          <th class="p-3">Owner</th>
-          <th class="p-3">Breeder</th>
-          <th class="p-3">Country</th>
-          <th class="p-3">Color</th>
-          <th class="p-3">Type</th>
-          <th class="p-3">Birthday</th>
-          <th class="p-3">Gender</th>
-          <th class="p-3 text-center">Action</th>
-        </tr>
-      </thead>
-      <tbody id="dogTableBody" class="divide-y divide-gray-700">
-        <!-- Dynamic Data -->
-      </tbody>
-    </table>
-  </div>
+<div class="overflow-x-auto rounded-md">
+  <table class="w-full text-sm text-left text-[#CCCCCC]">
+    <thead class="bg-[#0D0D0D] text-[#FFD700] uppercase text-xs">
+      <tr>
+        <th class="p-3">Code</th>
+        <th class="p-3">Image</th>
+        <th class="p-3">Name</th>
+        <th class="p-3">Owner</th>
+        <th class="p-3">Breeder</th>
+        <th class="p-3">Country</th>
+        <th class="p-3">Color</th>
+        <th class="p-3">Type</th>
+        <th class="p-3">Birthday</th>
+        <th class="p-3">Gender</th>
+        <th class="p-3 text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody id="dogTableBody" class="divide-y divide-gray-700">
+      <!-- Dynamic Data -->
+    </tbody>
+  </table>
 </div>
+
+<!-- Pagination -->
+<div id="pagination" class="mt-4 flex justify-center gap-2"></div>
 
 
 
