@@ -100,76 +100,81 @@
   function loadTable(page = 1) {
     currentPage = page;
 
-    $.ajax({
-      url: "../controller/admin/end-points/controller.php",
-      method: "GET",
-      data: { 
-        requestType: "fetch_all_gettable_page_limit",
-        page: page,
-        limit: limit
-      },
-      dataType: "json",
-      success: function (res) {
+   $.ajax({
+    url: "../controller/admin/end-points/controller.php",
+    method: "GET",
+    data: { 
+      requestType: "fetch_all_gettable_page_limit",
+      page: page,
+      limit: limit
+    },
+    dataType: "json",
+    beforeSend: function () {
+      // Show loading spinner
+      $('#outputTableBody').html(`
+        <tr>
+          <td colspan="11" class="p-6 text-center">
+            <div class="flex items-center justify-center space-x-2">
+              <div class="w-6 h-6 border-2 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+              <span class="text-yellow-400 font-medium">Loading...</span>
+            </div>
+          </td>
+        </tr>
+      `);
+      $('#pagination').empty();
+    },
+    success: function (res) {
+      let count = 1;
+      $('#outputTableBody').empty();
 
-         let count = 1;
-
-        $('#outputTableBody').empty();
-
-        if (res.status === 200 && res.data.length > 0) {
-          res.data.forEach(gettable => {
-            $('#outputTableBody').append(`
-              <tr class="hover:bg-[#2B2B2B] transition-colors">
-                            <td class="p-3 text-center font-mono">${count++}</td>
-                            <td class="p-3 text-center font-mono">${gettable.gt_name}</td>
-                            <td class="p-3 text-center font-semibold">
-                            ${gettable.gt_description 
-                                ? (gettable.gt_description.length > 60 
-                                    ? gettable.gt_description.substring(0, 60) + '...' 
-                                    : gettable.gt_description)
-                                : 'N/A'}
-                            </td>
-
-                            <td class="p-3 text-center font-semibold">${gettable.gt_link}</td>
-
-                            <!-- Banner Image Column -->
-                           <td class="p-3">
-                                <div class="flex justify-center items-center">
-                                    ${gettable.gt_image ? 
-                                        `<img src="../static/upload/${gettable.gt_image}" alt="Banner" class="w-20 h-12 object-cover rounded" />`
-                                        : 
-                                        '<span class="text-white-500 p-3 text-center font-semibold">N/A</span>'}
-                                </div>
-                            </td>
-
-
-                            <td class="p-3 text-center">
-                                <button class="viewDetailsBtn bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
-                                data-gt_id='${gettable.gt_id}'
-                                data-gt_name='${gettable.gt_name}'
-                                data-gt_description='${gettable.gt_description}'
-                                data-gt_link='${gettable.gt_link}'
-                                
-                                >Details</button>
-                                <button class="removeBtn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition"
-                                data-gt_id='${gettable.gt_id}'
-                                data-gt_name='${gettable.gt_name}'>Remove</button>
-                            </td>
-                            </tr>
-            `);
-          });
-
-          renderPagination(res.total, limit, currentPage);
-
-        } else {
+      if (res.status === 200 && res.data.length > 0) {
+        res.data.forEach(gettable => {
           $('#outputTableBody').append(`
-            <tr>
-              <td colspan="11" class="p-4 text-center text-gray-400 italic">No record found</td>
+            <tr class="hover:bg-[#2B2B2B] transition-colors">
+              <td class="p-3 text-center font-mono">${count++}</td>
+              <td class="p-3 text-center font-mono">${gettable.gt_name}</td>
+              <td class="p-3 text-center font-semibold">
+                ${gettable.gt_description 
+                    ? (gettable.gt_description.length > 60 
+                        ? gettable.gt_description.substring(0, 60) + '...' 
+                        : gettable.gt_description)
+                    : 'N/A'}
+              </td>
+              <td class="p-3 text-center font-semibold">${gettable.gt_link}</td>
+              <td class="p-3">
+                <div class="flex justify-center items-center">
+                  ${gettable.gt_image 
+                    ? `<img src="../static/upload/${gettable.gt_image}" alt="Banner" class="w-20 h-12 object-cover rounded" />`
+                    : '<span class="text-gray-500 p-3 text-center font-semibold">N/A</span>'}
+                </div>
+              </td>
+              <td class="p-3 text-center">
+                <button class="viewDetailsBtn bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
+                  data-gt_id='${gettable.gt_id}'
+                  data-gt_name='${gettable.gt_name}'
+                  data-gt_description='${gettable.gt_description}'
+                  data-gt_link='${gettable.gt_link}'>Details</button>
+                <button class="removeBtn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition"
+                  data-gt_id='${gettable.gt_id}'
+                  data-gt_name='${gettable.gt_name}'>Remove</button>
+              </td>
             </tr>
           `);
-          $('#pagination').empty();
-        }
+        });
+
+        renderPagination(res.total, limit, currentPage);
+
+      } else {
+        $('#outputTableBody').append(`
+          <tr>
+            <td colspan="11" class="p-4 text-center text-gray-400 italic">No record found</td>
+          </tr>
+        `);
+        $('#pagination').empty();
       }
-    });
+    }
+  });
+
   }
 
   function renderPagination(totalRows, limit, currentPage) {
