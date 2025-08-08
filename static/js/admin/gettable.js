@@ -93,31 +93,40 @@
 
 
 
+  // Fetch data
+  let currentPage = 1;
+  let limit = 10; 
 
-   $.ajax({
-    url: "../controller/admin/end-points/controller.php",
-    method: "GET",
-    data: { requestType: "fetch_all_gettable" },
-    dataType: "json",
-    success: function (res) {
-        if (res.status === 200) {
-            let count = 1;
+  function loadTable(page = 1) {
+    currentPage = page;
 
-            // Clear previous content (optional)
-            $('#eventTableBody').empty();
+    $.ajax({
+      url: "../controller/admin/end-points/controller.php",
+      method: "GET",
+      data: { 
+        requestType: "fetch_all_gettable_page_limit",
+        page: page,
+        limit: limit
+      },
+      dataType: "json",
+      success: function (res) {
 
-            // Check if there is data
-            if (res.data.length > 0) {
-                res.data.forEach(gettable => {
+         let count = 1;
 
+        $('#outputTableBody').empty();
 
-
-                    $('#eventTableBody').append(`
-                        <tr class="hover:bg-[#2B2B2B] transition-colors">
+        if (res.status === 200 && res.data.length > 0) {
+          res.data.forEach(gettable => {
+            $('#outputTableBody').append(`
+              <tr class="hover:bg-[#2B2B2B] transition-colors">
                             <td class="p-3 text-center font-mono">${count++}</td>
                             <td class="p-3 text-center font-mono">${gettable.gt_name}</td>
                             <td class="p-3 text-center font-semibold">
-                            ${gettable.gt_description.length > 60 ? gettable.gt_description.substring(0, 60) + '...' : gettable.gt_description}
+                            ${gettable.gt_description 
+                                ? (gettable.gt_description.length > 60 
+                                    ? gettable.gt_description.substring(0, 60) + '...' 
+                                    : gettable.gt_description)
+                                : 'N/A'}
                             </td>
 
                             <td class="p-3 text-center font-semibold">${gettable.gt_link}</td>
@@ -146,28 +155,60 @@
                                 data-gt_name='${gettable.gt_name}'>Remove</button>
                             </td>
                             </tr>
+            `);
+          });
 
-                    `);
-                });
-            } else {
-                $('#eventTableBody').append(`
-                    <tr>
-                        <td colspan="7" class="p-4 text-center text-gray-400 italic">
-                            No record found
-                        </td>
-                    </tr>
-                `);
-            }
+          renderPagination(res.total, limit, currentPage);
+
+        } else {
+          $('#outputTableBody').append(`
+            <tr>
+              <td colspan="11" class="p-4 text-center text-gray-400 italic">No record found</td>
+            </tr>
+          `);
+          $('#pagination').empty();
         }
+      }
+    });
+  }
+
+  function renderPagination(totalRows, limit, currentPage) {
+    let totalPages = Math.ceil(totalRows / limit);
+    let paginationHTML = '';
+
+    if (totalPages > 1) {
+      paginationHTML += `
+        <button class="px-3 py-1 bg-gray-700 text-white rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">Prev</button>
+      `;
+
+      for (let i = 1; i <= totalPages; i++) {
+        paginationHTML += `
+          <button class="px-3 py-1 mx-1 rounded ${i === currentPage ? 'bg-yellow-400 text-black' : 'bg-gray-700 text-white'}" data-page="${i}">${i}</button>
+        `;
+      }
+
+      paginationHTML += `
+        <button class="px-3 py-1 bg-gray-700 text-white rounded ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">Next</button>
+      `;
     }
-});
+
+    $('#pagination').html(paginationHTML);
+  }
+
+  $(document).on('click', '#pagination button', function () {
+    let page = $(this).data('page');
+    if (page) loadTable(page);
+  });
+
+  // Initial load
+  loadTable();
 
 
 
   // Search filter
   $('#searchInput').on('input', function () {
     const term = $(this).val().toLowerCase();
-    $('#eventTableBody tr').each(function () {
+    $('#outputTableBody tr').each(function () {
       $(this).toggle($(this).text().toLowerCase().includes(term));
     });
   });

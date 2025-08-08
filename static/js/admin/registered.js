@@ -1,61 +1,106 @@
 $(document).ready(function () {
   // Fetch dog data
- $.ajax({
-  url: "../controller/admin/end-points/controller.php",
-  method: "GET",
-  data: { requestType: "fetch_all_registered_dogs" },
-  dataType: "json",
-  success: function (res) {
-    if (res.status === 200) {
-      $('#dogTableBody').empty(); // Optional: clear existing content
+  let currentPage = 1;
+  let limit = 10; // number of dogs per page
 
-      if (res.data.length > 0) {
-        res.data.forEach(dog => {
+  function loadDogs(page = 1) {
+    currentPage = page;
+
+    $.ajax({
+      url: "../controller/admin/end-points/controller.php",
+      method: "GET",
+      data: { 
+        requestType: "fetch_all_registered_dogs_page_limit",
+        page: page,
+        limit: limit
+      },
+      dataType: "json",
+      success: function (res) {
+        $('#dogTableBody').empty();
+
+        if (res.status === 200 && res.data.length > 0) {
+          res.data.forEach(dog => {
+            $('#dogTableBody').append(`
+              <tr class="hover:bg-[#2B2B2B] transition-colors">
+                <td class="p-3 font-mono">${dog.dog_code}</td>
+                <td class="p-3">
+                  <img src="../static/upload/${dog.dog_image}" alt="${dog.dog_name}" class="w-12 h-12 rounded object-cover border border-gray-600">
+                </td>
+                <td class="p-3 font-semibold">${dog.dog_name}</td>
+                <td class="p-3">${dog.dog_owner_name}</td>
+                <td class="p-3">${dog.dog_breeder_name}</td>
+                <td class="p-3 capitalize">${dog.dog_country}</td>
+                <td class="p-3">${dog.dog_color}</td>
+                <td class="p-3">${dog.dog_type_status}</td>
+                <td class="p-3">${dog.dog_date_of_birth}</td>
+                <td class="p-3 flex items-center space-x-1">
+                  ${dog.dog_gender === 'male' 
+                    ? `<span class="material-icons text-blue-400 text-sm">male</span> Male`
+                    : dog.dog_gender === 'female' 
+                      ? `<span class="material-icons text-red-400 text-sm">female</span> Female`
+                      : 'N/A'}
+                </td>
+                <td class="p-3 text-center">
+                  <button class="viewDetailsBtn bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
+                    data-dog='${JSON.stringify(dog)}'>Details</button>
+                  <a href="generation?dog_id=${dog.dog_id}" 
+                    class="inline-block bg-yellow-400 hover:bg-gray-400 text-black px-3 py-1 rounded text-xs font-semibold transition">
+                    Generation
+                  </a>
+                  <button class="removeBtn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition"
+                    data-dog='${JSON.stringify(dog)}'
+                    data-dog_id='${dog.dog_id}'
+                    data-dog_name='${dog.dog_name}'>Remove</button>
+                </td>
+              </tr>
+            `);
+          });
+
+          renderPagination(res.total, limit, currentPage);
+
+        } else {
           $('#dogTableBody').append(`
-            <tr class="hover:bg-[#2B2B2B] transition-colors">
-              <td class="p-3 font-mono">${dog.dog_code}</td>
-              <td class="p-3">
-                <img src="../static/upload/${dog.dog_image}" alt="${dog.dog_name}" class="w-12 h-12 rounded object-cover border border-gray-600">
-              </td>
-              <td class="p-3 font-semibold">${dog.dog_name}</td>
-              <td class="p-3">${dog.dog_owner_name}</td>
-              <td class="p-3">${dog.dog_breeder_name}</td>
-              <td class="p-3 capitalize">${dog.dog_country}</td>
-              <td class="p-3">${dog.dog_color}</td>
-              <td class="p-3">${dog.dog_type_status}</td>
-              <td class="p-3">${dog.dog_date_of_birth}</td>
-              <td class="p-3 flex items-center space-x-1">
-                ${dog.dog_gender === 'male' 
-                  ? `<span class="material-icons text-blue-400 text-sm">male</span> Male`
-                  : dog.dog_gender === 'female' 
-                    ? `<span class="material-icons text-red-400 text-sm">female</span> Female`
-                    : 'N/A'}
-              </td>
-              <td class="p-3 text-center">
-                <button class="viewDetailsBtn bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
-                  data-dog='${JSON.stringify(dog)}'>Details</button>
-                <a href="generation?dog_id=${dog.dog_id}" 
-                  class="inline-block bg-yellow-400 hover:bg-gray-400 text-black px-3 py-1 rounded text-xs font-semibold transition">
-                  Generation
-                </a>
-                <button class="removeBtn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition"
-                  data-dog='${JSON.stringify(dog)}'
-                  data-dog_id='${dog.dog_id}'
-                  data-dog_name='${dog.dog_name}'>Remove</button>
-              </td>
+            <tr>
+              <td colspan="11" class="p-4 text-center text-gray-400 italic">No record found</td>
             </tr>
           `);
-        });
-      } else {
-        $('#dogTableBody').append(`
-          <tr>
-            <td colspan="11" class="p-4 text-center text-gray-400 italic">No record found</td>
-          </tr>
-        `);
+          $('#pagination').empty();
+        }
       }
-    }
+    });
   }
-});
+
+  function renderPagination(totalRows, limit, currentPage) {
+    let totalPages = Math.ceil(totalRows / limit);
+    let paginationHTML = '';
+
+    if (totalPages > 1) {
+      paginationHTML += `
+        <button class="px-3 py-1 bg-gray-700 text-white rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}" ${currentPage === 1 ? 'disabled' : ''} data-page="${currentPage - 1}">Prev</button>
+      `;
+
+      for (let i = 1; i <= totalPages; i++) {
+        paginationHTML += `
+          <button class="px-3 py-1 mx-1 rounded ${i === currentPage ? 'bg-yellow-400 text-black' : 'bg-gray-700 text-white'}" data-page="${i}">${i}</button>
+        `;
+      }
+
+      paginationHTML += `
+        <button class="px-3 py-1 bg-gray-700 text-white rounded ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}" ${currentPage === totalPages ? 'disabled' : ''} data-page="${currentPage + 1}">Next</button>
+      `;
+    }
+
+    $('#pagination').html(paginationHTML);
+  }
+
+  $(document).on('click', '#pagination button', function () {
+    let page = $(this).data('page');
+    if (page) loadDogs(page);
+  });
+
+  // Initial load
+  loadDogs();
+
 
 
  $(document).on("click", ".viewDetailsBtn", function () {

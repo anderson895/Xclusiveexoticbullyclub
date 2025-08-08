@@ -604,12 +604,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
    if (isset($_GET['requestType'])) {
-        if ($_GET['requestType'] == 'fetch_all_registered_dogs') {
+        if ($_GET['requestType'] == 'fetch_all_registered_dogs_page_limit') {
+           $page  = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+            $offset = ($page - 1) * $limit;
+
+            $data  = $db->fetch_all_registered_dogs_page_limit($limit, $offset);
+            $total = $db->count_all_registered_dogs();
+
+            echo json_encode([
+                'status' => 200,
+                'total'  => $total,
+                'data'   => $data
+            ]);
+            exit;
+
+        }else if ($_GET['requestType'] == 'fetch_all_registered_dogs') {
             $result = $db->fetch_all_registered_dogs();
             echo json_encode([
                 'status' => 200,
                 'data' => $result
             ]);
+        }else if ($_GET['requestType'] == 'fetch_all_gettable_page_limit') {
+            $page  = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+            $offset = ($page - 1) * $limit;
+
+            $data  = $db->fetch_all_gettable_page_limit($limit, $offset);
+            $total = $db->count_all_gettable();
+
+            echo json_encode([
+                'status' => 200,
+                'total'  => $total,
+                'data'   => $data
+            ]);
+            exit;
+
         }else if ($_GET['requestType'] == 'fetch_all_gettable') {
             $result = $db->fetch_all_gettable();
             echo json_encode([

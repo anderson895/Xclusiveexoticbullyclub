@@ -44,29 +44,27 @@ include "../src/components/admin/nav.php";
 </div>
 
 
-
-  <!-- Table Container -->
-  <div class="overflow-x-auto rounded-md">
-    <table class="w-full text-sm text-left text-[#CCCCCC]">
-      <thead class="bg-[#0D0D0D] text-[#FFD700] uppercase text-xs">
-        <tr>
-
-          <th class="p-3">#</th>
-          <th class="p-3 text-center">Name</th>
-          <th class="p-3 text-center">Description</th>
-          <th class="p-3 text-center">Link</th>
-          <th class="p-3 text-center">Image</th>
-          
-          <th class="p-3 text-center">Action</th>
-        </tr>
-      </thead>
-      <tbody id="eventTableBody" class="divide-y divide-gray-700">
-        <!-- Dynamic Data -->
-      </tbody>
-    </table>
-  </div>
+<!-- Table Container -->
+<div class="overflow-x-auto rounded-md">
+  <table class="w-full text-sm text-left text-[#CCCCCC]">
+    <thead class="bg-[#0D0D0D] text-[#FFD700] uppercase text-xs">
+      <tr>
+        <th class="p-3">#</th>
+        <th class="p-3 text-center">Name</th>
+        <th class="p-3 text-center">Description</th>
+        <th class="p-3 text-center">Link</th>
+        <th class="p-3 text-center">Image</th>
+        <th class="p-3 text-center">Action</th>
+      </tr>
+    </thead>
+    <tbody id="outputTableBody" class="divide-y divide-gray-700">
+      <!-- Dynamic Data -->
+    </tbody>
+  </table>
 </div>
 
+<!-- Pagination -->
+<div id="pagination" class="mt-4 flex justify-center gap-2"></div>
 
 
 
