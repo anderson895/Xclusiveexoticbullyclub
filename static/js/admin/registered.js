@@ -1,73 +1,88 @@
 $(document).ready(function () {
   // Fetch dog data
   let currentPage = 1;
-  let limit = 10; // number of dogs per page
+  let limit = 10; 
 
   function loadDogs(page = 1) {
     currentPage = page;
 
-    $.ajax({
-      url: "../controller/admin/end-points/controller.php",
-      method: "GET",
-      data: { 
-        requestType: "fetch_all_registered_dogs_page_limit",
-        page: page,
-        limit: limit
-      },
-      dataType: "json",
-      success: function (res) {
-        $('#dogTableBody').empty();
+   $.ajax({
+    url: "../controller/admin/end-points/controller.php",
+    method: "GET",
+    data: { 
+      requestType: "fetch_all_registered_dogs_page_limit",
+      page: page,
+      limit: limit
+    },
+    dataType: "json",
+    beforeSend: function () {
+      // Show loading spinner
+      $('#dogTableBody').html(`
+        <tr>
+          <td colspan="11" class="p-6 text-center">
+            <div class="flex items-center justify-center space-x-2">
+              <div class="w-6 h-6 border-2 border-yellow-400 border-t-transparent rounded-full animate-spin"></div>
+              <span class="text-yellow-400 font-medium">Loading...</span>
+            </div>
+          </td>
+        </tr>
+      `);
+      $('#pagination').empty();
+    },
+    success: function (res) {
+      $('#dogTableBody').empty();
 
-        if (res.status === 200 && res.data.length > 0) {
-          res.data.forEach(dog => {
-            $('#dogTableBody').append(`
-              <tr class="hover:bg-[#2B2B2B] transition-colors">
-                <td class="p-3 font-mono">${dog.dog_code}</td>
-                <td class="p-3">
-                  <img src="../static/upload/${dog.dog_image}" alt="${dog.dog_name}" class="w-12 h-12 rounded object-cover border border-gray-600">
-                </td>
-                <td class="p-3 font-semibold">${dog.dog_name}</td>
-                <td class="p-3">${dog.dog_owner_name}</td>
-                <td class="p-3">${dog.dog_breeder_name}</td>
-                <td class="p-3 capitalize">${dog.dog_country}</td>
-                <td class="p-3">${dog.dog_color}</td>
-                <td class="p-3">${dog.dog_type_status}</td>
-                <td class="p-3">${dog.dog_date_of_birth}</td>
-                <td class="p-3 flex items-center space-x-1">
-                  ${dog.dog_gender === 'male' 
-                    ? `<span class="material-icons text-blue-400 text-sm">male</span> Male`
-                    : dog.dog_gender === 'female' 
-                      ? `<span class="material-icons text-red-400 text-sm">female</span> Female`
-                      : 'N/A'}
-                </td>
-                <td class="p-3 text-center">
-                  <button class="viewDetailsBtn bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
-                    data-dog='${JSON.stringify(dog)}'>Details</button>
-                  <a href="generation?dog_id=${dog.dog_id}" 
-                    class="inline-block bg-yellow-400 hover:bg-gray-400 text-black px-3 py-1 rounded text-xs font-semibold transition">
-                    Generation
-                  </a>
-                  <button class="removeBtn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition"
-                    data-dog='${JSON.stringify(dog)}'
-                    data-dog_id='${dog.dog_id}'
-                    data-dog_name='${dog.dog_name}'>Remove</button>
-                </td>
-              </tr>
-            `);
-          });
-
-          renderPagination(res.total, limit, currentPage);
-
-        } else {
+      if (res.status === 200 && res.data.length > 0) {
+        res.data.forEach(dog => {
           $('#dogTableBody').append(`
-            <tr>
-              <td colspan="11" class="p-4 text-center text-gray-400 italic">No record found</td>
+            <tr class="hover:bg-[#2B2B2B] transition-colors">
+              <td class="p-3 font-mono">${dog.dog_code}</td>
+              <td class="p-3">
+                <img src="../static/upload/${dog.dog_image}" alt="${dog.dog_name}" class="w-12 h-12 rounded object-cover border border-gray-600">
+              </td>
+              <td class="p-3 font-semibold">${dog.dog_name}</td>
+              <td class="p-3">${dog.dog_owner_name}</td>
+              <td class="p-3">${dog.dog_breeder_name}</td>
+              <td class="p-3 capitalize">${dog.dog_country}</td>
+              <td class="p-3">${dog.dog_color}</td>
+              <td class="p-3">${dog.dog_type_status}</td>
+              <td class="p-3">${dog.dog_date_of_birth}</td>
+              <td class="p-3 flex items-center space-x-1">
+                ${dog.dog_gender === 'male' 
+                  ? `<span class="material-icons text-blue-400 text-sm">male</span> Male`
+                  : dog.dog_gender === 'female' 
+                    ? `<span class="material-icons text-red-400 text-sm">female</span> Female`
+                    : 'N/A'}
+              </td>
+              <td class="p-3 text-center">
+                <button class="viewDetailsBtn bg-yellow-400 hover:bg-yellow-500 text-black px-3 py-1 rounded text-xs font-semibold transition"
+                  data-dog='${JSON.stringify(dog)}'>Details</button>
+                <a href="generation?dog_id=${dog.dog_id}" 
+                  class="inline-block bg-yellow-400 hover:bg-gray-400 text-black px-3 py-1 rounded text-xs font-semibold transition">
+                  Generation
+                </a>
+                <button class="removeBtn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs font-semibold transition"
+                  data-dog='${JSON.stringify(dog)}'
+                  data-dog_id='${dog.dog_id}'
+                  data-dog_name='${dog.dog_name}'>Remove</button>
+              </td>
             </tr>
           `);
-          $('#pagination').empty();
-        }
+        });
+
+        renderPagination(res.total, limit, currentPage);
+
+      } else {
+        $('#dogTableBody').append(`
+          <tr>
+            <td colspan="11" class="p-4 text-center text-gray-400 italic">No record found</td>
+          </tr>
+        `);
+        $('#pagination').empty();
       }
-    });
+    }
+  });
+
   }
 
   function renderPagination(totalRows, limit, currentPage) {
