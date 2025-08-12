@@ -70,8 +70,7 @@
 <section class="bg-[#1A1A1A] py-16 px-6 text-center">
 
   <img src="static/logo.jpg" alt="BRC Global" class="w-40 mx-auto mb-6">
-  <h2 class="text-xl font-bold uppercase text-[#FFD700]">XEBC PERMANENT registration</h2>
-
+  <h2 class="text-xl font-bold uppercase text-[#FFD700] ">XEBC SINGLE REGISTRATION</h2>
   <p class="text-lg text-red-500 mt-2 font-semibold">$35.00</p>
   <a href="#" class="mt-4 inline-block bg-red-600 text-white px-6 py-2 rounded hover:bg-red-700 transition">Buy Now</a>
   <p class="text-sm max-w-md mx-auto mt-6 text-[#CCCCCC] leading-relaxed">
