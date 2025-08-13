@@ -1,7 +1,10 @@
 <?php 
-include "auth.php";
 
 session_start();
+
+include "auth.php";
+
+
 $db = new auth_class();
 
 
